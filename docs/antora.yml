@@ -1,0 +1,8 @@
+---
+name: rollenspiel-cons
+version: current
+title: Rollenspiel Con Support
+nav:
+  - modules/manual/pages/nav.adoc
+  - modules/arc42/pages/nav.adoc
+  - modules/ROOT/pages/nav.adoc

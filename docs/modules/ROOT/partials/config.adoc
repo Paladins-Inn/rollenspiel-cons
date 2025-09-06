@@ -1,0 +1,11 @@
+:heading-font-color: #ff0000
+:sectnums:
+:sectnumlevels: 5
+:sectlinks:
+:sectids:
+:sectanchors:
+:chapter-label: Chapter
+:icons: font
+:partnums:
+include::partial$includes/glossary.adoc[]
+include::partial$includes/bibliography.adoc[]

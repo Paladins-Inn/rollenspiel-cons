@@ -1,0 +1,8 @@
+:12factor: ↑xref:rollenspiel-cons:ROOT:bibliography.adoc#factor12[12FACTOR]
+:agilemanifesto: ↑xref:rollenspiel-cons:ROOT:bibliography.adoc#agilemanifesto[AGILE]
+:wordpress: ↑xref:rollenspiel-cons:ROOT:bibliography.adoc#wordpress[WORDPRESS]
+:cleancode: ↑xref:rollenspiel-cons:ROOT:bibliography.adoc#cleancode[CLEANCODE]
+:sapl: ↑xref:rollenspiel-cons:ROOT:bibliography.adocs#sapl[SAPL]
+:scs: ↑xref:rollenspiel-cons:ROOT:bibliography.adoc#scs[SCS]
+:baeldung01: ↑xref:rollenspiel-cons:ROOT:bibliography.adocs#baeldung01[BAELDUNG01]
+:wiki01: ↑xref:rollenspiel-cons:ROOT:bibliography.adoc#wiki01[WIKI01]

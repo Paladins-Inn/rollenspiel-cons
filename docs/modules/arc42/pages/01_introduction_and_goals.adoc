@@ -1,0 +1,40 @@
+= Introduction and Goals
+
+include::partial$config.adoc[]
+
+
+
+
+== Requirements Overview
+
+* {fs02}
+* {fs03}
+
+In addition, the interoperability with other Torg Eternity supporting systems is needed to make the system more usable.
+
+* {co01}
+* {co02}
+* {co03}
+* {co04}
+* {us02}
+
+
+== Quality Goals
+
+* {re01}
+* {us03}
+* {us04}
+* {mt01}
+
+<<<
+== Stakeholders
+
+[cols="<.<6,<.<6,<.<8a",options="header",frame="topbot",grid="rows"]
+|===
+|Role/Name|Contact|Expectations
+
+|RPG Player
+|Roland T. Lichti
+|Find conventions
+
+|===

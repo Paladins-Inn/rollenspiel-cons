@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kp-checkstyle" target="17" />
+      <module name="kp-commons-api" target="17" />
+      <module name="kp-commons-api.main" target="17" />
+      <module name="kp-commons-api.test" target="17" />
+      <module name="kp-commons-bom" target="17" />
+      <module name="kp-commons-core" target="17" />
+      <module name="kp-commons-core-root" target="17" />
+      <module name="kp-commons-core.main" target="17" />
+      <module name="kp-commons-core.test" target="17" />
+      <module name="kp-commons-dnb-lookup" target="17" />
+      <module name="kp-commons-dnb-lookup.main" target="17" />
+      <module name="kp-commons-dnb-lookup.test" target="17" />
+      <module name="kp-commons-ean-search" target="17" />
+      <module name="kp-commons-ean-search.main" target="17" />
+      <module name="kp-commons-ean-search.test" target="17" />
+      <module name="kp-commons-guava" target="17" />
+      <module name="kp-commons-guava.main" target="17" />
+      <module name="kp-commons-guava.test" target="17" />
+      <module name="kp-commons-jpa" target="17" />
+      <module name="kp-commons-jpa.main" target="17" />
+      <module name="kp-commons-jpa.test" target="17" />
+      <module name="kp-commons-modules-root" target="17" />
+      <module name="kp-commons-parent" target="17" />
+      <module name="kp-commons-r2dbc" target="17" />
+      <module name="kp-commons-r2dbc.main" target="17" />
+      <module name="kp-commons-r2dbc.test" target="17" />
+      <module name="kp-commons-rest" target="17" />
+      <module name="kp-commons-rest.main" target="17" />
+      <module name="kp-commons-rest.test" target="17" />
+      <module name="kp-commons-root" target="17" />
+      <module name="kp-commons-services-root" target="17" />
+      <module name="kp-commons-sms77" target="17" />
+      <module name="kp-commons-sms77.main" target="17" />
+      <module name="kp-commons-sms77.test" target="17" />
+      <module name="kp-commons-spring" target="17" />
+      <module name="kp-commons-spring.main" target="17" />
+      <module name="kp-commons-spring.test" target="17" />
+      <module name="kp-commons-test" target="17" />
+      <module name="kp-commons-test.main" target="17" />
+      <module name="kp-commons-test.test" target="17" />
+      <module name="kp-spring-boot-parent" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="kp-checkstyle" options="-parameters" />
+      <module name="kp-commons-api" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-api.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-api.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-bom" options="-parameters" />
+      <module name="kp-commons-core" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-core-root" options="-parameters" />
+      <module name="kp-commons-core.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-core.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-dnb-lookup" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-dnb-lookup.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-dnb-lookup.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-ean-search" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-ean-search.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-ean-search.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-guava" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-guava.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-guava.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-jpa" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-jpa.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-jpa.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-modules-root" options="-parameters" />
+      <module name="kp-commons-parent" options="-parameters" />
+      <module name="kp-commons-r2dbc" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-r2dbc.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-r2dbc.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-rest" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-rest.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-rest.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-root" options="-parameters" />
+      <module name="kp-commons-services-root" options="-parameters" />
+      <module name="kp-commons-sms77" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-sms77.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-sms77.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-spring" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-spring.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-spring.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-test.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-commons-test.test" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
+      <module name="kp-spring-boot-parent" options="-parameters" />
+      <module name="rollenspiel-cons" options="-parameters" />
+      <module name="session-planner" options="-parameters" />
+    </option>
+  </component>
+</project>
