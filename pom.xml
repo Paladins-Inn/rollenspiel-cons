@@ -23,12 +23,255 @@
   <groupId>de.paladins-inn.rollenspiel-cons</groupId>
   <artifactId>rollenspiel-cons</artifactId>
   <version>0.1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <url>https://rollenspiel-cons.info/</url>
 
   <inceptionYear>2025</inceptionYear>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>3.5.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>jakarta.platform</groupId>
+        <artifactId>jakarta.jakartaee-bom</artifactId>
+        <version>11.0.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>2.19.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-bom</artifactId>
+        <version>1.15.3</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+
+      <!-- testing -->
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.13.4</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.testcontainers</groupId>
+        <artifactId>testcontainers-bom</artifactId>
+        <version>1.20.4</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.wiremock</groupId>
+        <artifactId>wiremock</artifactId>
+        <version>3.12.1</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-client</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>gg.jte</groupId>
+      <artifactId>jte-spring-boot-starter-3</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>gg.jte</groupId>
+      <artifactId>jte</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+
+
+    <!-- syntactical suggar -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.38</version>
+    </dependency>
+
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+      <version>2.0.1.MR</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.20.0</version>
+    </dependency>
+
+
+    <!-- Evaluate mathematical expressions -->
+    <dependency>
+      <groupId>net.objecthunter</groupId>
+      <artifactId>exp4j</artifactId>
+      <version>0.4.8</version>
+    </dependency>
+
+    <!-- MarkDown Library -->
+    <dependency>
+      <groupId>com.github.rjeschke</groupId>
+      <artifactId>txtmark</artifactId>
+      <version>0.13</version>
+    </dependency>
+
+    <!-- Snowflake-ID Generator -->
+    <dependency>
+      <groupId>cn.ipokerface</groupId>
+      <artifactId>snowflake-id-generator</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+
+
+    <!-- Version handling -->
+    <dependency>
+      <groupId>org.semver4j</groupId>
+      <artifactId>semver4j</artifactId>
+      <version>5.7.0</version>
+    </dependency>
+
+
+
+    <!-- Encryption -->
+    <dependency>
+      <groupId>org.connectbot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.eclipse.microprofile.config</groupId>
+      <artifactId>microprofile-config-api</artifactId>
+      <version>3.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.microprofile.openapi</groupId>
+      <artifactId>microprofile-openapi-api</artifactId>
+      <version>4.0.2</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>1.6.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-core</artifactId>
+      <version>3.7.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-commons</artifactId>
+      <version>3.5.0</version>
+    </dependency>
+
+    <!-- R2DBC PostgreSQL -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>r2dbc-postgresql</artifactId>
+    </dependency>
+
+    <!-- R2DBC H2 -->
+    <dependency>
+      <groupId>io.r2dbc</groupId>
+      <artifactId>r2dbc-h2</artifactId>
+      <version>1.0.0.RELEASE</version>
+    </dependency>
+
+    <!-- Observability -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-ext</artifactId>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations -->
+    <dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs-annotations</artifactId>
+      <version>4.9.3</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-test</artifactId>
+      <scope>test</scope>
+      <version>3.6.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
 
   <licenses>
     <license>
@@ -107,8 +350,9 @@
     <main.basedir>${project.basedir}</main.basedir>
 
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.release>21</maven.compiler.release>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.inputEncoding>UTF-8</project.reporting.inputEncoding>
@@ -116,6 +360,15 @@
   </properties>
 
   <build>
+    <finalName>app</finalName>
+
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+
     <pluginManagement>
       <plugins>
         <plugin>
@@ -206,26 +459,11 @@
           <version>3.21.0</version>
         </plugin>
 
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.9.0</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.6.0</version>
-          <configuration>
-            <configLocation>kaiserpfalz/checkstyle.xml</configLocation>
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>de.kaiserpfalz-edv.commons</groupId>
-              <artifactId>kp-checkstyle</artifactId>
-              <version>${rollenspiel-cons.version}</version>
-            </dependency>
-          </dependencies>
         </plugin>
 
         <plugin>
@@ -296,8 +534,47 @@
             </dependency>
           </dependencies>
         </plugin>
+
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>3.5.5</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.14.0</version>
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.38</version>
+              </path>
+            </annotationProcessorPaths>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 
   <reporting>
@@ -451,6 +728,7 @@
       </plugin>
     </plugins>
   </reporting>
+
 
   <profiles>
     <profile>
