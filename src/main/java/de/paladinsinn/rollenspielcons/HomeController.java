@@ -1,5 +1,6 @@
 package de.paladinsinn.rollenspielcons;
 
+import de.paladinsinn.rollenspielcons.ui.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
@@ -8,7 +9,12 @@ import org.springframework.ui.Model;
 public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("title", "Willkommen bei Rollenspiel-Cons!");
-        return "home.jte";
+      Page home = Page.builder()
+          .title("Willkommen bei Rollenspiel-Cons!")
+          .description("Die Seite für Rollenspiel-Conventions")
+          .build();
+      
+      model.addAttribute("page", home);
+      return "home.jte";
     }
 }

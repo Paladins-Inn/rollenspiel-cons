@@ -1,0 +1,17 @@
+spring:
+  main:
+    application:
+      name: rollenspiel-cons
+      description: Rollenspiel Con Verwaltung
+      version: 0.1.0-SNAPSHOT
+  
+  security:
+    oauth2:
+      client:
+        registration:
+          paladins-inn:
+            client-id: changeme
+            client-secret: changeme
+        provider:
+          paladins-inn:
+            issuer-uri: changeme

@@ -12,6 +12,11 @@
       <option name="url" value="https://maven.pkg.github.com/klenkes74/sb-starter" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="gh-kaiserpfalzedv-kp-commons" />
+      <option name="name" value="gh-kaiserpfalzedv-kp-commons" />
+      <option name="url" value="https://maven.pkg.github.com/KaiserpfalzEDV/kp-commons" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="torganized-play-users" />
       <option name="name" value="torganized-play-users" />
       <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-users" />

@@ -1,4 +1,4 @@
-# ROLLENSPIEL-CONS - slag line
+# ROLLENSPIEL-CONS - Eating the Elephant one bite at a time
 
 > What man is a man who does not make the world better.
 >
@@ -24,13 +24,11 @@ wrong. But every line that needs not be written is a bug free line without need 
 
 
 ## A note from the author
-I'm working on another ROLLENSPIEL-CONS that can be found on github [(ROLLENSPIEL-CONS)](https://github.com/klenkes74/ROLLENSPIEL-CONS). And while
-developing that piece of software I ran on the blocker not being able to nicely handle OIDC UMA. I looked around and
-found no library to abstract away UMA from my code. So I decided to write one.
+This should be a solution for organizing and running role playing convetions or gatherings.
 
 If someone is interested in getting it faster, we may team up. I'm open for that. But be warned: I want to do it 
 _right_. So no short cuts to get faster. And be prepared for some basic discussions about the architecture or software 
 design :-).
 
 ---
-CITY, DATE
+Bensheim, 2025-09-07
