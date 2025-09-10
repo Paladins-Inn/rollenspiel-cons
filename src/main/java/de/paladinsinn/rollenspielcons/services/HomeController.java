@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons;
+package de.paladinsinn.rollenspielcons.services;
 
 import de.paladinsinn.rollenspielcons.ui.Page;
 import org.springframework.stereotype.Controller;

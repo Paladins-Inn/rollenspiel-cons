@@ -12,6 +12,10 @@ spring:
           paladins-inn:
             client-id: changeme
             client-secret: changeme
+            scope: openid,email,roles,profile,groups
         provider:
           paladins-inn:
             issuer-uri: changeme
+gg:
+  jte:
+    use-precompiled-templates: true
