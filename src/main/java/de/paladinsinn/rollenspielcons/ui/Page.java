@@ -1,16 +1,11 @@
 package de.paladinsinn.rollenspielcons.ui;
 
 
-import cn.ipokerface.snowflake.SnowflakeIdGenerator;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.extern.jackson.Jacksonized;
+import lombok.*;
+import lombok.extern.slf4j.XSlf4j;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.security.Principal;
 import java.util.UUID;
 
 
@@ -26,10 +21,22 @@ import java.util.UUID;
 @Getter
 @ToString(includeFieldNames = true)
 @EqualsAndHashCode(of = {"id"})
+@XSlf4j
 public class Page {
   @Builder.Default
   private UUID id = UUID.randomUUID();
   
   private String title;
   private String description;
+  private String author;
+  
+  private Principal principal;
+  
+  public String getUserName() {
+    return principal != null ? principal.getName() : "- not logged in -";
+  }
+  
+  public String getContextPath(@Value("${server.servlet.context-path:./}") final String contextPath) {
+    return contextPath;
+  }
 }

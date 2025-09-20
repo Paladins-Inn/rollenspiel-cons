@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 
 /**
- *
+ * The spring application.
  *
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-09-06
@@ -19,11 +19,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @ToString
 @XSlf4j
-public class RollenspielConsApplication {
+public class Application {
   public static void main(String[] args) {
     log.entry();
     
-    SpringApplication.run(RollenspielConsApplication.class, args);
+    SpringApplication.run(Application.class, args);
     
     log.exit();
   }

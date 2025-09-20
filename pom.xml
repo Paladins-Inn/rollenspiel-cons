@@ -34,7 +34,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.5.5</version>
+        <version>3.5.6</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -93,6 +93,16 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>io.projectreactor.netty</groupId>
+          <artifactId>reactor-netty</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
@@ -230,6 +240,7 @@
       <version>1.0.0.RELEASE</version>
     </dependency>
 
+
     <!-- Observability -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -239,6 +250,19 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-ext</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-tracing-bridge-brave</artifactId>
+    </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/com.github.spotbugs/spotbugs-annotations -->
     <dependency>
@@ -256,7 +280,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
-      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.security</groupId>
@@ -567,6 +590,25 @@
             </annotationProcessorPaths>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>gg.jte</groupId>
+          <artifactId>jte-maven-plugin</artifactId>
+          <version>3.1.13</version>
+          <configuration>
+            <sourceDirectory>${project.basedir}/src/main/jte</sourceDirectory>
+            <targetDirectory>${project.build.outputDirectory}</targetDirectory>
+            <contentType>Html</contentType>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>process-classes</phase>
+              <goals>
+                <goal>precompile</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -579,6 +621,10 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>gg.jte</groupId>
+        <artifactId>jte-maven-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 
@@ -587,7 +633,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>3.9.0</version>
+        <version>3.8.0</version>
         <reportSets>
           <reportSet>
             <reports>
@@ -713,7 +759,7 @@
       <plugin>
         <groupId>org.owasp</groupId>
         <artifactId>dependency-check-maven</artifactId>
-        <version>12.1.0</version>
+        <version>12.1.1</version>
         <configuration>
           <suppressionFiles>
             <suppressionFile>${main.basedir}/owasp-suppressions.xml</suppressionFile>
@@ -777,7 +823,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-project-info-reports-plugin</artifactId>
-            <version>3.9.0</version>
+            <version>3.8.0</version>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>

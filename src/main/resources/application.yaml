@@ -12,10 +12,37 @@ spring:
           paladins-inn:
             client-id: changeme
             client-secret: changeme
-            scope: openid,email,roles,profile,groups
         provider:
           paladins-inn:
             issuer-uri: changeme
+
+  devtools:
+    livereload:
+      enabled: true
+    add-properties: true
+
+  web:
+    locale: de_DE
+    
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 1800s
+    context-path: /cons
+  error: whitelabel
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,application/javascript,application/json
+    min-response-size: 2048
+
 gg:
   jte:
-    use-precompiled-templates: true
+    usePrecompiledTemplates: true
+    template-location: src/main/jte
+    template-suffix: .jte
+
+logging:
+  level:
+    root: INFO
+    de.paladinsinn: TRACE
