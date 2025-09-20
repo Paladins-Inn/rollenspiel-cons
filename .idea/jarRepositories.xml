@@ -2,11 +2,6 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
-      <option name="id" value="torganized-play-threats" />
-      <option name="name" value="torganized-play-threats" />
-      <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-threats" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="gh-klenkes74-sb-starter" />
       <option name="name" value="gh-klenkes74-sb-starter" />
       <option name="url" value="https://maven.pkg.github.com/klenkes74/sb-starter" />
@@ -17,6 +12,31 @@
       <option name="url" value="https://maven.pkg.github.com/KaiserpfalzEDV/kp-commons" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="central" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="google" />
+      <option name="name" value="google" />
+      <option name="url" value="https://maven.google.com/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="google-api-services" />
+      <option name="name" value="google-api-services" />
+      <option name="url" value="https://google-api-client-libraries.appspot.com/mavenrepo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="torganized-play-threats" />
+      <option name="name" value="torganized-play-threats" />
+      <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-threats" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="torganized-play-users" />
       <option name="name" value="torganized-play-users" />
       <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-users" />
@@ -25,11 +45,6 @@
       <option name="id" value="torganized-play-codex" />
       <option name="name" value="torganized-play-codex" />
       <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-codex" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="Maven Central repository" />
-      <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="torganized-play-commons" />
@@ -50,11 +65,6 @@
       <option name="id" value="torganized-play-gaming" />
       <option name="name" value="torganized-play-gaming" />
       <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-gaming" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="central" />
-      <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
   </component>
 </project>

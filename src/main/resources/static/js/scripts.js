@@ -8,6 +8,23 @@
 // 
 
 window.addEventListener('DOMContentLoaded', event => {
+  // Dropdown functionality
+  const dropdownToggle = document.getElementById('navbarDropdown');
+  const dropdownMenu = dropdownToggle ? dropdownToggle.nextElementSibling : null;
+
+  if (dropdownToggle && dropdownMenu) {
+    dropdownToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      dropdownMenu.classList.toggle('show');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.remove('show');
+      }
+    });
+  }
 
     // Toggle the side navigation
     const sidebarToggle = document.body.querySelector('#sidebarToggle');

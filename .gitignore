@@ -1,2 +1,3 @@
 docs/generated/
 target/
+/src/main/resources/calendar-service-account.json

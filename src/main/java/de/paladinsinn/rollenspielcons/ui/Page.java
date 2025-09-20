@@ -3,9 +3,8 @@ package de.paladinsinn.rollenspielcons.ui;
 
 import lombok.*;
 import lombok.extern.slf4j.XSlf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.security.Principal;
 import java.util.UUID;
 
 
@@ -15,11 +14,11 @@ import java.util.UUID;
  * @author klenkes74
  * @since 07.09.25
  */
-@Builder(toBuilder = true, setterPrefix = "")
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
-@ToString(includeFieldNames = true)
+@ToString()
 @EqualsAndHashCode(of = {"id"})
 @XSlf4j
 public class Page {
@@ -30,13 +29,21 @@ public class Page {
   private String description;
   private String author;
   
-  private Principal principal;
+  private OAuth2User user;
   
-  public String getUserName() {
-    return principal != null ? principal.getName() : "- not logged in -";
+  public boolean isLoggedIn() {
+    return user != null;
   }
   
-  public String getContextPath(@Value("${server.servlet.context-path:./}") final String contextPath) {
-    return contextPath;
+  public String getUserName() {
+    return user != null ? user.getName() : "- not logged in -";
+  }
+  
+  public String getEmail() {
+    return user != null ? user.getAttribute("email") : "./.";
+  }
+  
+  public String getDiscordId() {
+    return user != null ? user.getAttribute("id") : "./.";
   }
 }

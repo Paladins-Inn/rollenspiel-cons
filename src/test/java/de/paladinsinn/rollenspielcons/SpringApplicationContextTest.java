@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-09-10
  */
-@SpringBootTest(classes = RollenspielConsApplication.class)
+@SpringBootTest(classes = Application.class)
 @XSlf4j
 public class SpringApplicationContextTest {
   @Test
