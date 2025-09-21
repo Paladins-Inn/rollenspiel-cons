@@ -9,91 +9,38 @@ include::partial$config.adoc[]
 skinparam actorStyle awesome
 
 together {
+  :Event Orga: as orga << Human >>
+  :Player: as player << Human >>
   :GM: as gm << Human >>
-  :Judge: as judge << Human >>
-  :Orga: as orga << Human >>
-  :Admin: as admin << Human >>
+}
 
-  together {
-    :Player: as player << Human >>
-
-    rectangle <<External>> {
-      :Foundry VTT: as foundry << System >>
-      :Discord: as discord << System >>
-    }
-  }
+rectangle <<External>> {
+  [Discord] as discord << External Service >>
+  [Google Calendar] as gcal << External Service >>
+  [3words] as what3words << External Service >>
+  [OpenStreetMap] as osm << External Service >>
+  [Mail Server] as mail << External Service >>
 }
 
 
-gm    .d.|> player : is a
-judge .d.|> player : is a
-orga  .d.|> player : is a
-admin .d.|> player : is a
+gm    .u.|> player : is a
+orga  .u.|> player : is a
 
-together {
-  rectangle "Application Layer" {
-    :UI Layer: as ui << Virtual >>
-    :API Layer: as api << Virtual >>
-    :Discord Bot: as bot << System >>
-  }
-}
+[rollenspiel-cons] <<SCS>> as service
+[sso] <<SSO>> as sso
 
-rectangle "Delphi Council Information System" {
-    :DCIS Arbitration: as arbitration << System >>
-    :DCIS Operatives: as operatives << System >>
-    :DCIS Gaming: as gaming << System >>
-    :DCIS Threats: as threats << System >>
-    :DCIS Users: as users << System >>
-}
+player <--> discord : sends/receives
+player --> service : uses
+player --> sso : logs into
 
-rectangle "Torg Codex" {
-    :Torg Codex: as codex << System >>
-}
+service <--> discord : sends/receives
+service --> gcal
+service --> what3words
+service --> osm
 
-broker as "Messaging Broker" << Asynchronus >>
-mail as "Mailserver" << External Service >>
-
-player --> discord : uses
-player --> ui : uses
-player --> foundry : uses
-admin --> sso : configures
-
-foundry --> api
-discord <--> bot
-
-bot --> api
-
-ui --> users
-ui --> arbitration
-ui --> operatives
-ui --> gaming
-ui --> threats
-ui --> codex
-
-api --> users
-api --> arbitration
-api --> operatives
-api --> gaming
-api --> threats
-api --> codex
-
-mail <-- users : sends email
+mail <-- service : sends email
 mail --> player : sends email
-bot <-- users : sends message
 
-users <-.-> broker
-arbitration <-.-> broker
-operatives <-.-> broker
-gaming <-.-> broker
-threats <-.-> broker
-codex <-.-> broker
-
-sso <-- player : logs into
-sso <-.- users
-sso <-.- arbitration
-sso <-.- operatives
-sso <-.- gaming
-sso <-.- threats
-sso <-.- codex
+sso <-.- service
 @enduml
 ----

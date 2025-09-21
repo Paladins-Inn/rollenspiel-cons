@@ -1,0 +1,36 @@
+include::partial$config.adoc[]
+.Level 1 Overview of the {rpg-cons} system.
+[plantuml, whitebox-scs]
+----
+@startuml whitebox-scs
+
+[rollenspiel-cons] <<Ingress>> as ingress
+
+component "rollenspiel-cons" <<SCS,spring-boot>> as service {
+[Frontend] <<Java, JTE, Bootstrap, REST, JSON>> as frontend
+
+  [Core] <<Java, spring-data-jpa>> as core
+
+  database "rollenspiel-cons" <<Postgres>> as data
+
+  [Integrations] <<Java, spring-boot, API>> as integrations
+}
+
+
+ingress --> frontend : uses
+frontend -right-> core : uses
+core --> integrations : uses
+core -right-> data
+
+[Google Calendar] as gcal
+[Discord] as discord
+[OpenStreetMap] as osm
+[3words] as what3words
+
+integrations --> gcal : API
+integrations <--> discord : API
+integrations --> osm : REST
+integrations --> what3words : REST
+
+@enduml
+----
