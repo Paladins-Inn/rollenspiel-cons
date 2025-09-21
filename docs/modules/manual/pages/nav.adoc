@@ -1,1 +1,2 @@
+include::ROOT:partial$config.adoc[]
 * xref:index.adoc[]

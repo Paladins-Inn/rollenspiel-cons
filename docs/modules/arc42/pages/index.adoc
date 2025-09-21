@@ -1,3 +1,3 @@
-= rollenspiel-cons-users System Architecture
+= Arc42 System Architecture
 include::partial$config.adoc[]
 
