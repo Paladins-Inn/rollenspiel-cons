@@ -72,7 +72,7 @@ Access is granted to all public data.
 
 | Third Party Systems
 | API using systems
-| Third Party Systems (like ((FoundryVTT))) normally use the privileges of the person using them.
+| Third Party Systems (like  normally use the privileges of the person using them.
 
 | Orga
 | Torganized Play Organization

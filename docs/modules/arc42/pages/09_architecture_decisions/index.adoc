@@ -2,4 +2,4 @@
 
 include::partial$config.adoc[]
 
-This chapter lists the current architecture decisions (ADRs) of the rollenspiel-cons project.
+This chapter lists the current architecture decisions (ADRs) of the {rpg-cons} project.

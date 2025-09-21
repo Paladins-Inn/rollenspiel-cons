@@ -9,3 +9,4 @@
 :partnums:
 include::partial$includes/glossary.adoc[]
 include::partial$includes/bibliography.adoc[]
+:rpg-cons: `rollenspiel-cons`

@@ -1,41 +1,68 @@
 = Deployment View
-
 include::partial$config.adoc[]
 
-== Infrastructure Level 1
+[plantuml, deployment-view]
+----
+@startuml deployment-view
+
+actor "Player" <<User>> as player
+actor "Game Master" <<User>> as gm
+actor "Con Orga" <<User>> as orga
+actor "System Admin" <<Admin>> as admin
+
+component "k8s Cluster" <<Cluster>> as k8s {
+  component "rollenspiel-cons" <<Namespace>> as ns {
+
+    component "rollenspiel-cons" <<Helm Deployment>> {
+        [rollenspiel-cons] <<Ingress>> as ingress
+
+        [rollenspiel-cons] <<Service>> as service
+
+        [rollenspiel-cons] <<Pod>> as scs
+
+        database "rollenspiel-cons" <<Pod>> as data
+        component "rollenspiel-cons" <<PVC>> as pvc
+
+        ingress -right-> service : HTML, REST\n(Port 8080)
+        service --> scs : HTML, REST\n(Port 8080)
+        scs -right-> data : Postgresql\n(Port 5432)
+
+        data .right. pvc : uses
+    }
+  }
+}
+
+player --> ingress : HTTPS (HTML, REST)\n(Port 443)
+gm --> ingress : HTTPS (HTML, REST)\n(Port 443)
+orga --> ingress : HTTPS (HTML, REST)\n(Port 443)
+admin --> ingress : HTTPS (HTML, REST)\n(Port 443)
+
+[Google Calendar] as gcal
+[Discord] as discord
+[OpenStreetMap] as osm
+[3words] as what3words
+
+scs --> gcal : HTTPS (REST)\n(Port 443)
+scs <--> discord : HTTPS (REST)\n(Port 443)
+scs --> osm : HTTPS (REST)\n(Port 443)
+scs --> what3words : HTTPS (REST)\n(Port 443)
+
+@enduml
+----
 
 
+== Quality and/or Performance Features
 
-_**<Overview Diagram>**_
+* {us03}
+* {re01}
+* {co01}
+* {co02}
+* {co03}
+* {co06}
 
-Motivation::
+== Mapping Building Blocks to Infrastructure
 
-_<explanation in text form>_
+The pod `rollenspiel-cons` contains the SCS application.
+It consists of the building blocks level 1.
 
-Quality and/or Performance Features::
-
-_<explanation in text form>_
-
-Mapping of Building Blocks to Infrastructure::
-_<description of the mapping>_
-
-
-== Infrastructure Level 2
-
-
-
-=== _<Infrastructure Element 1>_
-
-_<diagram + explanation>_
-
-==== _<Infrastructure Element 2>_
-
-_<diagram + explanation>_
-
-...
-
-=== _<Infrastructure Element n>_
-
-_<diagram + explanation>_
-
-<<<
+include::partial$building-blocks-level-2.adoc[]

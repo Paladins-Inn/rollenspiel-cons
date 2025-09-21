@@ -1,11 +1,14 @@
 = Solution Strategy
-
 include::partial$config.adoc[]
 
 
 == Modularization
 
-_**TBD**_
+The system needs to stay maintainable and extensible.
+Therefore we use a hexagonal architecture {adr-005}.
+The core domain is separated from the outside world (UI, DB, Messaging, etc.) via ports and adapters.
+This allows to easily exchange parts of the system without affecting the core domain.
+Also testing the core domain is much easier this way.
 
 
 == Single Sign On
@@ -21,7 +24,7 @@ Internally they get an UUID which maps to the (Issuer, User) tuple of the extern
 The systems use frontend integration methods for the UI.
 
 Needed communication between the backends (data synchronization, event distribution) are handled via a messaging infrastructure.
-The broker {madr-003} used will be a rabbitMQ handling AMQP queues and topics.
+The broker {adr-003} used will be a rabbitMQ handling AMQP queues and topics.
 
 We heavily rely on xref:08_concepts/scs.adoc[self-contained systems] {scs} as promoted by INNOQ.
 

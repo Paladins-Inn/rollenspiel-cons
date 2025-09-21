@@ -3,28 +3,36 @@
 include::partial$config.adoc[]
 
 
+== Introduction
+The software is a {gloss_rpg} event management system.
+It helps connecting
 
 
 == Requirements Overview
 
+* {fs01}
 * {fs02}
 * {fs03}
+* {fs04}
+* {fs05}
 
-In addition, the interoperability with other Torg Eternity supporting systems is needed to make the system more usable.
+* {us01}
+* {us02}
+* {us04}
 
 * {co01}
 * {co02}
 * {co03}
 * {co04}
-* {us02}
+* {co05}
 
 
 == Quality Goals
 
-* {re01}
 * {us03}
-* {us04}
+* {re01}
 * {mt01}
+* {mt02}
 
 <<<
 == Stakeholders
@@ -33,8 +41,20 @@ In addition, the interoperability with other Torg Eternity supporting systems is
 |===
 |Role/Name|Contact|Expectations
 
-|RPG Player
+|[[player]]RPG Player
 |Roland T. Lichti
-|Find conventions
+|Find conventions and events.
+Find tables to play on.
+Get notified about changes of my convention, events, or game tables.
+
+|[[gm]]Game Master
+|Roland T. Lichti
+|Run games at a convention or at an event.
+I want to promote my game table on the convention.
+
+|[[orga]]Convention Organizer
+|Roland T. Lichti
+|Manage one or more conventions or events.
+This should be as painless and easy as possible.
 
 |===

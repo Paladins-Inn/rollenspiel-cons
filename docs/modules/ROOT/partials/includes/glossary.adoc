@@ -5,6 +5,7 @@
 :gloss_discord: xref:rollenspiel-cons:ROOT:glossary.adoc#discord[&uarr;Discord]
 :gloss_principle-dry: xref:rollenspiel-cons:ROOT:glossary.adoc#principle-dry[&uarr;DRY-Principle]
 :gloss_scs: xref:rollenspiel-cons:ROOT:glossary.adoc#scs[&uarr;Self Contained System]
+:gloss_rpg: xref:rollenspiel-cons:ROOT:glossary.adoc#rpg[&uarr;RPG (Role Playing Game)]
 :gloss_transclude: xref:rollenspiel-cons:ROOT:glossary.adoc#transclude[&uarr;Transclude]
 :gloss_principle-solid: xref:rollenspiel-cons:ROOT:glossary.adoc#principle-solid[&uarr;SOLID-Principle]
 :gloss_principle-yagni: xref:rollenspiel-cons:ROOT:glossary.adoc#principle-yagni[&uarr;YAGNI-Principle]

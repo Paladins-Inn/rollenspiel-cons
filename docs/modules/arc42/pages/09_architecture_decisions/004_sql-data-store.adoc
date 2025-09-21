@@ -5,13 +5,11 @@
 :adr-author: klenkes74
 :adr-body: klenkes74
 :adr-seq: 004
-:adr-short: MADR-{adr-seq}
+:adr-short: ADR-{adr-seq}
 = {adr-short} -- {adr-title}
 
-(((Architectural Decisions, {adr-short})))
-(((Architectural Decisions, {adr-title})))
-((({adr-short})))
-((({adr-title})))
+
+
 
 [cols="<.<8h,<.<12a", frame="topbot", grid="rows"]
 |===

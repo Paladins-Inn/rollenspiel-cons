@@ -1,3 +1,14 @@
 docs/generated/
 target/
 /src/main/resources/calendar-service-account.json
+/src/main/resources/static/401.html
+/src/main/resources/static/404.html
+/src/main/resources/static/500.html
+/src/main/resources/static/charts.html
+/src/main/resources/static/index.html
+/src/main/resources/static/layout-sidenav-light.html
+/src/main/resources/static/layout-static.html
+/src/main/resources/static/login.html
+/src/main/resources/static/password.html
+/src/main/resources/static/register.html
+/src/main/resources/static/tables.html

@@ -1,5 +1,4 @@
 = EventBus: Concept Overview
-
 include::partial$config.adoc[]
 
 [NOTE]

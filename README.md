@@ -5,6 +5,51 @@
 > -- Balian, Kingdom of Heaven
 
 ## Abstract
+The objective of this project is to create a full-blown RPG helper application to organize and run role playing events.
+The focus is on conventions or gatherings with multiple game masters and multiple groups of players. 
+The software should help to organize the event, manage the players and game masters.
+
+
+## Planned Features
+
+* Event Management
+  * [X] Provide a calendar of events to the public.
+  * [ ] Let people register their own events.
+  * [ ] Let people subscribe to new events.
+  * Gamers
+    * [ ] Register for events as gamer.
+    * [ ] Register for gaming tables at events.
+    * [ ] Manage their own registrations.
+    * [ ] List their registered games.
+    * [ ] Provide calendar feeds for their registered games and events.
+  * Game Masters
+    * [ ] Register for events as game master.
+    * [ ] Register gaming tables at events.
+    * [ ] Manage gamers at their tables.
+    * [ ] Manage their gaming tables at events.
+    * [ ] List their events and gaming tables.
+  * Convention Organizers
+    * [ ] Manage events.
+    * [ ] Manage game masters.
+    * [ ] Manage gamers.
+    * [ ] Manage gaming tables.
+    * [ ] Provide statistics about events, game masters, gamers, gaming tables.
+* User Management
+  * [ ] User registration and login.
+  * [ ] User profiles.
+  * User enablement
+    * [ ] Provide an activity list for users.
+* Integrations
+  * [ ] Website https://www.rollenspiel-cons.info as primary site.
+  * [X] Integration Google Calendar
+  * [ ] Integration 3words
+  * [ ] Integration OpenStreetMap
+  * [ ] Discord for registering tables and games (like the late RPG-Schedule bot).
+  * [ ] Calendar feeds (iCal) for gamers and game masters.
+  * [ ] Email notifications for event changes.
+  * [ ] SMS notifications for event changes.
+
+Enough of the theory. Let's look at the current state:
 
 
 ## License
