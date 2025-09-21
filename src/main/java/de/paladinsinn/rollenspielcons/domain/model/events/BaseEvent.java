@@ -26,6 +26,11 @@ import java.util.List;
 @ToString()
 @EqualsAndHashCode(of = {"id"})
 public abstract class BaseEvent implements HasEtag {
+  /**
+   * This is no database sequence but a <a href="https://en.wikipedia.org/wiki/Snowflake_ID">Snowflake ID</a>.
+   *
+   * We normally use the generator provided by {@link de.paladinsinn.rollenspielcons.config.SnowflakeIdGeneratorConfig}.
+   */
   private final long id;
   
   private final List<String> labels;
@@ -37,6 +42,7 @@ public abstract class BaseEvent implements HasEtag {
   private final String name;
   private final String description;
   
+  @Override
   public String monitoredData() {
     return id
          + labels.stream().reduce("", (a, b) -> a + b)
