@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.0...v1.0.1) (2025-09-28)
+
+
+### Bug Fixes
+
+* **build:** change pom.xml injected version to have no v in front of it. ([b340e17](https://github.com/Paladins-Inn/rollenspiel-cons/commit/b340e1710234b7579e93836589adbc2af100bdca))
+
 # 1.0.0 (2025-09-28)
 
 
