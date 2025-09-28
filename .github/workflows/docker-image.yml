@@ -99,8 +99,9 @@ jobs:
     - name: Get current RELEASE_VERSION
       id: release-version
       run: |
-        echo "RELEASE_VERSION=$(git tag --points-at HEAD)" >> $GITHUB_OUTPUT
-        echo "POM_VERSION=$(git tag --points-at HEAD | sed 's/^v//')" >> $GITHUB_OUTPUT
+        TAG=$(git descibe --tags --abrev=0)
+        echo "RELEASE_VERSION=$TAG" >> $GITHUB_OUTPUT
+        echo "POM_VERSION=$(echo $TAG | sed 's/^v//')" >> $GITHUB_OUTPUT
     - name: Show versions
       run: echo -e "RELEASE_VERSION=${{ steps.release-version.outputs.RELEASE_VERSION }}\nPOM_VERSION=${{ steps.release-version.outputs.POM_VERSION }}"
         
