@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.9...v1.0.10) (2025-09-28)
+
+
+### Bug Fixes
+
+* **tests:** Activate profile test for context test to read the .env file ([c2efe71](https://github.com/Paladins-Inn/rollenspiel-cons/commit/c2efe718b3d99b127e1c8f2498526af71e17d2f8))
+
 ## 1.0.0 (2025-09-28) till [1.0.9](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.8...v1.0.9) (2025-09-28)
 
 ### Bug Fixes
