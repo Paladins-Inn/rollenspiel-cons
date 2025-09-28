@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.4...v1.0.5) (2025-09-28)
+
+
+### Bug Fixes
+
+* **build:** debug POM_VERSION ([c2ad6f9](https://github.com/Paladins-Inn/rollenspiel-cons/commit/c2ad6f9ace930d22fb0da5f92cf0870f27e75be0))
+
 ## [1.0.4](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.3...v1.0.4) (2025-09-28)
 
 
