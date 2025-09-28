@@ -3,8 +3,8 @@ spring:
     banner-mode: off
   application:
     name: rollenspiel-cons
-    description: Rollenspiel Con Verwaltung
-    version: 0.1.0-SNAPSHOT
+    description: Rollenspiel Convention Management
+    version: @project.version@
   
   security:
     oauth2:
@@ -82,7 +82,7 @@ management:
 google:
   calendar:
     service-account-key-path: calendar-service-account.json
-    id: 88fb7669d9909b5ae6a8ac88c09526c3c09ff0ac32e840363094c2e758e4dd12@group.calendar.google.com
+    id: changeme
 
 snowflake:
   datacenter-id: 1

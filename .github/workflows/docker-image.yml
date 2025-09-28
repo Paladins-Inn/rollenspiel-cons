@@ -114,6 +114,8 @@ jobs:
         git add pom.xml
         git commit -m "chore(release): set version to pom.xml ${{ steps.release-version.outputs.POM_VERSION }} [skip ci]"
         git push origin main
+        git tag -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
+        git push origin -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
     
     - name: Compile stuff
       id: build-java
