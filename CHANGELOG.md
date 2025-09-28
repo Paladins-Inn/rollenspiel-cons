@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.6...v1.0.7) (2025-09-28)
+
+
+### Bug Fixes
+
+* **build:** fix typo in git describe ([ce24743](https://github.com/Paladins-Inn/rollenspiel-cons/commit/ce247433f0ec4029d0820f0c80c91073d5cc68cf))
+
 ## [1.0.6](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.5...v1.0.6) (2025-09-28)
 
 
