@@ -1,71 +1,16 @@
-## [1.0.9](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.8...v1.0.9) (2025-09-28)
-
+## 1.0.0 (2025-09-28) till [1.0.9](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.8...v1.0.9) (2025-09-28)
 
 ### Bug Fixes
 
 * **build:** read .env file for tests. ([9e0ac29](https://github.com/Paladins-Inn/rollenspiel-cons/commit/9e0ac29ca323a04f126950bbde6d3b8baae21b2d))
-
-## [1.0.8](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.7...v1.0.8) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** pull before push ([d76f11c](https://github.com/Paladins-Inn/rollenspiel-cons/commit/d76f11c940074e5816c99178699e08d7a6c10a38))
-
-## [1.0.7](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.6...v1.0.7) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** fix typo in git describe ([ce24743](https://github.com/Paladins-Inn/rollenspiel-cons/commit/ce247433f0ec4029d0820f0c80c91073d5cc68cf))
-
-## [1.0.6](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.5...v1.0.6) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** fix typo in git describe ([7dbb944](https://github.com/Paladins-Inn/rollenspiel-cons/commit/7dbb944cb429c9933ec7949ef30732796a3c3e04))
-
-## [1.0.5](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.4...v1.0.5) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** debug POM_VERSION ([c2ad6f9](https://github.com/Paladins-Inn/rollenspiel-cons/commit/c2ad6f9ace930d22fb0da5f92cf0870f27e75be0))
-
-## [1.0.4](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.3...v1.0.4) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** debug POM_VERSION ([d1d8d43](https://github.com/Paladins-Inn/rollenspiel-cons/commit/d1d8d4383ecd93304e67633b3c93e7452850dcb5))
-
-## [1.0.3](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.2...v1.0.3) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** debug POM_VERSION ([bbf65f6](https://github.com/Paladins-Inn/rollenspiel-cons/commit/bbf65f6136b47481c533639a8848d689ea1f4a75))
-
-## [1.0.2](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.1...v1.0.2) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** change pom.xml version ([6c4422c](https://github.com/Paladins-Inn/rollenspiel-cons/commit/6c4422c23cd157aecc0bbc1bb61307855639a152))
-
-## [1.0.1](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.0...v1.0.1) (2025-09-28)
-
-
-### Bug Fixes
-
 * **build:** change pom.xml injected version to have no v in front of it. ([b340e17](https://github.com/Paladins-Inn/rollenspiel-cons/commit/b340e1710234b7579e93836589adbc2af100bdca))
-
-# 1.0.0 (2025-09-28)
-
-
-### Bug Fixes
-
 * **Documentation:** Some naming problems fixed. ([4e59feb](https://github.com/Paladins-Inn/rollenspiel-cons/commit/4e59feb528b3a8696db96d712ceaeeacb30364cb))
 
 
