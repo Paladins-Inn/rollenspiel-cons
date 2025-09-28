@@ -99,7 +99,7 @@ jobs:
     - name: Get current RELEASE_VERSION
       id: release-version
       run: |
-        TAG=$(git descibe --tags --abrev=0)
+        TAG=$(git describe --tags --abrev=0)
         echo "RELEASE_VERSION=$TAG" >> $GITHUB_OUTPUT
         echo "POM_VERSION=$(echo $TAG | sed 's/^v//')" >> $GITHUB_OUTPUT
     - name: Show versions
