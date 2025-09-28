@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.8...v1.0.9) (2025-09-28)
+
+
+### Bug Fixes
+
+* **build:** read .env file for tests. ([9e0ac29](https://github.com/Paladins-Inn/rollenspiel-cons/commit/9e0ac29ca323a04f126950bbde6d3b8baae21b2d))
+
 ## [1.0.8](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.7...v1.0.8) (2025-09-28)
 
 
