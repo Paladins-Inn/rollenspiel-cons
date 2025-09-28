@@ -1,3 +1,10 @@
+## [1.0.13](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.12...v1.0.13) (2025-09-28)
+
+
+### Bug Fixes
+
+* **tests:** trying to get the tests running on github actions. ([54165d3](https://github.com/Paladins-Inn/rollenspiel-cons/commit/54165d30d4e1916477f4bbf46f5d34662206d189))
+
 ## [1.0.12](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.11...v1.0.12) (2025-09-28)
 
 
