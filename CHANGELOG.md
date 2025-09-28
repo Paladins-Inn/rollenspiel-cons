@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.13...v1.1.0) (2025-09-28)
+
+
+### Bug Fixes
+
+* **security:** Update okio-jvm to 3.6.0 to fix CVE-2023-3635 ([e0dce02](https://github.com/Paladins-Inn/rollenspiel-cons/commit/e0dce020db06f3b37dc9533d178c26053e881fbf))
+
+
+### Features
+
+* **build:** Added dependabot configuration ([e0e844a](https://github.com/Paladins-Inn/rollenspiel-cons/commit/e0e844a4b4fb5aad12b25e00ad0277b822028420))
+
 ## 1.0.0 till [1.0.13](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.0...v1.0.13) (2025-09-28)
 
 
