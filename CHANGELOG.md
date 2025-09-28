@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.10...v1.0.11) (2025-09-28)
+
+
+### Bug Fixes
+
+* **tests:** remove commons-logging as it is not needed at all. ([f617972](https://github.com/Paladins-Inn/rollenspiel-cons/commit/f61797247e01d26a855761c8f303d23ec4715a55))
+
 ## [1.0.10](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.9...v1.0.10) (2025-09-28)
 
 
