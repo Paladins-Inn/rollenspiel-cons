@@ -221,6 +221,14 @@
     </dependency>
 
 
+    <!-- what3words -->
+    <dependency>
+      <groupId>com.what3words</groupId>
+      <artifactId>w3w-java-wrapper</artifactId>
+      <version>3.1.22</version>
+    </dependency>
+
+
     <!-- Version handling -->
     <dependency>
       <groupId>org.semver4j</groupId>
