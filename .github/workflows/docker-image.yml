@@ -131,7 +131,7 @@ jobs:
       run: |
         mkdir -p java-artifacts/target
         cp -a target/app.jar java-artifacts/target/
-        cp -a Dockerfile .dockerignore pom.xml java-artifacts
+        cp -a Dockerfile .dockerignore pom.xml README.md CONTRIBUTING.md CODE_OF_CONDUCT.md CHANGELOG.md LICENSE SECURITY.md "KES Corporate Contributor License Agreement (2019-12-31).pdf"  java-artifacts
     
     - name: Store result
       uses: actions/upload-artifact@master
