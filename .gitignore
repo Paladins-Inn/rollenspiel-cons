@@ -1,4 +1,5 @@
 docs/generated/
+node_modules/
 target/
 /src/main/resources/calendar-service-account.json
 /src/main/resources/static/401.html
