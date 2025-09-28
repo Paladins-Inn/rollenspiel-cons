@@ -97,19 +97,20 @@ jobs:
           ]
         
     - name: Get current RELEASE_VERSION
-      run: echo "RELEASE_VERSION=$(git tag --points-at HEAD)" >> $GITHUB_ENV
-    - name: Get current POM_VERSION
-      run: echo "POM_VERSION=$(git tag --points-at HEAD | sed 's/^v//')" >> $GITHUB_ENV
+      id: release-version
+      run: |
+        echo "RELEASE_VERSION=$(git tag --points-at HEAD)" >> $GITHUB_OUTPUT
+        echo "POM_VERSION=$(git tag --points-at HEAD | sed 's/^v//')" >> $GITHUB_OUTPUT
     - name: Show versions
-      run: echo -e "RELEASE_VERSION=${{ env.RELEASE_VERSION }}\nPOM_VERSION=${{ env.POM_VERSION }}"
+      run: echo -e "RELEASE_VERSION=${{ steps.release-version.outputs.RELEASE_VERSION }}\nPOM_VERSION=${{ steps.release-version.outputs.POM_VERSION }}"
         
     - name: Set project.version in pom.xml with versions-maven-plugin
       run: |
-        mvn versions:set -U --batch-mode --no-transfer-progress -DnewVersion=${{ env.POM_VERSION }} -DgenerateBackupPoms=false
+        mvn versions:set -U --batch-mode --no-transfer-progress -DnewVersion=${{ steps.release-version.outputs.POM_VERSION }} -DgenerateBackupPoms=false
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add pom.xml
-        git commit -m "chore(release): set version to pom.xml $MAVEN_VERSION [skip ci]"
+        git commit -m "chore(release): set version to pom.xml ${{ steps.release-version.outputs.POM_VERSION }} [skip ci]"
         git push origin main
     
     - name: Compile stuff
