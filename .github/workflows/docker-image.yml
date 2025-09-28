@@ -96,11 +96,12 @@ jobs:
             { "id": "torganized-play-commons", "username": "${{ secrets.ARTIFACTSTORE_USER }}", "password": "${{ secrets.ARTIFACTSTORE_PASSWORD }}"}
           ]
         
-    - name: Get current git tag
-      run: |
-        echo "RELEASE_VERSION=$(git tag --points-at HEAD)" >> $GITHUB_ENV
-        echo "POM_VERSION=$(git tag --points-at HEAD | sed 's/^v//')" >> $GITHUB_ENV
-        
+    - name: Get current RELEASE_VERSION
+      run: echo "RELEASE_VERSION=$(git tag --points-at HEAD)" >> $GITHUB_ENV
+    - name: Get current POM_VERSION
+      run: echo "POM_VERSION=$(git tag --points-at HEAD | sed 's/^v//')" >> $GITHUB_ENV
+    - name: Show versions
+      run: echo -e "RELEASE_VERSION=${{ env.RELEASE_VERSION }}\nPOM_VERSION=${{ env.POM_VERSION }}"
         
     - name: Set project.version in pom.xml with versions-maven-plugin
       run: |
