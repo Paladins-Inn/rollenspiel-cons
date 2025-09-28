@@ -98,15 +98,17 @@ jobs:
         
     - name: Get current git tag
       run: |
-        echo "RELEASE_VERSION=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+        echo "RELEASE_VERSION=$(git tag --points-at HEAD)" >> $GITHUB_ENV
+        echo "MAVEN_VERSION=$(git tag --points-at HEAD | sed 's/^v//')" >> $GITHUB_ENV
+        
         
     - name: Set project.version in pom.xml with versions-maven-plugin
       run: |
-        mvn versions:set -DnewVersion=${{ env.RELEASE_VERSION }} -DgenerateBackupPoms=false
+        mvn versions:set -DnewVersion=${{ env.MAVEN_VERSION }} -DgenerateBackupPoms=false
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add pom.xml
-        git commit -m "chore(release): set version to pom.xml $RELEASE_VERSION [skip ci]"
+        git commit -m "chore(release): set version to pom.xml $MAVEN_VERSION [skip ci]"
         git push origin main
     
     - name: Compile stuff
