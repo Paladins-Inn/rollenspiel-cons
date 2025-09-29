@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.2.1...v1.3.0) (2025-09-29)
+
+
+### Features
+
+* **rollenspiel-con:** moved management port to 8081 ([6c45720](https://github.com/Paladins-Inn/rollenspiel-cons/commit/6c45720bacdb7f25c83a240ce5f76d461fa0d47f))
+
 ## [1.2.1](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.2.0...v1.2.1) (2025-09-29)
 
 
