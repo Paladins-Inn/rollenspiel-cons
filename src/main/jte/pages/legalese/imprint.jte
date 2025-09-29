@@ -9,24 +9,28 @@
     content = @`
         <div class="row">
             <div class="col-lg-12">
-                <h2>Über Rollenspiel-Cons</h2>
-                <p>Diese Plattform wurde entwickelt, um Rollenspiel-Conventions zu organisieren und zu verwalten.</p>
+                <h2>Impressum</h2>
 
-                <h3>Features</h3>
-                <ul>
-                    <li>Benutzerregistrierung über Discord</li>
-                    <li>Event-Management</li>
-                    <li>Teilnehmer-Verwaltung</li>
-                    <li>Spieltisch-Koordination</li>
-                </ul>
+                <h3>Angaben gemäß §5 TMG</h3>
+                <address>
+                    Roland Thomas Lichti<br/>
+                    Darmstädter Straße 12<br/>
+                    64625 Bensheim
+                </address>
 
-                @if(page.getUser() != null)
-                    <p><strong>Eingeloggt als:</strong> ${page.getUserName()}</p>
-                    <a href="/dashboard" class="btn btn-primary">Zum Dashboard</a>
-                @else
-                    <p>Loggen Sie sich ein, um alle Funktionen zu nutzen.</p>
-                    <a href="/oauth2/authorization/discord" class="btn btn-primary">Mit Discord anmelden</a>
-                @endif
+                <h4>Kontakt</h4>
+                <dl>
+                    <dt>Telefon</dt><dd>+49 5172 9392 7171</dd>
+                    <dt>Telefax</dt><dd>+49 5172 9392 7179</dd>
+                    <dt>E-Mail</dt><dd><a href="mailto:info@paladins-inn.de">info@paladins-inn.de</a></dd>
+                </dl>
+
+                <h2>Verantwortlich für den Inhalt nach §55 Abs. 2 RStV</h2>
+                <address>
+                    Roland Thomas Lichti<br/>
+                    Darmstädter Straße 12<br/>
+                    64625 Bensheim
+                </address>
             </div>
         </div>
     `
