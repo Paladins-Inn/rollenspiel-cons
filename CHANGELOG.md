@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.2.0...v1.2.1) (2025-09-29)
+
+
+### Bug Fixes
+
+* **rollenspiel-con:** change the filename for the contribution license in copy command. ([1c6e194](https://github.com/Paladins-Inn/rollenspiel-cons/commit/1c6e19439ce1f2d2ae8439f36c790d9b6db3388c))
+
 # [1.2.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.1.0...v1.2.0) (2025-09-29)
 
 
