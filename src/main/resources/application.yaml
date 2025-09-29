@@ -71,13 +71,10 @@ management:
       exposure:
         include: prometheus,health,metrics
   endpoint:
-    prometheus:
-      enabled: true
     health:
-      enabled: true
       show-details: always
-    metrics:
-      enabled: true
+  server:
+    port: 8081
 
 google:
   calendar:
