@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.1.0...v1.2.0) (2025-09-29)
+
+
+### Features
+
+* **rollenspiel-cons:** Changed the logging ([bba4fb5](https://github.com/Paladins-Inn/rollenspiel-cons/commit/bba4fb5495ff045a1e0f9b81cc07978cd79b5438))
+* **security:** Add some metadata files to the container. ([b0fe035](https://github.com/Paladins-Inn/rollenspiel-cons/commit/b0fe035a9dfd918036496ce0aa582810d9a928a1))
+
 # [1.1.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.0.13...v1.1.0) (2025-09-28)
 
 
