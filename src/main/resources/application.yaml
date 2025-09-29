@@ -52,7 +52,7 @@ server:
   servlet:
     session:
       timeout: 1800s
-    context-path: /cons
+    context-path: /
   forward-headers-strategy: native
   compression:
     enabled: true
@@ -78,7 +78,7 @@ management:
 
 google:
   calendar:
-    service-account-key-path: calendar-service-account.json
+    service-account-key-path: file:./calendar-service-account.json
     id: changeme
 
 snowflake:

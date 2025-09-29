@@ -18,7 +18,7 @@
                 @if(!requestUri.isEmpty())
                     <p class="text-muted"><small>Angeforderte URL: ${requestUri}</small></p>
                 @endif
-                <a class="btn btn-primary" href="${contextPath}/">
+                <a class="btn btn-primary" href="${contextPath}">
                     <i class="fas fa-home me-1"></i>Zurück zur Startseite
                 </a>
             </div>

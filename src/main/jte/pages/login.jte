@@ -40,12 +40,12 @@
                         </p>
                         
                         <div class="d-grid gap-2">
-                            <a href="${contextPath}/oauth2/authorization/discord" class="btn btn-primary btn-lg">
+                            <a href="${contextPath}oauth2/authorization/discord" class="btn btn-primary btn-lg">
                                 <i class="fab fa-discord me-2"></i>
                                 Mit Discord anmelden
                             </a>
                             
-                            <a href="${contextPath}/oauth2/authorization/paladins-inn" class="btn btn-success btn-lg">
+                            <a href="${contextPath}oauth2/authorization/paladins-inn" class="btn btn-success btn-lg">
                                 <i class="fas fa-key me-2"></i>
                                 Mit Paladins Inn anmelden
                             </a>
@@ -56,13 +56,13 @@
                         <div class="text-center">
                             <small class="text-muted">
                                 Durch die Anmeldung stimmen Sie unseren 
-                                <a href="${contextPath}/legalese/tos">Nutzungsbedingungen</a> zu.
+                                <a href="${contextPath}legalese/tos">Nutzungsbedingungen</a> zu.
                             </small>
                         </div>
                     </div>
                     <div class="card-footer text-center py-3">
                         <div class="small">
-                            <a href="${contextPath}/">Zurück zur Startseite</a>
+                            <a href="${contextPath}">Zurück zur Startseite</a>
                         </div>
                     </div>
                 </div>

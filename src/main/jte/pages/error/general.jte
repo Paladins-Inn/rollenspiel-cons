@@ -31,7 +31,7 @@
                             Versuchen Sie es in ein paar Minuten erneut oder kehren Sie zur Startseite zurück.
                         </p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                            <a href="${contextPath}/" class="btn btn-primary">
+                            <a href="${contextPath}" class="btn btn-primary">
                                 <i class="fas fa-home me-1"></i>Zur Startseite
                             </a>
                             <button onclick="history.back()" class="btn btn-secondary">

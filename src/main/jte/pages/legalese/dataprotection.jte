@@ -22,10 +22,10 @@
 
                 @if(page.getUser() != null)
                     <p><strong>Eingeloggt als:</strong> ${page.getUserName()}</p>
-                    <a href="/cons/dashboard" class="btn btn-primary">Zum Dashboard</a>
+                    <a href="/dashboard" class="btn btn-primary">Zum Dashboard</a>
                 @else
                     <p>Loggen Sie sich ein, um alle Funktionen zu nutzen.</p>
-                    <a href="/cons/oauth2/authorization/discord" class="btn btn-primary">Mit Discord anmelden</a>
+                    <a href="/oauth2/authorization/discord" class="btn btn-primary">Mit Discord anmelden</a>
                 @endif
             </div>
         </div>

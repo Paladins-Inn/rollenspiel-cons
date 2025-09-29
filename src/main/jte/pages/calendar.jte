@@ -3,6 +3,7 @@
 @param Page page
 @param String contextPath
 
+
 @template.layout(
     title = "Willkommen bei den Rollenspiel-Cons",
     page = page,
@@ -114,7 +115,7 @@
             week: 'Woche',
             day: 'Tag'
           },
-          events: '${contextPath}/api/events',
+          events: '${contextPath}api/events',
           eventClick: function(info) {
             const event = info.event;
             const props = event.extendedProps;
