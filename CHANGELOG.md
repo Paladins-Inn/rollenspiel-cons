@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.4.0...v1.5.0) (2025-09-29)
+
+
+### Features
+
+* **rollenspiel-cons:** Datenschutzerklärung and Impressum added. ([29597d6](https://github.com/Paladins-Inn/rollenspiel-cons/commit/29597d642486f3a2cf6d4866087f85787e12326c))
+
 # [1.4.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.3.0...v1.4.0) (2025-09-29)
 
 
