@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.3.0...v1.4.0) (2025-09-29)
+
+
+### Features
+
+* **rollenspiel-con:** BREAKING CHANGE remove / after ${contextPath} in templates. You need to set the trailing "/" to the contextPath variable in application.yaml. ([34146f1](https://github.com/Paladins-Inn/rollenspiel-cons/commit/34146f141b7db3fb139ce492288db38548275c3e))
+
 # [1.3.0](https://github.com/Paladins-Inn/rollenspiel-cons/compare/v1.2.1...v1.3.0) (2025-09-29)
 
 
