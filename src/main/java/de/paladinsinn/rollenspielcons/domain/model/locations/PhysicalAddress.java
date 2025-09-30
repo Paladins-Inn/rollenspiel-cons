@@ -1,17 +1,16 @@
-package de.paladinsinn.rollenspielcons.domain.model;
+package de.paladinsinn.rollenspielcons.domain.model.locations;
 
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.validator.constraints.Range;
@@ -24,14 +23,14 @@ import org.hibernate.validator.constraints.Range;
  * @since 21.09.25
  */
 @Schema(
-    title = "Location",
-    description = "A location with address and coordinates.",
+    title = "PhysicalAddress",
+    description = "A locations with address and coordinates.",
     examples = {
         """
          {
            "address": "Darmstädter Str. 12, 64625 Bensheim",
            "threeWords": "neuerung.sportler.zelter",
-           "longitute": 8.621361,
+           "longitude": 8.621361,
            "latitude": 49.684139
          }
          """,
@@ -39,23 +38,23 @@ import org.hibernate.validator.constraints.Range;
          {
            "address": "Messegelände 1, 60327 Frankfurt am Main",
            "threeWords": "dörfern.beweis.zwischen",
-           "longitute": 8.2769618,
+           "longitude": 8.2769618,
            "latitude": 49.8887193
          }
          """
     }
 )
 @Jacksonized
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
 @ToString
-@EqualsAndHashCode(of = {"longitute", "latitude"})
-public class Location {
+@EqualsAndHashCode(of = {"longitude", "latitude"}, callSuper = true)
+public class PhysicalAddress extends Location {
   @Schema(
-      title = "Address of the location",
-      description = "The full address of the location.",
+      title = "Address of the locations",
+      description = "The full address of the locations.",
       examples = {
           "Darmstädter Str. 12, 64625 Bensheim",
           "Messegelände 1, 60327 Frankfurt am Main"
@@ -67,8 +66,8 @@ public class Location {
   private String address;
   
   @Schema(
-      title = "What3Words location",
-      description = "The What3Words location of the address.",
+      title = "What3Words locations",
+      description = "The What3Words locations of the address.",
       examples = {
           "neuerung.sportler.zelter",
           "dörfern.beweis.zwischen"
@@ -79,10 +78,10 @@ public class Location {
   @NotNull
   @Pattern(regexp = "^[a-zA-ZäöüÄÖÜß]+\\.[a-zA-ZäöüÄÖÜß]+\\.[a-zA-ZäöüÄÖÜß]+$", message = "threeWords must be in the format word1.word2.word3 with only letters and German umlauts")
   private String threeWords;
-
+  
   @Schema(
-      title = "Longitude of the location",
-      description = "The longitude of the location in decimal degrees.",
+      title = "Longitude of the locations",
+      description = "The longitude of the locations in decimal degrees.",
       examples = { "8.621361", "8.2769618" },
       minimum = "-180",
       maximum = "180",
@@ -90,11 +89,11 @@ public class Location {
   )
   @NotNull
   @Range(min = -180, max = 180, message = "Longitude must be between {min} and {max}")
-  private Double longitute;
+  private Double longitude;
   
   @Schema(
-      title = "Latitude of the location",
-      description = "The latitude of the location in decimal degrees.",
+      title = "Latitude of the locations",
+      description = "The latitude of the locations in decimal degrees.",
       examples = { "49.684139", "49.8887193" },
       minimum = "-90",
       maximum = "90",
@@ -103,4 +102,20 @@ public class Location {
   @NotNull
   @Range(min = -90, max = 90, message = "Latitude must be between {min} and {max}")
   private Double latitude;
+  
+  
+  @Override
+  public String getDisplayText() {
+    return address;
+  }
+  
+  @Override
+  public String getEmailText() {
+    return address + " (" + getUri() + ")";
+  }
+  
+  @Override
+  public String getUri() {
+    return "https://www.openstreetmap.org/#map=19/" + longitude + "/" + latitude;
+  }
 }

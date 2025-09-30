@@ -29,9 +29,9 @@ public class LocationService {
   /**
    * Converts the given latitude and longitude to a 3 word address.
    *
-   * @param latitude The latitude of the location.
-   * @param longitude the longitude of the location.
-   * @return the 3 word address of the location.
+   * @param latitude The latitude of the locations.
+   * @param longitude the longitude of the locations.
+   * @return the 3 word address of the locations.
    */
   public String convertTo3Words(final double latitude, final double longitude) {
     log.entry(latitude, longitude);
@@ -68,7 +68,7 @@ public class LocationService {
    * Converts the given 3 word address to coordinates.
    *
    * @param threeWords The 3 word address to convert.
-   * @return the coordinates of the location in "longitude,latitude" format.
+   * @return the coordinates of the locations in "longitude,latitude" format.
    */
   public String convertToCoordinates(final String threeWords) {
     log.entry(threeWords);
@@ -87,7 +87,7 @@ public class LocationService {
    * Converts the given 3 word address to a nearest known place.
    *
    * @param threeWords The 3 word address to convert.
-   * @return the nearest known place to the location.
+   * @return the nearest known place to the locations.
    */
   public String convertToAddress(final String threeWords) {
     log.entry(threeWords);

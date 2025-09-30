@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <!-- Event Details Modal -->
+    <!-- PhysicalEvent Details Modal -->
     <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -120,7 +120,7 @@
             const event = info.event;
             const props = event.extendedProps;
 
-            // Modal mit Event-Daten füllen
+            // Modal mit PhysicalEvent-Daten füllen
             document.getElementById('eventTitle').textContent = event.title;
             document.getElementById('eventDescription').textContent = props.description || '';
 
@@ -178,20 +178,20 @@
 
         calendar.render();
 
-        // Event hinzufügen Button
+        // PhysicalEvent hinzufügen Button
         document.getElementById('addEventBtn').addEventListener('click', function() {
-          alert('Event hinzufügen - Funktionalität noch nicht implementiert');
+          alert('PhysicalEvent hinzufügen - Funktionalität noch nicht implementiert');
         });
 
-        // Event bearbeiten Button
+        // PhysicalEvent bearbeiten Button
         document.getElementById('editEventBtn').addEventListener('click', function() {
-          alert('Event bearbeiten - Funktionalität noch nicht implementiert');
+          alert('PhysicalEvent bearbeiten - Funktionalität noch nicht implementiert');
         });
 
-        // Event beitreten Button
+        // PhysicalEvent beitreten Button
         document.getElementById('joinEventBtn').addEventListener('click', function() {
           if (!this.disabled) {
-            alert('Event beitreten - Funktionalität noch nicht implementiert');
+            alert('PhysicalEvent beitreten - Funktionalität noch nicht implementiert');
           }
         });
       });

@@ -3,7 +3,7 @@ spring:
     banner-mode: off
   application:
     name: rollenspiel-cons
-    description: Rollenspiel Convention Management
+    description: Rollenspiel PhysicalEvent Management
     version: @project.version@
   
   security:
