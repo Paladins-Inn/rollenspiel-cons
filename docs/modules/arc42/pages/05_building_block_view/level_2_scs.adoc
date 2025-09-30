@@ -1,0 +1,62 @@
+= Level 2: Components of the SCS
+
+== Overview Diagram
+[plantuml, scs-level-2]
+----
+@startuml scs-level-2
+
+actor "User" <<User>> as ingress
+
+component "rollenspiel-cons" <<SCS,spring-boot>> as service {
+  component "Frontend" as frontend {
+    [Web Application] <<Java, JTE>> as app
+    [REST API] <<Java>> as api
+  }
+
+  component "Core" as core {
+    [Domain] <<Java>> as domain
+    [Model] <<Java>> as model
+
+  }
+
+
+  component "Integrations" as integrations {
+    [Google Calendar Service] <<Java>> as gcalsvc
+    [Discord Bot Service] <<Java>> as discordsvc
+    [3words Service] <<Java>> as what3wordssvc
+    [OpenStreetMap Service] <<Java>> as osmsvc
+  }
+
+  database "rollenspiel-cons" <<Postgres>> as data
+}
+
+
+ingress --> app : HTML
+ingress --> api : REST\nGRAPHQL\nJSON
+
+app --> domain
+api --> domain
+
+domain <-right-> model
+domain -left-> data : Postgres
+
+domain --> gcalsvc
+domain <--> discordsvc
+domain --> what3wordssvc
+domain --> osmsvc
+
+[Google Calendar] as gcal
+[Discord] as discord
+[OpenStreetMap] as osm
+[3words] as what3words
+
+gcalsvc --> gcal : API
+discordsvc <--> discord : API
+osmsvc --> osm : REST
+what3wordssvc --> what3words : REST
+
+@enduml
+----
+
+== List of Building Blocks
+include::partial$building-blocks-level-2.adoc[]

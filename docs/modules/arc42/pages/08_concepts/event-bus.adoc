@@ -49,7 +49,7 @@ public class UserCreatedEvent {
 public class UserEventListener {
     @EventListener
     public void handleUserCreated(UserCreatedEvent event) {
-        System.out.println("User created: " + event.getUsername());
+        System.out.println("Identity created: " + event.getUsername());
     }
 }
 ----

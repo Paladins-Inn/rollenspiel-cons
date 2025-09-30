@@ -1,0 +1,140 @@
+= Level 3: Identity and Access Management
+include::partial$config.adoc[]
+
+== Overview
+
+[plantuml,level3-iam]
+----
+@startuml level3-iam
+skinparam monochrome true
+skinparam ranksep 150
+skinparam dpi 150
+skinparam arrowThickness 0.7
+skinparam packageTitleAlignment left
+skinparam usecaseBorderThickness 0.4
+skinparam defaultFontSize 12
+skinparam rectangleBorderThickness 1
+
+component "de.paladinsinn.rollenspielcons.model" as model {
+    interface HasId {
+      ----
+      +getId() : long
+    }
+
+    interface HasDisplayText {
+        ----
+        +getDisplayText() : String
+        +getUri() : String
+        +getEmailText() : String
+        +getHtmlLink() : String
+        +getMarkdownLink() : String
+        +getAsciiDocLink() : String
+    }
+
+
+    abstract class AbstractBaseEntity <<HasId, HasDisplayText>>
+
+    AbstractBaseEntity .le.|> HasId
+    AbstractBaseEntity .ri.|> HasDisplayText
+
+    component "de.paladinsinn.rollenspielcons.model.iam" as iam {
+        interface HasOwner {
+            ----
+            +getOwner() : Owner
+            +isOwnedBy(identityHolder : HasIdentity) : boolean
+        }
+
+        interface HasIdentity {
+            ----
+            +getIdentity() : Identity
+        }
+
+        class Owner {
+            -identities : Set<Identity>
+            -groups : Set<Group>
+            ----
+            +isOwner(identity : Identity) : boolean
+        }
+        Owner -up-|> AbstractBaseEntity
+
+        class Identity <<HasIdenity>> {
+            -oidcUser : Set<OidcUser>
+            -roles : Set<Role>
+            -groups : Set<Group>
+            ----
+            +hasRole(role : Role) : boolean
+            +isInGroup(group : Group) : boolean
+            +getIdentity() : Identity
+        }
+        Identity -up-|> AbstractBaseEntity
+        Identity -up-|> HasIdentity
+        Identity o-- OidcUser
+        Identity o-- Role
+        Identity --Group
+
+        class OidcUser <<HasIdentity>> {
+            -id : long
+            -identity : Identity
+            -issuer : String
+            -sub : String
+            ----
+        }
+        OidcUser -up-|> HasIdentity
+        OidcUser o-- Identity
+
+        class Group {
+            -owner : Owner
+            ----
+            +isMember(identity : Identity) : boolean
+            +getOwner() : Owner
+        }
+        Group -up-|> AbstractBaseEntity
+        Group o-up-o Owner
+        Group --|> HasOwner
+
+        class Role {
+            -owner : Owner
+            ----
+            +getOwner() : Owner
+        }
+        Role -up-|> AbstractBaseEntity
+        Role o-up-o Owner
+        Role --|> HasOwner
+
+        class Rule {
+            -role : Role
+            -object : String
+            -action : Action
+            -rule : Rule.Ruling
+            ----
+            +apply(identity : Identity, action : Action, object : String) : boolean
+        }
+        Rule -up-|> AbstractBaseEntity
+        Rule o-- Role
+        Rule o-- Action
+        Rule o-- ruling
+
+        enum "Rule.Ruling" as ruling {
+            +ALLOW
+            +DENY
+        }
+
+        enum Action {
+            CREATE
+            READ
+            UPDATE
+            DELETE
+            ASSIGN
+            REVOKE
+            PUBLISH
+            UNPUBLISH
+            SUBSCRIBE
+            UNSUBSCRIBE
+            EXECUTE
+            APPROVE
+            REJECT
+        }
+    }
+}
+@enduml
+----

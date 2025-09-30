@@ -9,6 +9,8 @@ include::partial$config.adoc[]
 ** Systems
 *** xref:04_solution_strategy.adoc[]
 *** xref:05_building_block_view/index.adoc[]
+**** xref:05_building_block_view/level_2_scs.adoc[]
+**** xref:05_building_block_view/level_3_iam.adoc[]
 ** Runtime view
 *** xref:06_runtime_view/rollenspiel-cons.adoc[]
 *** xref:07_deployment_view.adoc[]

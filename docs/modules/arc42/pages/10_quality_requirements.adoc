@@ -60,6 +60,7 @@ This includes using widely used frameworks so help can be given quite easily.
 +++_ Fast Responses (US03)
 +++_ Accessible (US04)
 +++_ Ready for tablet usage (US05)
++++_ Attribute based access control (ABAC) (US06)
 ++ Reliability (RE)
 +++_ Working Hours 24/7 (RE01)
 ++ Maintainability (MT)
@@ -143,6 +144,9 @@ This includes following the {w3c01} and the {eu-barrierefreiheit}.
 |[[US05,Ready for tablet usage (US05)]] **US05**
 |The system should be usable on tablets as well as on desktop computers.
 
+|[[US06,Attribute based access control (ABAC) (US06)]] **US06**
+|The system should use ABAC (&uparrow;xref:08_concepts/abac.adoc[]) to manage permissions.
+Uses should be able to form groups and manage eents on group level.
 
 2+h| Reliability
 
