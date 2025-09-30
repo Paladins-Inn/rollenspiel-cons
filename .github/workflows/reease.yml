@@ -6,24 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: CI/CD OCI Container
+name: Release Version
 
 on:
-  push:
-    branches: [ "main" ]
-    paths-ignore:
-      - '.github/ISSUE_TEMPLATE/**'
-      - .github/dependabot.yml
-      - 'src/main/helm/**'
-      - 'src/main/kubernetes/**'
-      - CODE_OF_CONDUCT.md
-      - CONTRIBUTING.md
-      - 'KES Corporate Contributor License Agreement (2019-12-31).pdf'
-      - LICENSE
-      - README.md
-      - SECURITY.md
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
 
 env:
@@ -32,9 +17,41 @@ env:
 
 
 jobs:
+  release:
+    name: Version and Changelog
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      deployments: write
+      statuses: write
+    
+    steps:
+    - uses: actions/checkout@v5
+    - name: Set up Node.js
+      uses: actions/setup-node@v5
+      with:
+        node-version: "20.x"
+    - name: Cache Node.js modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-modules-
+    - name: Install semver management dependencies
+      run: npm ci
+    - name: Run Semantic Release
+      run: npx semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+    
   build-app:
     name: Build with Maven
     runs-on: ubuntu-latest
+    needs: release
     permissions:
       contents: write
       packages: write
@@ -68,22 +85,22 @@ jobs:
       id: release-version
       run: |
         git pull --rebase origin main
-        TAG=$(git describe --tags)
-        echo "RELEASE_VERSION=$TAG" >> $GITHUB_ENV
-        echo "POM_VERSION=$(echo $TAG | sed 's/^v//')" >> $GITHUB_ENV
+        TAG=$(git describe --tags --abbrev=0)
+        echo "RELEASE_VERSION=$TAG" >> $GITHUB_OUTPUT
+        echo "POM_VERSION=$(echo $TAG | sed 's/^v//')" >> $GITHUB_OUTPUT
     - name: Show versions
-      run: echo -e "RELEASE_VERSION${RELEASE_VERSION}\nPOM_VERSION=${POM_VERSION}"
+      run: echo -e "RELEASE_VERSION=${{ steps.release-version.outputs.RELEASE_VERSION }}\nPOM_VERSION=${{ steps.release-version.outputs.POM_VERSION }}"
         
     - name: Set project.version in pom.xml with versions-maven-plugin
       run: |
-        mvn versions:set -U --batch-mode --no-transfer-progress -DnewVersion=${POM_VERSION} -DgenerateBackupPoms=false
+        mvn versions:set -U --batch-mode --no-transfer-progress -DnewVersion=${{ steps.release-version.outputs.POM_VERSION }} -DgenerateBackupPoms=false
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add pom.xml
-        git commit -m "chore(release): set version to pom.xml ${POM_VERSION} [skip ci]"
+        git commit -m "chore(release): set version to pom.xml ${{ steps.release-version.outputs.POM_VERSION }} [skip ci]"
         git push origin main
-        git tag -f ${RELEASE_VERSION}
-        git push origin -f ${RELEASE_VERSION}
+        git tag -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
+        git push origin -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
     
     - name: Compile stuff
       id: build-java
