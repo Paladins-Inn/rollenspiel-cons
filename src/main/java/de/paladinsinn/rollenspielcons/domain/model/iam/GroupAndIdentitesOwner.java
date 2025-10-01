@@ -4,14 +4,17 @@ package de.paladinsinn.rollenspielcons.domain.model.iam;
 import de.paladinsinn.rollenspielcons.domain.model.AbstractBaseEntity;
 import de.paladinsinn.rollenspielcons.domain.model.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.model.HasId;
-import jakarta.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
+import lombok.extern.slf4j.XSlf4j;
 
 
 /**
@@ -26,17 +29,30 @@ import lombok.extern.jackson.Jacksonized;
 @Setter(value = AccessLevel.PACKAGE, onMethod_ = @__(@Deprecated)) // Only for testing
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Group extends AbstractBaseEntity implements HasId, HasDisplayText, HasOwner {
-  @EqualsAndHashCode.Exclude
-  private Owner owner;
+@XSlf4j
+public class GroupAndIdentitesOwner extends AbstractBaseEntity implements Owner, HasId, HasDisplayText {
+  /**
+   * The identities that are consigned to this owner.
+   */
+  @Builder.Default
+  @ToString.Exclude
+  private Set<Identity> identities = new HashSet<>();
   
   /**
-   * Checks if the given identity is a member of this group.
-   *
-   * @param identity the identity to check
-   * @return true if the identity is a member of this group, false otherwise
+   * The groups that are consigned to this owner.
    */
-  public boolean isMember(@NotNull Identity identity) {
-    return identity.isInGroup(this);
+  @Builder.Default
+  @ToString.Exclude
+  private Set<Group> groups = new HashSet<>();
+  
+  
+  @Override
+  public boolean isOwner(final Identity identity) {
+    log.entry(identity);
+    
+    boolean result = identities.contains(identity)
+           || groups.stream().anyMatch(g -> g.isMember(identity));
+    
+    return log.exit(result);
   }
 }

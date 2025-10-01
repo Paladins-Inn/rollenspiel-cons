@@ -5,11 +5,12 @@ import de.paladinsinn.rollenspielcons.domain.model.AbstractBaseEntity;
 import de.paladinsinn.rollenspielcons.domain.model.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.model.HasId;
 import jakarta.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
@@ -24,13 +25,15 @@ import lombok.extern.jackson.Jacksonized;
  */
 @Jacksonized
 @SuperBuilder(toBuilder = true)
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
-@Setter(AccessLevel.PACKAGE)
-@ToString
+@Setter(value = AccessLevel.PACKAGE, onMethod_ = @__(@Deprecated)) // Only for testing
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class Role extends AbstractBaseEntity implements HasId, HasDisplayText, HasOwner {
-  @NotNull(message = "The group must not be null.")
+  @EqualsAndHashCode.Exclude
+  @NotNull(message = "The owner must not be null.")
   private Owner owner;
+  
+  @Builder.Default
+  private Set<Rule> rules = new HashSet<>();
 }

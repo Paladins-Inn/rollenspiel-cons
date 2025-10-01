@@ -54,6 +54,7 @@ public class DisplayableName implements HasDisplayText {
   )
   @NotNull(message = "The URI must be present.")
   @Size(min = 3, max = 100, message = "The name must be between {min} and {max} characters long.")
+  @ToString.Exclude
   private String uri;
   
   /**

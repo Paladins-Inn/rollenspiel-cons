@@ -31,7 +31,7 @@ import lombok.extern.jackson.Jacksonized;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
-@Setter(AccessLevel.PACKAGE)
+@Setter(value = AccessLevel.PACKAGE, onMethod_ = @__(@Deprecated)) // Only for testing
 @ToString
 @EqualsAndHashCode(of = {"id"})
 public class OidcUser implements HasId, HasDisplayText, HasIdentity {
