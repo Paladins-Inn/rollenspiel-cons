@@ -1,6 +1,8 @@
 package de.paladinsinn.rollenspielcons.domain.model.iam;
 
 
+import de.paladinsinn.rollenspielcons.domain.api.iam.Group;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Role;
 import lombok.extern.slf4j.XSlf4j;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +22,7 @@ public class IdentityTest {
   public void shouldBeAValidIdentityWhenCalledWithoutGroupAndRoles() {
     log.entry();
     
-    Identity result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
+    IdentityImpl result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
     
     assertEquals(1L, result.getId());
     assertEquals("identity", result.getDisplayText());
@@ -35,8 +37,8 @@ public class IdentityTest {
   public void shouldBeAValidIdentityWhenCalledWithGroupAndWithoutRoles() {
     log.entry();
     
-    Identity result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
-    Group group = GENERATOR.generateGroup(2L, "group", result);
+    IdentityImpl result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
+    Group        group  = GENERATOR.generateGroup(2L, "group", result);
     result.getGroups().add(group);
     
     assertEquals(1L, result.getId());
@@ -51,8 +53,8 @@ public class IdentityTest {
   public void shouldBeAValidIdentityWhenCalledWithRolesAndWithoutGroups() {
     log.entry();
     
-    Identity result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
-    Role role = GENERATOR.generateRole(3L, "role", result);
+    IdentityImpl result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
+    Role         role   = GENERATOR.generateRole(3L, "role", result);
     result.getRoles().add(role);
     
     assertEquals(1L, result.getId());
@@ -67,8 +69,8 @@ public class IdentityTest {
   public void shouldBeAValidIdentityWhenCalledWithRolesAndGroups() {
     log.entry();
     
-    Identity result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
-    Group group = GENERATOR.generateGroup(2L, "group", result);
+    IdentityImpl result = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
+    Group        group  = GENERATOR.generateGroup(2L, "group", result);
     result.getGroups().add(group);
     Role role = GENERATOR.generateRole(3L, "role", result);
     result.getRoles().add(role);

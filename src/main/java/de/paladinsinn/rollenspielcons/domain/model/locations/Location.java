@@ -1,8 +1,8 @@
 package de.paladinsinn.rollenspielcons.domain.model.locations;
 
 
-import de.paladinsinn.rollenspielcons.domain.model.HasDisplayText;
-import de.paladinsinn.rollenspielcons.domain.model.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
+import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

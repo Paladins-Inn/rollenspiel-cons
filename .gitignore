@@ -1,7 +1,6 @@
 docs/generated/
 node_modules/
 target/
-/src/main/resources/calendar-service-account.json
 /src/main/resources/static/401.html
 /src/main/resources/static/404.html
 /src/main/resources/static/500.html
@@ -13,3 +12,4 @@ target/
 /src/main/resources/static/password.html
 /src/main/resources/static/register.html
 /src/main/resources/static/tables.html
+calendar-service-account.json

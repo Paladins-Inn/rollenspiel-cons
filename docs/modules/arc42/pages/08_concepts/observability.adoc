@@ -79,7 +79,7 @@ Alerting generates notifications based on defined thresholds in metrics, enablin
 === Technology: Prometheus + Alertmanager
 
 * Prometheus evaluates metrics and triggers alerts according to alerting rules.
-* Example rule (Prometheus):
+* Example permission (Prometheus):
 
 [source,yaml]
 ----

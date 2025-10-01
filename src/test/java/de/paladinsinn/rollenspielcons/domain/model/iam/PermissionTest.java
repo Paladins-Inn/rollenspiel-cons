@@ -1,6 +1,11 @@
 package de.paladinsinn.rollenspielcons.domain.model.iam;
 
 
+import de.paladinsinn.rollenspielcons.domain.api.iam.Action;
+import de.paladinsinn.rollenspielcons.domain.api.iam.HasOwner;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Identity;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Owner;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Permission;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,21 +23,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @since 2025-09-30
  */
 @XSlf4j
-public class RuleTest {
+public class PermissionTest {
   static final IamGenerator GENERATOR = new IamGenerator();
   
   @Test
   public void shouldBeAValidRuleWhenCalledWithOwnerAndObject() {
     log.entry();
     
-    Identity owner = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
+    Identity   owner  = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
     TestObject object = TestObject.builder().owner(owner).build();
-    Rule result = GENERATOR.generateRule(1L, "rule", Action.CREATE, object.getClass().getCanonicalName());
+    Permission result = GENERATOR.generateRule(1L, "rule", Action.CREATE, object.getClass().getCanonicalName());
     
     assertEquals(1L, result.getId());
     assertEquals("rule", result.getDisplayText());
     assertEquals(Action.CREATE, result.getAction());
-    assertEquals(Rule.Ruling.ALLOW, result.getRuling());
+    assertEquals(Permission.Ruling.ALLOW, result.getRuling());
     
     log.exit();
   }
@@ -42,10 +47,10 @@ public class RuleTest {
     log.entry();
     
     Identity owner = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
-    TestObject object = TestObject.builder().owner(owner).build();
-    Rule rule = GENERATOR.generateRule(1L, "rule", Action.CREATE, object.getClass().getCanonicalName());
+    TestObject object     = TestObject.builder().owner(owner).build();
+    Permission permission = GENERATOR.generateRule(1L, "permission", Action.CREATE, object.getClass().getCanonicalName());
     
-    assertTrue(rule.apply(owner, Action.CREATE, object));
+    assertTrue(permission.apply(owner, Action.CREATE, object));
     
     log.exit();
   }
@@ -57,10 +62,10 @@ public class RuleTest {
     
     Identity owner = GENERATOR.generateIdentity(1L, "identity", "https://issuer", "123451234512345");
     Identity user = GENERATOR.generateIdentity(2L, "other identity", "https://issuer", "123451234512345");
-    TestObject object = TestObject.builder().owner(owner).build();
-    Rule rule = GENERATOR.generateRule(1L, "rule", Action.CREATE, object.getClass().getCanonicalName());
+    TestObject object     = TestObject.builder().owner(owner).build();
+    Permission permission = GENERATOR.generateRule(1L, "permission", Action.CREATE, object.getClass().getCanonicalName());
     
-    assertFalse(rule.apply(user, Action.CREATE, object));
+    assertFalse(permission.apply(user, Action.CREATE, object));
     
     log.exit();
   }

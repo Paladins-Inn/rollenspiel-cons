@@ -3,8 +3,8 @@ package de.paladinsinn.rollenspielcons.domain.model.events;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.paladinsinn.rollenspielcons.domain.model.DisplayableName;
-import de.paladinsinn.rollenspielcons.domain.model.HasDisplayText;
-import de.paladinsinn.rollenspielcons.domain.model.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
+import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import de.paladinsinn.rollenspielcons.domain.model.time.TimeSpec;
 import de.paladinsinn.rollenspielcons.domain.model.time.Timed;
 import jakarta.validation.constraints.Min;

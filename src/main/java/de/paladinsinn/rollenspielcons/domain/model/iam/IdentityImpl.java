@@ -1,9 +1,10 @@
 package de.paladinsinn.rollenspielcons.domain.model.iam;
 
 
-import de.paladinsinn.rollenspielcons.domain.model.AbstractBaseEntity;
-import de.paladinsinn.rollenspielcons.domain.model.HasDisplayText;
-import de.paladinsinn.rollenspielcons.domain.model.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Group;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Identity;
+import de.paladinsinn.rollenspielcons.domain.api.iam.OidcUser;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Role;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.HashSet;
@@ -30,7 +31,7 @@ import lombok.extern.jackson.Jacksonized;
 @Setter(value = AccessLevel.PACKAGE, onMethod_ = @__(@Deprecated)) // Only for testing
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class Identity extends AbstractBaseEntity implements Owner, HasId, HasDisplayText, HasIdentity {
+public class IdentityImpl extends OwnerImpl implements Identity {
   /**
    * The OIDC users that are linked to this identity.
    */
@@ -59,29 +60,8 @@ public class Identity extends AbstractBaseEntity implements Owner, HasId, HasDis
   private Set<Group> groups = new HashSet<>();
   
   
-  /**
-   * Checks if this identity has the given role.
-   *
-   * @param role the role to check
-   * @return {@code true} if this identity has the given role, {@code false} otherwise
-   */
-  public boolean hasRole(@NotNull Role role) {
-    return roles.contains(role);
-  }
-
-  
-  /**
-   * Checks if this identity is in the given group.
-   *
-   * @param group the group to check
-   * @return {@code true} if this identity is in the given group, {@code false} otherwise
-   */
-  public boolean isInGroup(@NotNull Group group) {
-    return groups.contains(group);
-  }
-  
-  @Override
-  public Identity getIdentity() {
+    @Override
+  public IdentityImpl getIdentity() {
     return this;
   }
   

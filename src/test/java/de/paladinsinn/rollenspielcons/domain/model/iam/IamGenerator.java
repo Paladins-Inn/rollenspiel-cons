@@ -1,6 +1,13 @@
 package de.paladinsinn.rollenspielcons.domain.model.iam;
 
 
+import de.paladinsinn.rollenspielcons.domain.api.iam.Action;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Group;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Identity;
+import de.paladinsinn.rollenspielcons.domain.api.iam.OidcUser;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Owner;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Permission;
+import de.paladinsinn.rollenspielcons.domain.api.iam.Role;
 import de.paladinsinn.rollenspielcons.domain.model.DisplayableName;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -17,7 +24,7 @@ import lombok.extern.slf4j.XSlf4j;
  */
 @XSlf4j
 public class IamGenerator {
-  public Identity generateIdentity(
+  public IdentityImpl generateIdentity(
       @Min(value = 1, message = "The id has to be at least {value}") final long id,
       @NotNull @NotBlank final String name,
       @NotNull @NotBlank final String issuer,
@@ -25,12 +32,12 @@ public class IamGenerator {
   ) {
     log.entry(id, name, issuer, sub);
     
-    Identity result = Identity.builder()
-        .id(id)
-        .name(
+    IdentityImpl result = IdentityImpl.builder()
+                                      .id(id)
+                                      .name(
             generateDisplayText(name)
         )
-        .build();
+                                      .build();
     
     result.getOidcUsers().add(generateOidc(result, issuer, sub));
     
@@ -67,7 +74,7 @@ public class IamGenerator {
   ) {
     log.entry(identity, issuer, sub);
     
-    OidcUser result = OidcUser
+    OidcUser result = OidcUserImpl
         .builder()
         .id(identity.getId())
         .issuer(issuer)
@@ -83,7 +90,7 @@ public class IamGenerator {
   ) {
     log.entry(id, name);
     
-    Group result = Group
+    Group result = GroupImpl
         .builder()
         .id(id)
         .name(generateDisplayText(name))
@@ -99,7 +106,7 @@ public class IamGenerator {
   ) {
     log.entry(id, name, owner);
     
-    Group result = Group
+    Group result = GroupImpl
         .builder()
         .id(id)
         .name(generateDisplayText(name))
@@ -116,11 +123,10 @@ public class IamGenerator {
       ) {
     log.entry(id, name, name);
     
-    Owner result = GroupAndIdentitesOwner
+    Owner result = GroupImpl
         .builder()
         .id(id)
         .name(DisplayableName.builder().name(name).build())
-        .groups(groups)
         .build();
     
     return log.exit(result);
@@ -132,7 +138,7 @@ public class IamGenerator {
   ) {
     log.entry(id, name);
     
-    Role result = Role
+    Role result = RoleImpl
         .builder()
         .id(id)
         .name(generateDisplayText(name))
@@ -148,7 +154,7 @@ public class IamGenerator {
   ) {
     log.entry(id, name);
     
-    Role result = Role
+    Role result = RoleImpl
         .builder()
         .id(id)
         .name(generateDisplayText(name))
@@ -158,7 +164,7 @@ public class IamGenerator {
     return log.exit(result);
   }
   
-  public Rule generateRule(
+  public Permission generateRule(
     @NotNull final long id,
     @NotNull @NotBlank final String name,
     @NotNull final Action action,
@@ -166,7 +172,7 @@ public class IamGenerator {
   ) {
     log.entry(id, name, action, object);
     
-    Rule result = Rule
+    Permission result = PermissionImpl
         .builder()
         .id(id)
         .name(generateDisplayText(name))

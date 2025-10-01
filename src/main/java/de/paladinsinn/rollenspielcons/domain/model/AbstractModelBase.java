@@ -2,9 +2,13 @@ package de.paladinsinn.rollenspielcons.domain.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
+import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import java.beans.Transient;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
@@ -18,10 +22,12 @@ import lombok.extern.jackson.Jacksonized;
  */
 @Jacksonized
 @SuperBuilder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode(of = {"id"})
-public class AbstractBaseEntity implements HasId, HasDisplayText {
+public class AbstractModelBase implements HasId, HasDisplayText {
   /**
    * The unique identifier of this entity.
    */

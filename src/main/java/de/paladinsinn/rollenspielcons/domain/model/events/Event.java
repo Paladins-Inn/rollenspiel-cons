@@ -2,9 +2,9 @@ package de.paladinsinn.rollenspielcons.domain.model.events;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.paladinsinn.rollenspielcons.domain.model.HasDisplayText;
-import de.paladinsinn.rollenspielcons.domain.model.HasEtag;
-import de.paladinsinn.rollenspielcons.domain.model.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
+import de.paladinsinn.rollenspielcons.domain.api.HasEtag;
+import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.beans.Transient;
@@ -52,7 +52,7 @@ public interface Event extends HasId, HasDisplayText, HasEtag {
       minItems = 0,
       maxItems = 20
   )
-  @Size(min = 0, max = 20, message = "There must be between {min} and {max} labels.")
+  @Size(max = 20, message = "There must be between {min} and {max} labels.")
   List<String> getLabels();
 
   @Schema(
@@ -76,8 +76,7 @@ public interface Event extends HasId, HasDisplayText, HasEtag {
   @Schema(
       description = "A description of the event. The text is formatted in Markdown",
       examples = { "This is a description of the event.", "Another description." },
-      maxLength = 4000,
-      nullable = false
+      maxLength = 4000
   )
   @NotNull(message = "The description must be present.")
   @Size(min = 1, max = 4000, message = "The description must be between {min} and {max} characters long.")

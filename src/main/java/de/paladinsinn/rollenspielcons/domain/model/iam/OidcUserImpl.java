@@ -3,8 +3,7 @@ package de.paladinsinn.rollenspielcons.domain.model.iam;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.paladinsinn.rollenspielcons.domain.model.DisplayableName;
-import de.paladinsinn.rollenspielcons.domain.model.HasDisplayText;
-import de.paladinsinn.rollenspielcons.domain.model.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.iam.OidcUser;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -34,18 +33,18 @@ import lombok.extern.jackson.Jacksonized;
 @Setter(value = AccessLevel.PACKAGE, onMethod_ = @__(@Deprecated)) // Only for testing
 @ToString
 @EqualsAndHashCode(of = {"id"})
-public class OidcUser implements HasId, HasDisplayText, HasIdentity {
+public class OidcUserImpl implements OidcUser {
   /**
    * The unique identifier of this OIDC user.
    */
-  @Min(value = 0, message = "The id must be greater than or equal to {value}.")
+  @Min(value = 1, message = "The id must be greater than or equal to {value}.")
   private long id;
   
   /**
    * The identity that is linked to this OIDC user.
    */
   @NotNull(message = "The identity must not be null.")
-  private Identity identity;
+  private IdentityImpl identity;
   
   /**
    * The issuer of this OIDC user.

@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.domain.model;
+package de.paladinsinn.rollenspielcons.domain.api;
 
 /**
  * The text to be displayed for an entity.

@@ -112,7 +112,7 @@ amqp ..> broker : write data
 @enduml
 ----
 The UserJPA is only used within the users.store component.
-It will provide a `Identity` as specified in the  `users.client` component.
+It will provide a `IdentityImpl` as specified in the  `users.client` component.
 
 == Use a locally defined data store
 

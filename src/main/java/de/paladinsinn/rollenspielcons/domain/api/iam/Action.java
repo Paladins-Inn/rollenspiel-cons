@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.domain.model.iam;
+package de.paladinsinn.rollenspielcons.domain.api.iam;
 
 /**
  *

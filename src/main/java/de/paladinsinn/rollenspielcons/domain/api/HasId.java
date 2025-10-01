@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.domain.model;
+package de.paladinsinn.rollenspielcons.domain.api;
 
 
 import jakarta.validation.constraints.Min;

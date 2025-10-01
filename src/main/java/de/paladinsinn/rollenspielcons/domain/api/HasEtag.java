@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.domain.model;
+package de.paladinsinn.rollenspielcons.domain.api;
 
 
 import java.security.MessageDigest;
@@ -16,7 +16,7 @@ public interface HasEtag {
    * Generates an MD5 hash over the data provided by {@link #monitoredData()}.
    *
    * @return The ETag as hex-string.
-   * @throws NoSuchAlgorithmException
+   * @throws NoSuchAlgorithmException if MD5 is not supported by the JVM.
    */
   default String getETag() throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("MD5");

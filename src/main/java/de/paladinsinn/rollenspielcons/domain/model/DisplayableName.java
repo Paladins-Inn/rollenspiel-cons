@@ -2,6 +2,7 @@ package de.paladinsinn.rollenspielcons.domain.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.beans.Transient;
