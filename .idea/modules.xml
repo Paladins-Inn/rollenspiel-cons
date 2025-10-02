@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../docs/docs.iml" filepath="$PROJECT_DIR$/../docs/docs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-foundryvtt/gitops-foundryvtt.iml" filepath="$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-foundryvtt/gitops-foundryvtt.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-paladins-inn/gitops-paladins-inn.iml" filepath="$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-paladins-inn/gitops-paladins-inn.iml" />
     </modules>
   </component>
