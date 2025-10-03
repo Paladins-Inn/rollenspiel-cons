@@ -68,11 +68,11 @@ jobs:
       id: release-version
       run: |
         git pull --rebase origin main
-        TAG="$(git describe --tags --abbrev=0)"
-        echo "RELEASE_VERSION=$TAG" >> $GITHUB_ENV
-        echo "POM_VERSION=$(echo $TAG | sed 's/^v//')" >> $GITHUB_ENV
+        BASE_VERSION="$(git tag --list --sort=-v:refname|head -1|sed -E 's/^v?([0-9]+\.[0-9]+\.[0-9]+).*/\1/')-$(git rev-parse --short=7 HEAD)"
+        echo "RELEASE_VERSION=v$BASE_VERSION" >> $GITHUB_ENV
+        echo "POM_VERSION=$BASE_VERSION" >> $GITHUB_ENV
     - name: Show versions
-      run: echo -e "RELEASE_VERSION${RELEASE_VERSION}\nPOM_VERSION=${POM_VERSION}"
+      run: echo -e "RELEASE_VERSION=${RELEASE_VERSION}\nPOM_VERSION=${POM_VERSION}"
         
     - name: Set project.version in pom.xml with versions-maven-plugin
       run: |
