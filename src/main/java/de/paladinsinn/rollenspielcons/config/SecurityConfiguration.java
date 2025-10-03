@@ -9,10 +9,9 @@ import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -59,12 +58,21 @@ public class SecurityConfiguration {
             .requestMatchers("/*.html", "/favicon.ico").permitAll()
             
             // Authentication endpoints
-            .requestMatchers("/login**", "/error**", "/oauth2/**").permitAll()
+            .requestMatchers("/login**", "/logout**", "/error**", "/oauth2/**").permitAll()
             
             // Geschützte Bereiche (Authentifizierung erforderlich)
             .requestMatchers("/dashboard", "/dashboard/**").authenticated()
             .requestMatchers("/profile", "/profile/**").authenticated()
             .requestMatchers("/admin", "/admin/**").hasRole("ADMIN")
+            
+            .requestMatchers(HttpMethod.GET, "/**").permitAll()
+            .requestMatchers(HttpMethod.HEAD, "/**").permitAll()
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            
+            .requestMatchers(HttpMethod.POST, "/**").authenticated()
+            .requestMatchers(HttpMethod.PUT, "/**").authenticated()
+            .requestMatchers(HttpMethod.DELETE, "/**").authenticated()
+            .requestMatchers(HttpMethod.PATCH, "/**").authenticated()
         )
     ;
     
