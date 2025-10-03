@@ -25,7 +25,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Jacksonized
 @Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
 @Getter
 @ToString
 public class DisplayableName implements HasDisplayText {

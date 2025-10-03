@@ -1,11 +1,15 @@
 package de.paladinsinn.rollenspielcons.domain.model.events;
 
 
-import de.paladinsinn.rollenspielcons.domain.model.locations.WebLocation;
+import de.paladinsinn.rollenspielcons.domain.api.events.WebEvent;
+import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +32,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
         """
         {
           "id": 123456789012345,
+          "owner": "jdoe",
           "labels": ["label1", "label2"],
           "title": {
             "name": "WebEvent Name",
@@ -56,6 +61,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
         """
         {
           "id": 123456789012345,
+          "owner": "033432545089124104",
           "labels": ["label1", "label2"],
           "title": {
             "name": "Another WebEvent"
@@ -77,11 +83,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
 @Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class WebEvent extends AbstractTimedEvent {
+public class WebEventImpl extends AbstractEvent implements WebEvent {
   @Schema(
       title = "Weblocations of this event",
       description = "The locations for this event.",
@@ -111,14 +117,8 @@ public class WebEvent extends AbstractTimedEvent {
       maxItems = 10,
       required = true
   )
+  @NotNull
   @Size(min = 1, max = 10, message = "A single convention can have between 1 and 10 locations")
-  private WebLocation[] locations;
-  
-  @Schema(
-      title = "The official website of the event",
-      description = "An optional website for the event, e.g. the official event page.",
-      nullable = true
-  )
-  @Nullable
-  private WebLocation website;
+  @Builder.Default
+  private Set<WebLocation> locations = new HashSet<>(10);
 }

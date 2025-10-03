@@ -1,6 +1,7 @@
 package de.paladinsinn.rollenspielcons.domain.model.locations;
 
 
+import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,11 +40,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = true)
-public class WebLocation extends Location {
+public class WebLocationImpl extends LocationImpl implements WebLocation {
   @Schema(
       title = "Name of the website",
       description = "The display name of the website.",

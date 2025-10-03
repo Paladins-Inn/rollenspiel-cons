@@ -1,6 +1,7 @@
 package de.paladinsinn.rollenspielcons.domain.model.locations;
 
 
+import de.paladinsinn.rollenspielcons.domain.api.locations.PhysicalAddress;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -47,11 +48,11 @@ import org.hibernate.validator.constraints.Range;
 @Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
 @Getter
 @ToString
 @EqualsAndHashCode(of = {"longitude", "latitude"}, callSuper = true)
-public class PhysicalAddress extends Location {
+public class PhysicalAddressImpl extends LocationImpl implements PhysicalAddress {
   @Schema(
       title = "Address of the locations",
       description = "The full address of the locations.",

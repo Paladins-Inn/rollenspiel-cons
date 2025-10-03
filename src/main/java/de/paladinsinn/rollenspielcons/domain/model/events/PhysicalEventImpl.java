@@ -1,13 +1,12 @@
 package de.paladinsinn.rollenspielcons.domain.model.events;
 
 
-import de.paladinsinn.rollenspielcons.domain.model.locations.PhysicalAddress;
-import de.paladinsinn.rollenspielcons.domain.model.locations.WebLocation;
+import de.paladinsinn.rollenspielcons.domain.api.events.PhysicalEvent;
+import de.paladinsinn.rollenspielcons.domain.api.locations.PhysicalAddress;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
-import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +32,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
         """
         {
           "id": 123456789012345,
+          "owner": "jdoe",
           "labels": ["label1", "label2"],
           "temporalData": {
             "startDay": "2024-12-24T18:00:00+01:00[Europe/Berlin]",
@@ -63,6 +63,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
         """
         {
           "id": 123456789012345,
+          "owner": "033432545089124104",
           "labels": ["label1", "label2"],
            "title": {
              "name": "Another AbstractBaseEvent",
@@ -91,11 +92,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
 @Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class PhysicalEvent extends AbstractTimedEvent {
+public class PhysicalEventImpl extends AbstractEvent implements PhysicalEvent {
   @Schema(
       title = "The physical locations of the event",
       description = "An array of physical locations where the event takes place. At least one locations is required.",
@@ -107,12 +108,4 @@ public class PhysicalEvent extends AbstractTimedEvent {
   @Size(min = 1, max = 10, message = "A single convention can have between 1 and 10 locations")
   @Builder.Default
   private Set<PhysicalAddress> locations = new HashSet<>(10);
-
-  @Schema(
-      title = "The official website of the event",
-      description = "An optional website for the event, e.g. the official event page.",
-      nullable = true
-  )
-  @Nullable
-  private WebLocation website;
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import java.beans.Transient;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,7 +24,7 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED, onConstructor_ = @__(@Deprecated))
 @Getter
 @ToString
 @EqualsAndHashCode(of = {"id"})

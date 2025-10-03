@@ -1,5 +1,4 @@
-= Macro Architecture Decisions
-
+= Architecture Decisions
 include::partial$config.adoc[]
 
 This chapter lists the current architecture decisions (ADRs) of the {rpg-cons} project.

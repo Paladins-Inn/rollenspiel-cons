@@ -1,8 +1,7 @@
 package de.paladinsinn.rollenspielcons.domain.model.locations;
 
 
-import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
-import de.paladinsinn.rollenspielcons.domain.api.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.locations.Location;
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,11 +20,11 @@ import lombok.experimental.SuperBuilder;
  */
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
 @Getter
 @ToString
 @EqualsAndHashCode(of = {"id"})
-public abstract class Location implements HasId, HasDisplayText {
+public abstract class LocationImpl implements Location {
   @Min(value = 1, message = "The id must be greater than {value}. Please use a Snowflake ID.")
   private long id;
 }

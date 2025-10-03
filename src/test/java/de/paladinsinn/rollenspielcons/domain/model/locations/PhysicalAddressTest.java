@@ -1,6 +1,7 @@
 package de.paladinsinn.rollenspielcons.domain.model.locations;
 
 
+import de.paladinsinn.rollenspielcons.domain.api.locations.PhysicalAddress;
 import lombok.extern.slf4j.XSlf4j;
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +20,12 @@ public class PhysicalAddressTest {
   private static final String ADDRESS = "Hauptstr. 1, 12345 Musterstadt";
   private static final String THREE_WORDS = "word1.word2.word3";
   
-  private static final PhysicalAddress SUT = PhysicalAddress.builder()
-      .address(ADDRESS)
-      .latitude(LATITUDE)
-      .longitude(LONGITUTE)
-      .threeWords(THREE_WORDS)
-      .build();
+  private static final PhysicalAddress SUT = PhysicalAddressImpl.builder()
+                                                                .address(ADDRESS)
+                                                                .latitude(LATITUDE)
+                                                                .longitude(LONGITUTE)
+                                                                .threeWords(THREE_WORDS)
+                                                                .build();
   
   @Test
   public void shouldReturnUriToOpenstreetmap() {
