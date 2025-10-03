@@ -3,3 +3,5 @@
 **** xref:rollenspiel-cons:arc42:09_architecture_decisions/003_messaging-rabbitmq.adoc[]
 **** xref:rollenspiel-cons:arc42:09_architecture_decisions/004_sql-data-store.adoc[]
 **** xref:rollenspiel-cons:arc42:09_architecture_decisions/005_hexagonal-architecture.adoc[]
+**** xref:rollenspiel-cons:arc42:09_architecture_decisions/006_rest-openapi.adoc[]
+**** xref:rollenspiel-cons:arc42:09_architecture_decisions/007_authn-authz.adoc[]

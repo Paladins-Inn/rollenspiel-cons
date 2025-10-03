@@ -3,13 +3,15 @@ package de.paladinsinn.rollenspielcons.domain.persistence;
 
 import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.api.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.HasOwner;
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
+import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,13 +30,16 @@ import lombok.extern.slf4j.XSlf4j;
  */
 @MappedSuperclass
 @SuperBuilder(toBuilder = true)
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @XSlf4j
-public abstract class AbstractBaseEntity implements HasId, HasDisplayText {
+public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOwner, Serializable {
+  private static final long serialVersionUID = 1L;
+  
+  
   /**
    * The unique identifier of the entity.
    * <p>It is generated using a Snowflake ID generator.</p>
@@ -54,7 +59,12 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText {
   @ToString.Include
   private int version = 0;
 
-  @Embedded
+  
+  @NotNull
+  @Builder.Default
+  private EmbeddableOwner embeddableOwner = new EmbeddableOwner();
+
+  @NotNull
   @ToString.Include
   private PersistedDisplayableName name;
   
@@ -68,7 +78,19 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText {
   @Override
   @Transient
   public String getUri() {
-    return name != null ? name.getUri() : null;
+    return name != null ? name.getUri() : "";
+  }
+  
+  @Transient
+  @SuppressWarnings("unused")
+  public String getEmbeddableOwner() {
+    return embeddableOwner.getOwner();
+  }
+  
+  @Transient
+  @SuppressWarnings("unused")
+  public void setEmbeddableOwner(@NotNull final String owner) {
+    embeddableOwner.setOwner(owner);
   }
   
   
@@ -88,5 +110,17 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText {
     }
     
     log.exit(id);
+  }
+  
+  /**
+   * Generates a URI for this entity based on the given base URI and the entity's id.
+   *
+   * @param baseUri the base URI to use
+   * @return the generated URI
+   */
+  protected String generateUriFromId(final String baseUri) {
+    log.entry(baseUri);
+    
+    return log.exit(baseUri + (baseUri.endsWith("/") ? "" : "/") + id);
   }
 }

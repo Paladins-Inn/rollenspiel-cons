@@ -7,7 +7,8 @@ import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,12 +30,14 @@ import lombok.extern.jackson.Jacksonized;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(of = {"name", "uri"})
-public class PersistedDisplayableName implements HasDisplayText {
-  @Column(name = "name", length = 250, nullable = false)
-  @NotNull
+public class PersistedDisplayableName implements HasDisplayText, Serializable {
+  private static final long serialVersionUID = 1L;
+  
+  @Column(name = "NAME", length = 250, nullable = false)
+  @NotBlank(message = "The name must not be blank.")
   private String name;
   
-  @Column(name = "uri", length = 250)
+  @Column(name = "URI", length = 250)
   @Nullable
   private String uri;
 

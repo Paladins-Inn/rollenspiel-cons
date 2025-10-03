@@ -1,3 +1,3 @@
-:stake_holder-player: &uparrow;xref:rollenspiel-cons:arc42:03_system_scope_and_context.adoc#player[player]
-:stake_holder-gm: &uparrow;xref:rollenspiel-cons:arc42:03_system_scope_and_context.adoc#gm[gm]
-:stake_holder-orga: &uparrow;xref:rollenspiel-cons:arc42:03_system_scope_and_context.adoc#orga[orga]
+:stake_holder-player: &uparrow;xref:rollenspiel-cons:arc42:03_system_scope_and_context.adoc#player[&uparrow;Stakeholder: player]
+:stake_holder-gm: &uparrow;xref:rollenspiel-cons:arc42:03_system_scope_and_context.adoc#gm[&uparrow;Stakeholder: gm]
+:stake_holder-orga: &uparrow;xref:rollenspiel-cons:arc42:03_system_scope_and_context.adoc#orga[&uparrow;Stakeholder: orga]
