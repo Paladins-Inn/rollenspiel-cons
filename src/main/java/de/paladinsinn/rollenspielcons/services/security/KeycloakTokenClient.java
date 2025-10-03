@@ -23,10 +23,10 @@ public class KeycloakTokenClient {
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
   private String protectionApiUrl;
   
-  @Value("${spring.security.oauth2.client.registration.paladins-inn.client-id}")
+  @Value("${spring.security.oauth2.client.registration.sso.client-id}")
   private String clientId;
   
-  @Value("${spring.security.oauth2.client.registration.paladins-inn.client-secret}")
+  @Value("${spring.security.oauth2.client.registration.sso.client-secret}")
   private String clientSecret;
   
   
