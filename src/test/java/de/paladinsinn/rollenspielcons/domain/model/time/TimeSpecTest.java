@@ -22,13 +22,13 @@ public class TimeSpecTest {
   private static final long DURATION_IN_SECONDS = 3600*6 - 1;
   private static final Duration DURATION = Duration.ofSeconds(DURATION_IN_SECONDS);
 
-  private static final TimeSpec SUT = TimeSpec.builder()
-      .startDay(ZonedDateTime.parse("2024-12-24T18:00:00+01:00[Europe/Berlin]"))
-      .duration(DURATION)
-      .build();
-  private static final TimeSpec SUT_WITHOUT_DURATION = TimeSpec.builder()
-                                              .startDay(ZonedDateTime.parse("2024-12-24T18:00:00+01:00[Europe/Berlin]"))
-                                              .build();
+  private static final TimeSpecImpl SUT = TimeSpecImpl.builder()
+                                                      .startDay(ZonedDateTime.parse("2024-12-24T18:00:00+01:00[Europe/Berlin]"))
+                                                      .duration(DURATION)
+                                                      .build();
+  private static final TimeSpecImpl SUT_WITHOUT_DURATION = TimeSpecImpl.builder()
+                                                                       .startDay(ZonedDateTime.parse("2024-12-24T18:00:00+01:00[Europe/Berlin]"))
+                                                                       .build();
   private static final LocalDateTime LOCAL_START = LocalDateTime.of(2024, 12, 24, 18, 0, 0);
   private static final LocalDateTime LOCAL_END = LocalDateTime.of(2024, 12, 24, 23, 59, 59);
   private static final LocalDateTime LOCAL_END_WITHOUT_DURATION = LocalDateTime

@@ -11,6 +11,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Transient;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotNull;
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,7 @@ import lombok.extern.slf4j.XSlf4j;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @XSlf4j
 public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOwner, Serializable {
+  @Serial
   private static final long serialVersionUID = 1L;
   
   
@@ -62,7 +64,7 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOw
   
   @NotNull
   @Builder.Default
-  private EmbeddableOwner embeddableOwner = new EmbeddableOwner();
+  private EmbeddableOwner owner = new EmbeddableOwner();
 
   @NotNull
   @ToString.Include
@@ -83,14 +85,14 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOw
   
   @Transient
   @SuppressWarnings("unused")
-  public String getEmbeddableOwner() {
-    return embeddableOwner.getOwner();
+  public String getOwner() {
+    return owner.getOwner();
   }
   
   @Transient
   @SuppressWarnings("unused")
-  public void setEmbeddableOwner(@NotNull final String owner) {
-    embeddableOwner.setOwner(owner);
+  public void setOwner(@NotNull final String owner) {
+    this.owner.setOwner(owner);
   }
   
   

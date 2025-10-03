@@ -2,7 +2,6 @@ package de.paladinsinn.rollenspielcons.domain.api.time;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.paladinsinn.rollenspielcons.domain.model.time.TimeSpec;
 import java.beans.Transient;
 import java.time.LocalDateTime;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;

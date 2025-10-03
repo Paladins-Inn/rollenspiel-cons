@@ -2,6 +2,7 @@ package de.paladinsinn.rollenspielcons.domain.model.locations;
 
 
 import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,7 @@ public class WebLocationImpl extends LocationImpl implements WebLocation {
       description = "The display name of the website.",
       example = "Paladins Inn"
   )
+  @NotBlank(message = "The display text must be set.")
   @Size(min = 1, max = 250, message = "The name must be between {min} and {max} characters long.")
   private String displayText;
   
@@ -58,6 +60,7 @@ public class WebLocationImpl extends LocationImpl implements WebLocation {
       description = "The URI (link) to the website.",
       example = "https://discord.gg/your-invite-code"
   )
+  @NotBlank(message = "The URI must be set.")
   @Size(min = 10, max = 250, message = "The URI must be between {min} and {max} characters long.")
   private String uri;
 }

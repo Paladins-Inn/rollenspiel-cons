@@ -32,7 +32,7 @@ public class EmbeddableOwner implements HasOwner, Serializable {
   
   @Column(name = "OWNER", length = 100, nullable = false)
   @EqualsAndHashCode.Include
-  @NotBlank(message = "The embeddableOwner must be set.")
+  @NotBlank(message = "The owner must be set.")
   @Builder.Default
   private String owner = "system";
   

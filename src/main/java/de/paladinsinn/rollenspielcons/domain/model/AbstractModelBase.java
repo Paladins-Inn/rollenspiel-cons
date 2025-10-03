@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import java.beans.Transient;
+import java.io.Serializable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -28,7 +29,7 @@ import lombok.extern.jackson.Jacksonized;
 @Getter
 @ToString
 @EqualsAndHashCode(of = {"id"})
-public class AbstractModelBase implements HasId, HasDisplayText {
+public class AbstractModelBase implements HasId, HasDisplayText, Serializable {
   /**
    * The unique identifier of this entity.
    */

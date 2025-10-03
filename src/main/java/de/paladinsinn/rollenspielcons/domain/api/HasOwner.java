@@ -13,14 +13,14 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  */
 public interface HasOwner {
   /**
-   * The embeddableOwner of this object.
+   * The owner of this object.
    *
    * <p>This is normally the sub of the identity.</p>
    *
-   * @return the embeddableOwner of this object
+   * @return the owner of this object
    */
   @Schema(
-      description = "The embeddableOwner of this object.",
+      description = "The owner of this object.",
       comment = "This is normally the sub of the identity.",
       examples = {
           "123451234512345"
@@ -29,7 +29,7 @@ public interface HasOwner {
       maxLength = 100,
       required = true
   )
-  @NotBlank(message = "The embeddableOwner has to be set.")
-  @Size(min = 2, max = 100, message = "The embeddableOwner must be between {min} and {max} characters long.")
+  @NotBlank(message = "The owner has to be set.")
+  @Size(min = 2, max = 100, message = "The owner must be between {min} and {max} characters long.")
   String getOwner();
 }

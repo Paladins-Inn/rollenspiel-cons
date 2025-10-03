@@ -3,12 +3,13 @@ package de.paladinsinn.rollenspielcons.domain.model.events;
 
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
+import de.paladinsinn.rollenspielcons.domain.api.time.TimeSpec;
 import de.paladinsinn.rollenspielcons.domain.model.AbstractModelBase;
-import de.paladinsinn.rollenspielcons.domain.model.time.TimeSpec;
 import de.paladinsinn.rollenspielcons.domain.api.time.Timed;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -62,9 +63,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
 @Getter
-@ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public abstract class AbstractEvent extends AbstractModelBase implements Event, Timed {
+  @Serial
+  private static final long serialVersionUID = 1L;
+  
   @Schema(
       title = "The owner of this event",
       description = "The user name of the owner of this event.",
