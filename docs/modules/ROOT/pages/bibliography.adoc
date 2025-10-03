@@ -37,8 +37,11 @@ The bibliography is shared between all components of the whole {rpg-cons} projec
 | [[graca-ports-adapters,PORTS-ADAPTERS]]PORTS-ADAPTERS
 | **Graça, Herberto**, 'Ports & Adapters Architecture'. 14. September 2017, [Online]. Available: https://herbertograca.com/2017/09/14/ports-adapters-architecture/
 
+| [[parks01,PARKS01]]PARKS01
+| 'API versioning: URL vs Header vs Media Type versioning'. lonti, [Online]. Available: https://www.lonti.com/blog/api-versioning-url-vs-header-vs-media-type-versioning
+
 | [[sapl,SAPL]]SAPL
-| [Online]. The Streaming Attribute Policy Language and Engine. Available: https://sapl.io/.
+| [Online]. The Streaming Attribute Policy Language and Engine. Available: https://sapl.io/
 
 | [[scs,SCS]]SCS
 | 'Self-contained Systems (SCS)'. INNOQ, [Online]. Available: https://scs-architecture.org.
