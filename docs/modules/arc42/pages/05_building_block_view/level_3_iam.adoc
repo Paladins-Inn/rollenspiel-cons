@@ -1,6 +1,8 @@
 = Level 3: Identity and Access Management
 include::partial$config.adoc[]
 
+IMPORTANT: Is to be replaced by UMA Client and fully integration using UMA.
+
 == Overview
 
 [plantuml,level3-iam]
@@ -101,20 +103,20 @@ component "de.paladinsinn.rollenspielcons.model" as model {
         Role o-up-o Owner
         Role --|> HasOwner
 
-        class Rule {
+        class Permission {
             -role : Role
             -object : String
             -action : Action
-            -rule : Rule.Ruling
+            -Permission : Permission.Ruling
             ----
             +apply(identity : Identity, action : Action, object : String) : boolean
         }
-        Rule -up-|> AbstractBaseEntity
-        Rule o-- Role
-        Rule o-- Action
-        Rule o-- ruling
+        Permission -up-|> AbstractBaseEntity
+        Permission o-- Role
+        Permission o-- Action
+        Permission o-- ruling
 
-        enum "Rule.Ruling" as ruling {
+        enum "Permission.Ruling" as ruling {
             +ALLOW
             +DENY
         }

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.application.description",
+      "type": "java.lang.String",
+      "description": "A short description of the application."
+  }
+] }

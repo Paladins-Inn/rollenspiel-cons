@@ -1,12 +1,18 @@
 
 package de.paladinsinn.rollenspielcons.config;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -58,4 +64,36 @@ public class SecurityConfiguration {
 
         return log.exit(http.build());
     }
+  
+  @SuppressWarnings("unchecked")
+  @Bean
+  JwtAuthenticationConverter jwtAuthConverter() {
+    var converter = new JwtAuthenticationConverter();
+    converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+      var authorities = new ArrayList<GrantedAuthority>();
+      
+      // Realm-Rollen (optional)
+      var realmRoles = (Map<String, Object>) jwt.getClaim("realm_access");
+      if (realmRoles != null && realmRoles.get("roles") instanceof List<?> roles) {
+        roles.forEach(r -> authorities.add(new SimpleGrantedAuthority("ROLE_" + r)));
+      }
+      
+      // UMA permissions -> PERM:{resourceName}#{scope}
+      var perms = (List<Map<String, Object>>) jwt.getClaims().get("permissions");
+      if (perms != null) {
+        for (var p : perms) {
+          var rs     = (String) p.getOrDefault("rsname", p.get("rsid"));
+          var scopes = (List<String>) p.get("scopes");
+          if (scopes != null) {
+            for (var s : scopes) {
+              authorities.add(new SimpleGrantedAuthority("PERM:" + rs + "#" + s));
+            }
+          }
+        }
+      }
+      return authorities;
+    });
+    return converter;
+  }
+  
 }

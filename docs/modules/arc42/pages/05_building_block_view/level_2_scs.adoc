@@ -7,53 +7,69 @@
 
 actor "User" <<User>> as ingress
 
+  database "rollenspiel-cons" <<Postgres>> as data
+  circle "Keycloak SSO" as keycloak
+
 component "rollenspiel-cons" <<SCS,spring-boot>> as service {
   component "Frontend" as frontend {
     [Web Application] <<Java, JTE>> as app
     [REST API] <<Java>> as api
   }
 
-  component "Core" as core {
-    [Domain] <<Java>> as domain
-    [Model] <<Java>> as model
 
+  component "Core" as core {
+    [Service/Controller] <<Java>> as servicecore
+    [Persistence] <<JPA>> as persistence
+    component "Domain" <<Java>> as domain {
+      [API] <<Java>> as apicore
+      [Model] <<Java>> as model
+      [Service] <<Java>> as domainservice
+    }
+    [UMA Client] <<Java>> as uma
   }
 
 
-  component "Integrations" as integrations {
+  component "Integrations/Services" as integrations {
     [Google Calendar Service] <<Java>> as gcalsvc
     [Discord Bot Service] <<Java>> as discordsvc
     [3words Service] <<Java>> as what3wordssvc
     [OpenStreetMap Service] <<Java>> as osmsvc
   }
-
-  database "rollenspiel-cons" <<Postgres>> as data
 }
-
 
 ingress --> app : HTML
 ingress --> api : REST\nGRAPHQL\nJSON
 
-app --> domain
-api --> domain
+app --> servicecore
+api --> servicecore
 
-domain <-right-> model
-domain -left-> data : Postgres
+servicecore --> domainservice
+servicecore -left-> persistence
+servicecore .down.> apicore
+servicecore -right-> uma
+domainservice -left-> model
+domainservice .left.> apicore
+model .left.> apicore
 
-domain --> gcalsvc
-domain <--> discordsvc
-domain --> what3wordssvc
-domain --> osmsvc
+model <-- persistence
+persistence -left-> data : Postgres
+persistence .down.> apicore
 
-[Google Calendar] as gcal
-[Discord] as discord
-[OpenStreetMap] as osm
-[3words] as what3words
+gcalsvc <-up- domainservice
+discordsvc <-up-> domainservice
+what3wordssvc <-up- domainservice
+osmsvc <-up- domainservice
 
-gcalsvc --> gcal : API
-discordsvc <--> discord : API
-osmsvc --> osm : REST
-what3wordssvc --> what3words : REST
+circle "Google Calendar" as gcal
+circle "Discord" as discord
+circle "OpenStreetMap" as osm
+circle "3words" as what3words
+
+gcalsvc -down-> gcal : Java-API
+discordsvc <-down-> discord : Java-API
+osmsvc -down-> osm : REST
+what3wordssvc -down-> what3words : REST
+uma -down-> keycloak : REST
 
 @enduml
 ----
