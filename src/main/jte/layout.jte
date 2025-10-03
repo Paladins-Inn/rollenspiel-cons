@@ -44,10 +44,7 @@
                     <li><a class="dropdown-item" href="${contextPath}logout">Logout</a></li>
                 </ul>
             @else
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i> Login</a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="${contextPath}oauth2/authorization/paladins-inn"><i class="fab fa-key fa-fw"></i>Paladins Inn</a></li>
-                </ul>
+                <a class="nav-link" href="${contextPath}oauth2/authorization/sso" role="button"><i class="fas fa-user fa-fw"></i> Login</a>
             @endif
         </li>
     </ul>
