@@ -5,6 +5,7 @@ import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import de.paladinsinn.rollenspielcons.domain.api.HasOwner;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
@@ -62,11 +63,13 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOw
   private int version = 0;
 
   
-  @NotNull
+  @Embedded
+  @NotNull(message = "The owner must be set.")
   @Builder.Default
   private EmbeddableOwner owner = new EmbeddableOwner();
-
-  @NotNull
+  
+  @Embedded
+  @NotNull(message = "The name must be set.")
   @ToString.Include
   private PersistedDisplayableName name;
   
@@ -112,17 +115,5 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOw
     }
     
     log.exit(id);
-  }
-  
-  /**
-   * Generates a URI for this entity based on the given base URI and the entity's id.
-   *
-   * @param baseUri the base URI to use
-   * @return the generated URI
-   */
-  protected String generateUriFromId(final String baseUri) {
-    log.entry(baseUri);
-    
-    return log.exit(baseUri + (baseUri.endsWith("/") ? "" : "/") + id);
   }
 }
