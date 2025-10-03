@@ -1,5 +1,6 @@
 package de.paladinsinn.rollenspielcons.ui;
 
+import jakarta.annotation.security.PermitAll;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @XSlf4j
 public class LegaleseController extends AbstractBaseController {
   
-  
+  @PermitAll
   @GetMapping("/about")
   public String about(@AuthenticationPrincipal OAuth2User user, Model model) {
     log.entry(user, model);
@@ -22,6 +23,7 @@ public class LegaleseController extends AbstractBaseController {
   }
   
   
+  @PermitAll
   @GetMapping("/tos")
   public String tos(@AuthenticationPrincipal OAuth2User user, Model model) {
     log.entry(user, model);
@@ -30,6 +32,7 @@ public class LegaleseController extends AbstractBaseController {
   }
   
   
+  @PermitAll
   @GetMapping("/dataprotection")
   public String dataprotection(@AuthenticationPrincipal OAuth2User user, Model model) {
     log.entry(user, model);
@@ -38,6 +41,7 @@ public class LegaleseController extends AbstractBaseController {
   }
   
   
+  @PermitAll
   @GetMapping("/imprint")
   public String imprint(@AuthenticationPrincipal OAuth2User user, Model model) {
     log.entry(user, model);

@@ -83,6 +83,9 @@ gg:
     template-location: src/main/jte
     template-suffix: .jte
 
+ingress:
+  host: changeme
+
 logging:
   level:
     root: INFO

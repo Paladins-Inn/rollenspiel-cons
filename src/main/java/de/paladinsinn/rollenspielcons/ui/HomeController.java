@@ -3,6 +3,7 @@ package de.paladinsinn.rollenspielcons.ui;
 import de.paladinsinn.rollenspielcons.services.GoogleCalendarService;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
+import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,7 +27,8 @@ import java.util.Map;
 public class HomeController extends AbstractBaseController {
   
   private final GoogleCalendarService googleCalendarService;
- 
+
+  @PermitAll
   @GetMapping
   @Counted(value = "calendar_count", description = "Total calls to the calender display page")
   @Timed(value = "calendar_duration", description = "Time of calls to the calender display page", percentiles = {0.5, 0.95, 0.99})
@@ -36,6 +38,7 @@ public class HomeController extends AbstractBaseController {
     return forwarder(user, model, "pages/calendar");
   }
   
+  @PermitAll
   @GetMapping("/api/events")
   @ResponseBody
   @Counted(value = "api_events_count", description = "Total calls to event listing API")
