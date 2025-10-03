@@ -11,6 +11,7 @@ import com.google.api.services.calendar.model.Events;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import jakarta.annotation.PostConstruct;
+import java.io.FileNotFoundException;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -38,10 +39,12 @@ public class GoogleCalendarService {
   
   @PostConstruct
   public void init() {
-    log.entry(service, serviceAccountKeyPath, calendarId);
+    log.entry(serviceAccountKeyPath, calendarId);
     
     try {
       createService();
+    } catch (FileNotFoundException e) {
+      log.error("The google calendar service won't work. The service account key file not found at path: " + serviceAccountKeyPath, e);
     } catch (Exception e) {
       log.error("Error initializing Google Calendar service", e);
     }
@@ -50,6 +53,7 @@ public class GoogleCalendarService {
   }
   
   private void createService() throws GeneralSecurityException, IOException {
+    @SuppressWarnings("deprecation")
     GoogleCredential credential = GoogleCredential
         .fromStream(new ClassPathResource(serviceAccountKeyPath).getInputStream())
         .createScoped(Collections.singleton(CalendarScopes.CALENDAR_READONLY));
@@ -67,9 +71,14 @@ public class GoogleCalendarService {
   @Counted(value = "google_calendar_requests_count", description = "Total calls to google calendar api")
   @Timed(value = "google_calendar_requests_duration", description = "Time taken to call google calendar api", percentiles = {0.5, 0.95, 0.99})
   public List<Map<String, Object>> getEvents(LocalDateTime start, LocalDateTime end) {
-    log.entry(start, end);
+    log.entry(service, start, end);
     
     List<Map<String, Object>> eventList = new ArrayList<>();
+    
+    if (service == null) {
+      log.error("Google Calendar service is not initialized.");
+      return log.exit(eventList);
+    }
     
     try {
       DateTime startDateTime = new DateTime(start.toInstant(ZoneOffset.UTC).toEpochMilli());
