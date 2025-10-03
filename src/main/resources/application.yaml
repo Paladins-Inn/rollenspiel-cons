@@ -10,8 +10,8 @@ spring:
     oauth2:
       client:
         registration:
-          paladins-inn:
-            client-name: Paladins Inn
+          sso:
+            client-name: Pandur SSO
             client-id: changeme
             client-secret: changeme
             scope: openid,profile,email,roles,discord
@@ -19,13 +19,13 @@ spring:
             client-authentication-method: client_secret_post
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
-          paladins-inn:
-            issuer-uri: https://sso.pandur.org/realms/paladins-inn
+          sso:
+            issuer-uri: https://sso.pandur.org/realms/rollenspiel-cons
             user-name-attribute: preferred_username
       resourceserver:
         jwt:
-          issuer-uri: https://sso.pandur.org/realms/paladins-inn
-          jwk-set-uri: https://sso.pandur.org/realms/myrealm/protocol/openid-connect/certs
+          issuer-uri: https://sso.pandur.org/realms/rollenspiel-cons
+          jwk-set-uri: https://sso.pandur.org/realms/rollenspiel-cons/protocol/openid-connect/certs
   
   
   cache:
