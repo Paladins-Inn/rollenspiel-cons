@@ -87,7 +87,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class WebEventImpl extends AbstractEvent implements WebEvent {
+public class WebEventImpl extends BaseEvent implements WebEvent {
   @Schema(
       title = "Weblocations of this event",
       description = "The locations for this event.",

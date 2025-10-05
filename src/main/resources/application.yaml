@@ -72,6 +72,12 @@ google:
   calendar:
     service-account-key-path: file:./calendar-service-account.json
     id: changeme
+    
+caldav:
+  url: changeme
+  calendar: changeme
+  username: changeme
+  password: changeme
 
 snowflake:
   datacenter-id: 1

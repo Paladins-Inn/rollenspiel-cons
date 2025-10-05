@@ -96,7 +96,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Getter
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class PhysicalEventImpl extends AbstractEvent implements PhysicalEvent {
+public class PhysicalEventImpl extends BaseEvent implements PhysicalEvent {
   @Schema(
       title = "The physical locations of the event",
       description = "An array of physical locations where the event takes place. At least one locations is required.",

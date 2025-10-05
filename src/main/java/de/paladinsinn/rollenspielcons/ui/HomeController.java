@@ -1,6 +1,6 @@
 package de.paladinsinn.rollenspielcons.ui;
 
-import de.paladinsinn.rollenspielcons.services.GoogleCalendarService;
+import de.paladinsinn.rollenspielcons.services.gcalendar.GoogleCalendarService;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import jakarta.annotation.security.PermitAll;

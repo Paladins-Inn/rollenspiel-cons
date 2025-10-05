@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +37,7 @@ import static jakarta.persistence.FetchType.EAGER;
 @Table(name = "WEBEVENTS")
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
-@Getter
+@Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class JpaWebEvent extends JpaEvent implements WebEvent {

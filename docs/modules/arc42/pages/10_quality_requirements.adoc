@@ -110,6 +110,7 @@ Users should be able to subscribe or mute events.
 
 |[[CO04,Compatible with Ical (CO04)]] **CO04**
 |The system should be able to export and import data using Ical format.
+This requirement fulfills the constraint {ct004}.
 
 |[[CO05,Compatible with VTT systems (CO05)]] **CO05**
 |The system should offer direct links to Virtual Table Top systems like Roll20 or FoundryVTT.

@@ -14,6 +14,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ import org.hibernate.validator.constraints.Range;
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 @ToString(callSuper = true, of = {"threeWords", "longitude", "latitude"})
 @EqualsAndHashCode(callSuper = true, of = {"longitude", "latitude"})
 public class JpaPhysicalAddress extends JpaLocation implements PhysicalAddress {

@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.services;
+package de.paladinsinn.rollenspielcons.services.gcalendar;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -6,12 +6,13 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
+import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import jakarta.annotation.PostConstruct;
 import java.io.FileNotFoundException;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
@@ -70,39 +71,74 @@ public class GoogleCalendarService {
   @Cacheable("calendarEvents")
   @Counted(value = "google_calendar_requests_count", description = "Total calls to google calendar api")
   @Timed(value = "google_calendar_requests_duration", description = "Time taken to call google calendar api", percentiles = {0.5, 0.95, 0.99})
-  public List<Map<String, Object>> getEvents(LocalDateTime start, LocalDateTime end) {
+  public List<Event> getEvents(final LocalDateTime start, final LocalDateTime end) {
     log.entry(service, start, end);
     
-    List<Map<String, Object>> eventList = new ArrayList<>();
+    List<Event> result = new ArrayList<>();
     
     if (service == null) {
       log.error("Google Calendar service is not initialized.");
-      return log.exit(eventList);
+      return log.exit(result);
     }
+    
+    Events events = loadEventsFromGoogle(start, end);
+    result = convertGoogleEvents(events);
+    
+    return log.exit(result);
+  }
+  
+  private Events loadEventsFromGoogle(final LocalDateTime start, final LocalDateTime end) {
+    log.entry(start, end);
+    
+    Events result;
     
     try {
       DateTime startDateTime = new DateTime(start.toInstant(ZoneOffset.UTC).toEpochMilli());
       DateTime endDateTime = new DateTime(end.toInstant(ZoneOffset.UTC).toEpochMilli());
       
-      Events events = service.events().list(calendarId)
-          .setTimeMin(startDateTime)
-          .setTimeMax(endDateTime)
-          .setOrderBy("startTime")
-          .setSingleEvents(true)
-          .execute();
-      
-      for (Event event : events.getItems()) {
-        Map<String, Object> eventMap = convertGoogleEvent(event);
-        eventList.add(eventMap);
-      }
+      result = service.events().list(calendarId)
+                      .setTimeMin(startDateTime)
+                      .setTimeMax(endDateTime)
+                      .setOrderBy("startTime")
+                      .setSingleEvents(true)
+                      .execute();
     } catch (IOException e) {
       log.error("Error retrieving Google Calendar events", e);
     }
     
-    return log.exit(eventList);
+    return log.exit(result);
   }
   
-  private Map<String, Object> convertGoogleEvent(Event event) {
+  private Collection<Event> convertGoogleEvents(final Events events) {
+    log.entry(events);
+    
+    Collection<Event> result = events
+        .getItems().stream()
+        .map(this::convertGoogleEvent)
+        .collect(Collectors.toCollection()
+        
+    return log.exit(result);
+  }
+  
+  private Event convertGoogleEvent(com.google.api.services.calendar.model.Event event) {
+    if (event.getLocation() != null && !event.getLocation().isBlank()) {
+      log.debug("This is a physical event at location: {}", event.getLocation());
+      
+      return convertPhysicalEvent(event);
+    } else {
+      log.debug("THis is a virtual event (no location specified).");
+      
+      return convertVirtualEvent(event);
+    }
+  }
+  
+  private Event convertPhysicalEvent(com.google.api.services.calendar.model.Event event) {
+    log.entry(event);
+  }
+  
+  private Event convertVirtualEvent(com.google.api.services.calendar.model.Event event) {
+    log.entry(event);
+    
     Map<String, Object> eventMap = new HashMap<>();
     
     eventMap.put("id", event.getId());

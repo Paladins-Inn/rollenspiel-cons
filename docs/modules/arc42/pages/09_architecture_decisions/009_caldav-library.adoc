@@ -1,0 +1,121 @@
+:adr-title: CalDAV Integration Strategy for Nextcloud
+:adr-state: Proposed
+:adr-date: 2025-10-05
+:adr-expires: ./.
+:adr-author: klenkes74
+:adr-body: klenkes74
+:adr-seq: 009
+:adr-short: ADR-{adr-seq}
+= {adr-short} -- {adr-title}
+include::partial$config.adoc[]
+
+[cols="<.<8h,<.<12a", frame="topbot", grid="rows"]
+|===
+| ADR | {adr-short}
+| Title | {adr-title}
+| State | {adr-state}
+| Author | {adr-author}
+| Decision Body | {adr-body}
+| Valid from | {adr-date}
+| Expires | {adr-expires}
+|===
+
+== Context
+
+The application must synchronize calendar events with Nextcloud using CalDAV.
+A robust, well-supported Java library is required for integration in a Spring Boot environment.
+
+
+== Decision Drivers
+
+* {fs01}
+* {co04}
+* {ct003}
+* {us02}
+* {mt01}
+* {mt02}
+
+
+== Decision
+We choose **ical4j** for CalDAV integration.
+
+**ical4j** is a mature Java library for handling iCalendar data and CalDAV protocol.
+The decision drivers are addressed as follows:
+
+* {fs01}: events are calendar entries.
+* {co04}: ical4j supports iCal and CalDAV event management.
+* {us02}: ical4j supports i18n.
+* {re01}: It has a large user base.
+* {mt01}: We can't maintain it ourself. ical4j is open source and actively developed.
+* {mt02}: We can use it as a service and therefore our app can follow the 12-factor rules.
+* {ct003}: ical4j is compatible with Spring Boot and modern Java versions.
+
+
+== Consequences
+
+* Fast onboarding and reliable support
+* Easy updates and bugfixes due to active development
+* Good compatibility with Spring Boot and modern Java
+* Community support for troubleshooting
+* License model (Apache 2.0) fits project needs
+
+
+== Options
+
+=== Option 1: ical4j
+
+*License:* Apache 2.0
+
+*Pros:*
+* Mature Java library for iCalendar and CalDAV
+* Good documentation and active development
+* Large user base and community
+* Maven Central support
+* Integrates well with Spring Boot
+* Open source, permissive license (Apache 2.0)
+* Supports modern Java versions
+* Fulfills maintainability and reliability requirements
+
+*Cons:*
+* API can be complex for advanced CalDAV features
+* Some CalDAV operations require manual handling
+
+
+=== Option 2: sabre/dav (via REST API)
+
+*License:* MIT
+
+*Pros:*
+* Used by Nextcloud as backend (full protocol support)
+* Large community (Nextcloud ecosystem)
+* REST API can be consumed with any HTTP client (flexible)
+* Open source, permissive license (MIT)
+
+*Cons:*
+* PHP-based, no native Java library
+* Integration requires custom REST client code
+* No direct Spring Boot integration
+* Documentation mainly PHP-focused
+
+
+=== Option 3: Sardine
+
+*License:* Apache 2.0
+
+*Pros:*
+* Lightweight Java WebDAV client
+* Simple API for basic CalDAV operations
+* Maven Central support
+* Open source, permissive license (Apache 2.0)
+
+*Cons:*
+* Less active development, smaller community
+* Limited CalDAV-specific features
+* May not fulfill all functional suitability requirements
+
+
+== Further Reading
+
+* https://github.com/ical4j/ical4j[Github: ical4j]
+* https://github.com/lookfirst/sardine[Github: Sardine]
+* https://sabre.io/dav/[Homepage of sabre/dav]

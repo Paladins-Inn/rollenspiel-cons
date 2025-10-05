@@ -5,13 +5,13 @@ import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
 import de.paladinsinn.rollenspielcons.domain.api.time.TimeSpec;
 import de.paladinsinn.rollenspielcons.domain.model.AbstractModelBase;
-import de.paladinsinn.rollenspielcons.domain.api.time.Timed;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Nullable;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -65,7 +65,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Getter
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-public abstract class AbstractEvent extends AbstractModelBase implements Event, Timed {
+public class BaseEvent extends AbstractModelBase implements Event {
   @Serial
   private static final long serialVersionUID = 1L;
   
@@ -123,8 +123,26 @@ public abstract class AbstractEvent extends AbstractModelBase implements Event, 
       description = "The temporal data including start date and optional duration of the event.",
       required = true
   )
-  @NotNull
+  @NotNull(message = "The time spec must be present.")
   private TimeSpec temporalData;
+  
+  @Schema(
+      title = "The Google Calendar event ID",
+      description = "The Google Calendar event ID if this event is synchronized with Google Calendar.",
+      nullable = true,
+      examples = {
+          "0s5samkb7jcd7kdl2i2j1j00ag",
+          "7dg9jus7nb2pi7e0kk02180oik"
+      }
+  )
+  @Nullable
+  @Size(min = 1, max = 50, message = "The Google ID must be between {min} and {max} characters long.")
+  private String googleId;
+  
+  @Override
+  public Optional<String> getGoogleId() {
+    return Optional.ofNullable(googleId);
+  }
   
   
   @Override

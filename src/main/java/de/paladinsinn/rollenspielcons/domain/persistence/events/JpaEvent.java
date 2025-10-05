@@ -4,11 +4,14 @@ package de.paladinsinn.rollenspielcons.domain.persistence.events;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import de.paladinsinn.rollenspielcons.domain.persistence.AbstractBaseEntity;
 import de.paladinsinn.rollenspielcons.domain.persistence.time.EmbeddableTimeSpec;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serial;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -40,6 +43,15 @@ public class JpaEvent extends AbstractBaseEntity implements Event {
   @Embedded
   @NotNull(message = "The temporal data must be set.")
   private EmbeddableTimeSpec temporalData;
+  
+  @Column(name = "GCAL_ID", length = 50)
+  @Nullable
+  @Size(min = 1, max = 50, message = "The Google Calendar ID must be between {min} and {max} characters long.")
+  private String googleId;
+  
+  public Optional<String> getGoogleId() {
+    return Optional.ofNullable(googleId);
+  }
 
   
   @Override
