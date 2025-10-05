@@ -3,6 +3,7 @@ package de.paladinsinn.rollenspielcons.services.caldav;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import de.paladinsinn.rollenspielcons.services.api.CalendarException;
 import de.paladinsinn.rollenspielcons.services.api.CalendarService;
+import de.paladinsinn.rollenspielcons.services.geo.LocationService;
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -46,6 +47,7 @@ public class CaldavCalendarService implements CalendarService {
   
   private final VEventMapper mapper;
   private final WebClient webClient;
+  private final LocationService locationService;
   
   @Override
   public List<Event> getEvents(@NotBlank final String calendar) throws CalendarException {
@@ -100,6 +102,10 @@ public class CaldavCalendarService implements CalendarService {
         .bodyToMono(byte[].class)
         .block();
     
+    if (calendarBytes == null) {
+      return events;
+    }
+    
     events = readEvents(calendarBytes);
     
     return log.exit(events);
@@ -122,21 +128,22 @@ public class CaldavCalendarService implements CalendarService {
     return log.exit(result);
   }
   
-  private List<VEvent> readEvents(final byte[] calendarBytes) throws CalendarException {
+  private List<VEvent> readEvents(@NotNull final byte[] calendarBytes) throws CalendarException {
     log.entry(calendarBytes.length);
     
     List<VEvent> events = new ArrayList<>();
     
-    if (calendarBytes != null) {
-      try (InputStream in = new java.io.ByteArrayInputStream(calendarBytes)) {
-        Calendar calendar  = new CalendarBuilder().build(in);
-        for (Object obj : calendar.getComponents("VEVENT")) {
-          events.add((VEvent) obj);
-        }
-      } catch (ParserException | IOException e) {
-        log.warn(e.getClass().getSimpleName() + " while reading calendar events from CALDAV service.", e.getMessage());
-        throw new CalendarException("Could not read the CALDAV events from external service.", e);
+    try (InputStream in = new java.io.ByteArrayInputStream(calendarBytes)) {
+      Calendar calendar = new CalendarBuilder().build(in);
+      for (Object obj : calendar.getComponents("VEVENT")) {
+        events.add((VEvent) obj);
       }
+    } catch (ParserException | IOException e) {
+      log.warn(
+          e.getClass().getSimpleName() + " while reading calendar events from CALDAV service.",
+          e.getMessage()
+      );
+      throw new CalendarException("Could not read the CALDAV events from external service.", e);
     }
     
     return log.exit(events);
@@ -149,7 +156,7 @@ public class CaldavCalendarService implements CalendarService {
     for (VEvent e : events) {
       String location = e.getLocation().orElse(new Location()).getValue();
       if (location != null && !location.startsWith("http")) {
-        result.add(mapper.toPhysicalEvent(e));
+        result.add(mapper.toPhysicalEvent(e, locationService));
       } else {
         result.add(mapper.toWebEvent(e));
       }
@@ -157,5 +164,4 @@ public class CaldavCalendarService implements CalendarService {
     
     return log.exit(result);
   }
-  
 }
