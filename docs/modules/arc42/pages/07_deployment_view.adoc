@@ -12,23 +12,36 @@ actor "System Admin" <<Admin>> as admin
 
 component "k8s Cluster" <<Cluster>> as k8s {
   component "rollenspiel-cons" <<Namespace>> as ns {
+    component ""rollenspiel-cons" <<ArgoCD Application>> as app {
+      component "con-planer-scs" <<Helm Deployment>> {
+        [con-planer-scs] <<Ingress>> as ingress
 
-    component "rollenspiel-cons" <<Helm Deployment>> {
-        [rollenspiel-cons] <<Ingress>> as ingress
+        [con-planer-scs] <<Service>> as service
 
-        [rollenspiel-cons] <<Service>> as service
+        [con-planer-scs] <<Pod>> as scs
 
-        [rollenspiel-cons] <<Pod>> as scs
-
-        database "rollenspiel-cons" <<Pod>> as data
-        component "rollenspiel-cons" <<PVC>> as pvc
+        database "con-planer-scs\n\nCNPG Cluster" <<Pod>> as data
+        component "con-planer-scs" <<PVC>> as pvc
 
         ingress -right-> service : HTML, REST\n(Port 8080)
         service --> scs : HTML, REST\n(Port 8080)
-        scs -right-> data : Postgresql\n(Port 5432)
+        scs -left-> data : Postgresql\n(Port 5432)
 
-        data .right. pvc : uses
+        data .left. pvc : uses
+      }
+
+      [nextcloud\n\nNextcloud Installation] <<Helm Deployment>> as nextcloud
+      [nextcloud-db\n\nCNPG Cluster] <<Helm Deployment>> as nextclouddb
+      [nextcloud-s3-credentials] <<External Secret>> as s3credentials
+
+      scs -left-> nextcloud : WebDAV\n(Port 443)
     }
+
+    nextcloud -left-> nextclouddb : Postgresql\n(Port 5432)
+
+    [nextcloud-s3-credentials] <<Secret>> as nextclouds3secret
+    s3credentials -down-> nextclouds3secret : creates\nvia ESO + Vault
+    nextcloud -right-> nextclouds3secret : uses
   }
 }
 
@@ -37,10 +50,14 @@ gm --> ingress : HTTPS (HTML, REST)\n(Port 443)
 orga --> ingress : HTTPS (HTML, REST)\n(Port 443)
 admin --> ingress : HTTPS (HTML, REST)\n(Port 443)
 
-[Google Calendar] as gcal
-[Discord] as discord
-[OpenStreetMap] as osm
-[3words] as what3words
+circle "S3 Storage" as s3
+circle "Google Calendar" as gcal
+circle "Discord" as discord
+circle "OpenStreetMap" as osm
+circle "3words" as what3words
+
+nextcloud -down-> s3 : HTTPS (S3 API)\n(Port 443)
+nextclouddb -down-> s3 : Backup\nHTTPS (S3 API)\n(Port 443)
 
 scs --> gcal : HTTPS (REST)\n(Port 443)
 scs <--> discord : HTTPS (REST)\n(Port 443)
@@ -58,6 +75,7 @@ scs --> what3words : HTTPS (REST)\n(Port 443)
 * {co01}
 * {co02}
 * {co03}
+* {co04} -- for integration with Nextcloud
 * {co06}
 
 == Mapping Building Blocks to Infrastructure
