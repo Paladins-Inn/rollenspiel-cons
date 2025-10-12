@@ -1,6 +1,6 @@
 ---
 name: rollenspiel-cons
-version: current
+version: dev
 title: Rollenspiel Con Support
 nav:
   - modules/manual/pages/nav.adoc
