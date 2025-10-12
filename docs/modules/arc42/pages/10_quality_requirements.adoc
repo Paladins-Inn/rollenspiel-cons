@@ -31,6 +31,10 @@ This should include at least:
 |The software should be easily maintainable.
 This includes using widely used frameworks so help can be given quite easily.
 
+|[[REQ-SE,Security]] **Security**
+|The system needs to be secure and resilient.
+This includes IT security and data protection.
+
 |===
 
 

@@ -1,8 +1,9 @@
 package de.paladinsinn.rollenspielcons.services.api;
 
 
+import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @since 2025-10-05
  */
 public interface CalendarService {
-  List<Event> getEvents(@NotBlank final String calendar) throws CalendarException;
-  List<Event> getEvents(@NotBlank final String calendar, @notNull final LocalDate from) throws CalendarException;
-  List<Event> getEvents(@NotBlank final String calendar, @notNull final LocalDate from, final LocalDate till) throws CalendarException;
+  List<Event> getEvents(@NotNull final Calendar calendar) throws CalendarException;
+  List<Event> getEvents(@NotNull final Calendar calendar, @NotNull final LocalDate from) throws CalendarException;
+  List<Event> getEvents(@NotNull final Calendar calendar, @NotNull final LocalDate from, final LocalDate till) throws CalendarException;
 }

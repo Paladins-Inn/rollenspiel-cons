@@ -1,5 +1,5 @@
 :adr-title: CalDAV Integration Strategy for Nextcloud
-:adr-state: Proposed
+:adr-state: Accepted
 :adr-date: 2025-10-05
 :adr-expires: ./.
 :adr-author: klenkes74

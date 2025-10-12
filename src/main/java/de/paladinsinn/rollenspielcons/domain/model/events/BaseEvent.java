@@ -4,6 +4,7 @@ package de.paladinsinn.rollenspielcons.domain.model.events;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
 import de.paladinsinn.rollenspielcons.domain.api.time.TimeSpec;
+import de.paladinsinn.rollenspielcons.domain.model.AbstractImportableModelBase;
 import de.paladinsinn.rollenspielcons.domain.model.AbstractModelBase;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  * @since 2025-09-30
  */
 @Schema(
-    title = "PhysicalEvent event",
+    title = "Event event",
     description = "This is a convention event with a locations.",
     examples = {
         """
@@ -65,7 +66,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Getter
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-public class BaseEvent extends AbstractModelBase implements Event {
+public class BaseEvent extends AbstractImportableModelBase implements Event {
   @Serial
   private static final long serialVersionUID = 1L;
   
@@ -126,21 +127,10 @@ public class BaseEvent extends AbstractModelBase implements Event {
   @NotNull(message = "The time spec must be present.")
   private TimeSpec temporalData;
   
-  @Schema(
-      title = "The Google Calendar event ID",
-      description = "The Google Calendar event ID if this event is synchronized with Google Calendar.",
-      nullable = true,
-      examples = {
-          "0s5samkb7jcd7kdl2i2j1j00ag",
-          "7dg9jus7nb2pi7e0kk02180oik"
-      }
-  )
-  @Nullable
-  @Size(min = 1, max = 50, message = "The Google ID must be between {min} and {max} characters long.")
   private String googleId;
   
   @Override
-  public Optional<String> getGoogleId() {
+  public Optional<String> getExternalId() {
     return Optional.ofNullable(googleId);
   }
   
