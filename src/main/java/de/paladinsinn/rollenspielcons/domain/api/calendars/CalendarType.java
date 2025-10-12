@@ -9,7 +9,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * @since 2025-10-11
  */
 @Schema(
-    description = "The type of calendar"
+    description = "The type of calendar",
+    examples = {"CALDAV", "GCAL"},
+    enumAsRef = true
 )
 public enum CalendarType {
   /** iCAL via CALDAV as provided by Nextcloud. */

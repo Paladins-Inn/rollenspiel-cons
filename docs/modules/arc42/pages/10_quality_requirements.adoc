@@ -46,7 +46,6 @@ This includes IT security and data protection.
 + **Requirements**
 -- Functional Suitability (FS)
 ---_ Provide Event Calendar (FS01)
----_ Data Retention TTL (FS02)
 ---_ Self-Service for Users (Gamers, Game Masters, Con Organizers) (FS03)
 ---_ Notification System to users (FS04)
 ---_ Data Display for Events (FS05)
@@ -57,6 +56,9 @@ This includes IT security and data protection.
 ---_ Compatible with Ical (CO04)
 ---_ Compatible with VTT systems (CO05)
 ---_ Compatible with Google Calendar (CO06)
+-- Security (SE)
+---_ Data Retention TTL (FS02)
+---_ Attribute based access control (ABAC) (US06)
 
 ++ Usability (US)
 +++_ Web based (US01)
@@ -64,7 +66,6 @@ This includes IT security and data protection.
 +++_ Fast Responses (US03)
 +++_ Accessible (US04)
 +++_ Ready for tablet usage (US05)
-+++_ Attribute based access control (ABAC) (US06)
 ++ Reliability (RE)
 +++_ Working Hours 24/7 (RE01)
 ++ Maintainability (MT)
@@ -86,9 +87,6 @@ This includes IT security and data protection.
 |[[FS01,Provide Event Calendar (FS01)]] **FS01**
 | Provide a nice interface to show events in a calendar view.
 This includes drill down to details.
-
-|[[FS02,Data Protection (FS02)]] **FS02**
-|The software needs to conform to the GDPR in Europe.
 
 |[[FS03,Self-Service for Users (Gamers, Game Masters, Con Organizers) (FS03)]] **FS03**
 | Users should be able to use the system without help from admins.
@@ -149,10 +147,6 @@ This includes following the {w3c01} and the {eu-barrierefreiheit}.
 |[[US05,Ready for tablet usage (US05)]] **US05**
 |The system should be usable on tablets as well as on desktop computers.
 
-|[[US06,Attribute based access control (ABAC) (US06)]] **US06**
-|The system should use ABAC (&uparrow;xref:08_concepts/abac.adoc[]) to manage permissions.
-Uses should be able to form groups and manage eents on group level.
-
 2+h| Reliability
 
 |[[RE01,Working hours 24/7 (RE01)]] **RE01**
@@ -167,4 +161,15 @@ So the systems have to work 24/7. There is no maintenance window available where
 
 |[[MT02,12 Factor (MT02)]] **MT02**
 |Following the guidelines of 'The Twelve-Factor App' {12factor} support the maintainability and resilience of the system.
+
+
+2+h| Security
+
+|[[FS02,Data Protection (FS02)]] **FS02**
+|The software needs to conform to the GDPR in Europe.
+
+|[[US06,Attribute based access control (ABAC) (US06)]] **US06**
+|The system should use ABAC (&uparrow;xref:08_concepts/abac.adoc[]) to manage permissions.
+Uses should be able to form groups and manage eents on group level.
+
 |===

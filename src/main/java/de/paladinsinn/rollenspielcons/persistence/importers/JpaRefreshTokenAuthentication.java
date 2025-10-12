@@ -1,7 +1,7 @@
 package de.paladinsinn.rollenspielcons.persistence.importers;
 
 
-import de.paladinsinn.rollenspielcons.domain.api.integrations.GoogleImporterAuthentication;
+import de.paladinsinn.rollenspielcons.domain.api.integrations.RefreshTokenAuthentication;
 import de.paladinsinn.rollenspielcons.persistence.mapper.AesGcmStringCryptoConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -29,7 +29,7 @@ import lombok.extern.jackson.Jacksonized;
 @NoArgsConstructor
 @Data
 @ToString(onlyExplicitlyIncluded = true)
-public class JpaGoogleImporterAuthentication implements GoogleImporterAuthentication {
+public class JpaRefreshTokenAuthentication implements RefreshTokenAuthentication {
   private static final int MAXIMUM_TOKEN_LENTH = 800;
   
   @Column(name = "REFRESH_TOKEN", length = MAXIMUM_TOKEN_LENTH, nullable = false)

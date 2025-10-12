@@ -5,7 +5,6 @@ import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarType;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.SyncSuccess;
 import de.paladinsinn.rollenspielcons.persistence.AbstractBaseEntity;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -13,10 +12,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
-import java.net.URI;
 import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -74,42 +73,17 @@ public abstract class AbstractJpaCalendar extends AbstractBaseEntity implements 
     return CalendarType.valueOf(syncTypeValue);
   }
   
-  @Column(name = "SYNC_URI", nullable = false)
-  @Schema(
-      description = "The URI to sync the calendar with.",
-      examples = {"https://example.com/calendar"}
-  )
-  @NotNull(message = "The sync URI must be set.")
-  @Size(min = URL_MIN_LENGTH, max = URL_MAX_LENGTH, message = "The sync URI must be between {min} and {max} characters long.")
-  @ToString.Include
-  private URI syncUri;
+  @Column(name = "CALENDAR_ID", nullable = false)
+  @NotBlank(message = "The calendar ID must be set.")
+  @Size(min = URL_MIN_LENGTH, max = URL_MAX_LENGTH, message = "The calendar ID must be between {min} and {max} characters long.")
+  private String calendarId;
 
   @Column(name = "LAST_SYNC_TIME")
-  @Schema(
-      description = "Last successful synchronization time.",
-      examples = {
-          "2024-12-24T18:00:00+01:00[Europe/Berlin]",
-          "2024-12-24T18:00:00+01:00",
-          "2024-12-24T16:00:00Z"
-      },
-      format = "date-time",
-      nullable = true
-  )
   @Nullable
   @ToString.Include
   private OffsetDateTime lastSyncTime;
   
   @Column(name = "LAST_SYNC_ATTEMPT_TIME")
-  @Schema(
-      description = "Timestamp of the last synchronization attempt.",
-      examples = {
-          "2024-12-24T18:00:00+01:00[Europe/Berlin]",
-          "2024-12-24T18:00:00+01:00",
-          "2024-12-24T16:00:00Z"
-      },
-      format = "date-time",
-      nullable = true
-  )
   @Nullable
   @ToString.Include
   private OffsetDateTime lastSyncAttemptTime;

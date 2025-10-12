@@ -1,7 +1,7 @@
 package de.paladinsinn.rollenspielcons.persistence.calendars;
 
 
-import de.paladinsinn.rollenspielcons.persistence.importers.JpaGoogleImporterAuthentication;
+import de.paladinsinn.rollenspielcons.persistence.importers.JpaRefreshTokenAuthentication;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Embedded;
@@ -26,7 +26,6 @@ import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MIN_
  * @since 2025-10-12
  */
 @Entity(name = "GoogleCalendar")
-@Table(name = "GOOGLE_CALENDARS")
 @DiscriminatorValue("GCAL") // Has To match the value in {@link CalendarType}
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
@@ -36,9 +35,5 @@ import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MIN_
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class JpaGoogleCalendar extends AbstractJpaCalendar {
   @Embedded
-  private JpaGoogleImporterAuthentication authentication;
-  
-  @Column(name = "CALENDAR_ID", nullable = false)
-  @Size(min = URL_MIN_LENGTH, max = URL_MAX_LENGTH, message = "The calendar ID must be between {min} and {max} characters long.")
-  private String calendarId;
+  private JpaRefreshTokenAuthentication authentication;
 }

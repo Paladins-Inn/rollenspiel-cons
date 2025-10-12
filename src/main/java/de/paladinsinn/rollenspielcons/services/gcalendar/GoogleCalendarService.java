@@ -1,9 +1,10 @@
 package de.paladinsinn.rollenspielcons.services.gcalendar;
 
+import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
 import com.google.api.services.calendar.model.Events;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
-import de.paladinsinn.rollenspielcons.domain.api.integrations.GoogleImporterAuthentication;
+import de.paladinsinn.rollenspielcons.domain.api.integrations.RefreshTokenAuthentication;
 import de.paladinsinn.rollenspielcons.services.api.CalendarException;
 import de.paladinsinn.rollenspielcons.services.api.CalendarService;
 import io.micrometer.core.annotation.Counted;
@@ -46,7 +47,7 @@ public class GoogleCalendarService implements CalendarService {
     
     try {
       Calendar service = serviceCreator.createService(
-          ((GoogleImporterAuthentication) gcal.getAuthentication()).getRefreshToken()
+          ((RefreshTokenAuthentication) gcal.getAuthentication()).getRefreshToken()
       );
       
       Events events = loadEventsFromGoogle(service, gcal.getCalendarId());
@@ -75,7 +76,7 @@ public class GoogleCalendarService implements CalendarService {
     
     try {
       Calendar service = serviceCreator.createService(
-          ((GoogleImporterAuthentication) gcal.getAuthentication()).getRefreshToken()
+          ((RefreshTokenAuthentication) gcal.getAuthentication()).getRefreshToken()
       );
       
       Events events = loadEventsFromGoogle(service, gcal.getCalendarId(), start);
@@ -105,7 +106,7 @@ public class GoogleCalendarService implements CalendarService {
     
     try {
       Calendar service = serviceCreator.createService(
-          ((GoogleImporterAuthentication) gcal.getAuthentication()).getRefreshToken()
+          ((RefreshTokenAuthentication) gcal.getAuthentication()).getRefreshToken()
       );
       
       Events events = loadEventsFromGoogle(service, gcal.getCalendarId(), start, end);
@@ -165,8 +166,11 @@ public class GoogleCalendarService implements CalendarService {
     try {
       DateTime startDateTime = new DateTime(
           start.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
+      
+      // Add one day to include the given end date as well.
       DateTime endDateTime   = new DateTime(
-          end.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
+          end.plusDays(1L).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
+      );
       
       Events result = service.events().list(calendarId)
                              .setTimeMin(startDateTime)
