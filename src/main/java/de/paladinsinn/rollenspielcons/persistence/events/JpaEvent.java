@@ -14,9 +14,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -38,7 +38,6 @@ import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.CascadeType.REFRESH;
 import static jakarta.persistence.CascadeType.REMOVE;
 import static jakarta.persistence.FetchType.EAGER;
-import static jakarta.persistence.InheritanceType.TABLE_PER_CLASS;
 
 
 /**
@@ -48,7 +47,7 @@ import static jakarta.persistence.InheritanceType.TABLE_PER_CLASS;
  * @since 2025-10-03
  */
 @Entity(name = "Event")
-@Inheritance(strategy = TABLE_PER_CLASS)
+@Table(schema = "cons", name = "EVENTS")
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor

@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
  * @since 2025-09-30
  */
 @Entity(name = "WebLocation")
-@Table(name = "WEBLOCATIONS")
+@Table(schema = "cons", name = "WEBLOCATIONS")
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @Data

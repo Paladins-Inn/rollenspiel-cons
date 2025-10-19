@@ -26,7 +26,7 @@ import org.hibernate.validator.constraints.Range;
  * @since 21.09.25
  */
 @Entity(name = "PhysicalAddress")
-@Table(name = "PHYSICALADDRESSES")
+@Table(schema = "cons", name = "PHYSICALADDRESSES")
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor

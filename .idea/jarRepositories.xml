@@ -22,11 +22,6 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="torganized-play-threats" />
-      <option name="name" value="torganized-play-threats" />
-      <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-threats" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="google" />
       <option name="name" value="google" />
       <option name="url" value="https://maven.google.com/" />
@@ -35,6 +30,11 @@
       <option name="id" value="google-api-services" />
       <option name="name" value="google-api-services" />
       <option name="url" value="https://google-api-client-libraries.appspot.com/mavenrepo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="torganized-play-threats" />
+      <option name="name" value="torganized-play-threats" />
+      <option name="url" value="https://maven.pkg.github.com/Paladins-Inn/torganized-play-threats" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="torganized-play-users" />
