@@ -2,13 +2,13 @@ package de.paladinsinn.rollenspielcons.domain.model.importers;
 
 
 import de.paladinsinn.rollenspielcons.domain.api.integrations.ImporterAuthentication;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.http.HttpHeaders;
@@ -21,23 +21,30 @@ import org.springframework.http.HttpHeaders;
  * @since 2025-10-12
  */
 @Jacksonized
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 @XSlf4j
 public class UsernameAndPasswordAuthentication implements ImporterAuthentication {
   @Getter
-  @NotBlank(message = "The username must not be blank.")
+  @Setter
+  @ToString.Include
   private String username;
-  @NotBlank(message = "The password must not be blank.")
+  
+  @Setter
   private String password;
   
   @Override
-  public HttpHeaders authenticate(@NotNull final HttpHeaders httpHeaders) {
+  public HttpHeaders authenticate(@NotNull HttpHeaders httpHeaders) {
     log.entry(httpHeaders, username, "<redacted>");
     
-    httpHeaders.setBasicAuth(username, password);
+    if (
+        username != null && password != null
+        && !username.isBlank() && !password.isBlank()
+    ) {
+      httpHeaders.setBasicAuth(username, password);
+    }
     
     return log.exit(httpHeaders);
   }

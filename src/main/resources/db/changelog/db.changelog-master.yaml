@@ -6,4 +6,7 @@ databaseChangeLog:
   - include:
       file: v1/v1.yaml
       relativeToChangelogFile: true
+  - include:
+      file: v1/v1-7-0.yaml
+      relativeToChangelogFile: true
 
