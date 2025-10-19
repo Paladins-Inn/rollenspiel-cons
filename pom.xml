@@ -22,7 +22,7 @@
 
   <groupId>de.paladins-inn.rollenspiel-cons</groupId>
   <artifactId>rollenspiel-cons</artifactId>
-  <version>1.5.0-c22fd6c</version>
+  <version>1.6.0</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <url>https://rollenspiel-cons.info/</url>
