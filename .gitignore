@@ -15,3 +15,4 @@ target/
 calendar-service-account.json
 /.env-local
 /http-client.private.env.json
+/.properties-local
