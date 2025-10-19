@@ -6,35 +6,33 @@ spring:
     description: Rollenspiel PhysicalEvent Management
     version: @project.version@
     
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
-    default-schema: cons
-    liquibase-schema: cons
+    liquibase:
+      change-log: classpath:db/changelog/db.changelog-master.yaml
+      default-schema: cons
       
-  datasource:
-    url: jdbc:postgresql://localhost:5432/rollenspiel-cons
-    username: changeme
-    password: changeme
-    driver-class-name: org.postgresql.Driver
-    hikari:
-      maximum-pool-size: 10
-      minimum-idle: 2
-      idle-timeout: 600000
-      max-lifetime: 1800000
-      connection-timeout: 30000
-
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    properties:
+    datasource:
+      url: jdbc:postgresql://localhost:5432/rollenspiel-cons
+      username: changeme
+      password: changeme
+      driver-class-name: org.postgresql.Driver
+      hikari:
+        maximum-pool-size: 10
+        minimum-idle: 2
+        idle-timeout: 600000
+        max-lifetime: 1800000
+        connection-timeout: 30000
+    jpa:
       hibernate:
-        default_schema: cons
-        format_sql: true
-        use_sql_comments: true
-        jdbc:
-          lob:
-            non_contextual_creation: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: validate
+      properties:
+        hibernate:
+          default_schema: cons
+          format_sql: true
+          use_sql_comments: true
+          jdbc:
+            lob:
+              non_contextual_creation: true
+          dialect: org.hibernate.dialect.PostgreSQLDialect
   
   security:
     oauth2:
@@ -102,6 +100,12 @@ google:
   client-id: changeme
   client-secret: changeme
     
+caldav:
+  url: changeme
+  calendar: changeme
+  username: changeme
+  password: changeme
+
 snowflake:
   datacenter-id: 1
   machine-id: 1
