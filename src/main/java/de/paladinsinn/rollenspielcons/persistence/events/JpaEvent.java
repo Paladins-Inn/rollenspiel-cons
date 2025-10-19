@@ -15,7 +15,6 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
@@ -72,6 +71,7 @@ public class JpaEvent extends AbstractBaseEntity implements Event {
   
   @OneToMany(
       targetEntity = JpaPhysicalAddress.class,
+      mappedBy = "event",
       orphanRemoval = true,
       fetch = EAGER,
       cascade = {PERSIST, MERGE, DETACH, REFRESH, REMOVE}
@@ -83,6 +83,7 @@ public class JpaEvent extends AbstractBaseEntity implements Event {
   
   @OneToMany(
       targetEntity = JpaWebLocation.class,
+      mappedBy = "event",
       orphanRemoval = true,
       fetch = EAGER,
       cascade = {PERSIST, MERGE, DETACH, REFRESH, REMOVE}
@@ -92,13 +93,11 @@ public class JpaEvent extends AbstractBaseEntity implements Event {
   @Builder.Default
   private Set<WebLocation> webLocations = new HashSet<>(10);
 
-  @OneToOne(
-      orphanRemoval = true,
-      fetch = EAGER,
-      cascade = {PERSIST, MERGE, DETACH, REFRESH, REMOVE}
-  )
-  @Nullable
-  private JpaWebLocation website;
+  @Override
+  @Transient
+  public WebLocation getWebsite() {
+    return webLocations.stream().findFirst().orElse(null);
+  }
   
   @Column(length = 4000)
   @NotNull(message = "The description must be set.")

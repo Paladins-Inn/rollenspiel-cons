@@ -1,12 +1,5 @@
 databaseChangeLog:
   - changeSet:
-      id: 001-create-schema-cons
-      author: klenkes74
-      changes:
-        - sql:
-            create schema if not exists cons;
-  
-  - changeSet:
       id: 010-create-persons
       author: klenkes74
       changes:
@@ -71,6 +64,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: EVENT_ID
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
                   name: NAME
                   type: varchar(250)
                   constraints:
@@ -78,11 +76,6 @@ databaseChangeLog:
               - column:
                   name: URI
                   type: varchar(250)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: WEBSITE_OF_EVENT_ID
-                  type: bigint
                   constraints:
                     nullable: true
   
@@ -108,6 +101,11 @@ databaseChangeLog:
               - column:
                   name: OWNER
                   type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EVENT_ID
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -140,11 +138,6 @@ databaseChangeLog:
                   type: double precision
                   constraints:
                     nullable: false
-              - column:
-                  name: EVENT_ID
-                  type: bigint
-                  constraints:
-                    nullable: true
   
   - changeSet:
       id: 040-create-events
@@ -181,23 +174,18 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: TEMPORAL_START
-                  type: timestamptz
+                  name: START
+                  type: timestamp with time zone
                   constraints:
                     nullable: true
               - column:
-                  name: TEMPORAL_END
-                  type: timestamptz
+                  name: DURATION
+                  type: numeric(21,0)
                   constraints:
                     nullable: true
               - column:
                   name: EXTERNAL_ID
                   type: varchar(100)
-                  constraints:
-                    nullable: true
-              - column:
-                  name: WEBSITE_ID
-                  type: bigint
                   constraints:
                     nullable: true
               - column:
@@ -276,17 +264,17 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: SYNC_PERIOD
-                  type: interval
+                  type: numeric(21,0)
                   constraints:
                     nullable: false
               - column:
                   name: LAST_SYNC_TIME
-                  type: timestamptz
+                  type: timestamp with time zone
                   constraints:
                     nullable: true
               - column:
                   name: LAST_SYNC_ATTEMPT_TIME
-                  type: timestamptz
+                  type: timestamp with time zone
                   constraints:
                     nullable: true
               - column:
@@ -308,7 +296,7 @@ databaseChangeLog:
                   type: bigint
               - column:
                   name: sync_period
-                  type: interval
+                  type: numeric(21,0)
               - column:
                   name: last_sync_attempt_time
                   type: timestamp with time zone
@@ -334,17 +322,9 @@ databaseChangeLog:
         - addForeignKeyConstraint:
             baseTableSchemaName: cons
             baseTableName: WEBLOCATIONS
-            baseColumnNames: WEBSITE_OF_EVENT_ID
+            baseColumnNames: EVENT_ID
             referencedTableSchemaName: cons
             referencedTableName: EVENTS
             referencedColumnNames: id
             constraintName: fk_weblocations_event
-        - addForeignKeyConstraint:
-            baseTableSchemaName: cons
-            baseTableName: EVENTS
-            baseColumnNames: WEBSITE_ID
-            referencedTableSchemaName: cons
-            referencedTableName: WEBLOCATIONS
-            referencedColumnNames: id
-            constraintName: fk_events_website
 

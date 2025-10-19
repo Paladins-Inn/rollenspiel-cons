@@ -20,7 +20,7 @@ import de.paladinsinn.rollenspielcons.services.geo.GeoCoordinateMapperImpl;
 import de.paladinsinn.rollenspielcons.services.geo.GeocodeMapsCoClient;
 import de.paladinsinn.rollenspielcons.services.geo.GeocodingService;
 import de.paladinsinn.rollenspielcons.services.geo.LocationService;
-import java.time.Period;
+import java.time.Duration;
 import java.util.List;
 import lombok.extern.slf4j.XSlf4j;
 import org.junit.jupiter.api.Disabled;
@@ -73,7 +73,7 @@ public class CaldavCalendarServiceTest {
       .builder()
       .calendarId(CALENDAR_URL)
       .owner("ich")
-      .syncPeriod(Period.ZERO)
+      .syncPeriod(Duration.ZERO)
       .authentication(NullAuthentication.builder().build())
       .build();
   

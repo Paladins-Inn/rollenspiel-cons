@@ -214,8 +214,8 @@ public interface VEventMapper {
    * wird das Ende des Tages von dtStart verwendet.
    */
   default Duration toZonedRange(final DtStart<Temporal> dtStart,
-                                  final Optional<DtEnd<Temporal>> dtEndOpt,
-                                  final ZoneId fallbackZone) {
+                              final Optional<DtEnd<Temporal>> dtEndOpt,
+                              final ZoneId fallbackZone) {
     ZonedDateTime startZ = dtStartToZonedDateTime(dtStart, fallbackZone);
     if (startZ == null) {
       return Duration.ZERO;

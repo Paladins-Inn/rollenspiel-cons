@@ -3,9 +3,9 @@ package de.paladinsinn.rollenspielcons.domain.api.time;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import de.paladinsinn.rollenspielcons.domain.model.time.TimeSpecImpl;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Duration;
 import java.time.ZonedDateTime;
 
 /**

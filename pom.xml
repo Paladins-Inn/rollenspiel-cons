@@ -118,6 +118,14 @@
   </dependencyManagement>
 
   <dependencies>
+    <!-- Command Line Parsing -->
+    <dependency>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli</artifactId>
+      <version>4.7.5</version>
+    </dependency>
+
+    <!-- ICal Verarbeitung -->
     <dependency>
       <groupId>org.mnode.ical4j</groupId>
       <artifactId>ical4j</artifactId>
@@ -1113,8 +1121,11 @@
             <version>4.23.2</version>
             <configuration>
               <changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
+              <!--suppress MavenModelInspection -->
               <url>${spring.datasource.url}</url>
+              <!--suppress MavenModelInspection -->
               <username>${spring.datasource.username}</username>
+              <!--suppress MavenModelInspection -->
               <password>${spring.datasource.password}</password>
               <defaultSchemaName>cons</defaultSchemaName>
 
