@@ -3,7 +3,6 @@ package de.paladinsinn.rollenspielcons.services.geo;
 
 import java.io.Serial;
 import java.io.Serializable;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -22,11 +21,11 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode
-public class GeoCordinates implements Serializable {
+public class GeoCoordinates implements Serializable {
   @Serial
   private static final long serialVersionUID = 1L;
   

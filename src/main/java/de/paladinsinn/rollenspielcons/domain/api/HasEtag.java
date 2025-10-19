@@ -1,6 +1,8 @@
 package de.paladinsinn.rollenspielcons.domain.api;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.beans.Transient;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -37,6 +39,9 @@ public interface HasEtag {
    *
    * @return String with the concatenated data.
    */
-  String monitoredData();
+  @JsonIgnore
+  default String monitoredData() {
+    return toString();
+  }
   
 }

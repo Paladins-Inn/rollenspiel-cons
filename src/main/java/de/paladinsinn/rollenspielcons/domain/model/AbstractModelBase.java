@@ -4,9 +4,9 @@ package de.paladinsinn.rollenspielcons.domain.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.api.HasId;
+import de.paladinsinn.rollenspielcons.domain.api.HasVersion;
 import java.beans.Transient;
 import java.io.Serializable;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,15 +25,20 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED, onConstructor_ = @__(@Deprecated))
+@NoArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode(of = {"id"})
-public class AbstractModelBase implements HasId, HasDisplayText, Serializable {
+public class AbstractModelBase implements HasId, HasVersion, HasDisplayText, Serializable {
   /**
    * The unique identifier of this entity.
    */
   private long id;
+  
+  /**
+   * The dataset version of this entity.
+   */
+  private int version;
   
   /**
    * The name of this entity.

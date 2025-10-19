@@ -1,12 +1,9 @@
 package de.paladinsinn.rollenspielcons.persistence.mapper;
 
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
-import de.paladinsinn.rollenspielcons.domain.api.events.PhysicalEvent;
-import de.paladinsinn.rollenspielcons.domain.api.events.WebEvent;
+import de.paladinsinn.rollenspielcons.domain.model.events.EventImpl;
+import de.paladinsinn.rollenspielcons.persistence.PersistedDisplayableName;
 import de.paladinsinn.rollenspielcons.persistence.events.JpaEvent;
-import de.paladinsinn.rollenspielcons.persistence.events.JpaPhysicalEvent;
-import de.paladinsinn.rollenspielcons.persistence.events.JpaWebEvent;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -15,24 +12,28 @@ import org.mapstruct.Mapping;
  */
 @Mapper(
     componentModel = "spring",
-    uses = {LocationMapper.class}
+    uses = {
+        LocationMapper.class,
+        OwnerMapper.class,
+        DisplayTextMapper.class,
+        ExternalIdMapper.class
+    }
 )
 public interface EventMapper {
-    // JpaEvent <-> BaseEvent
-    Event toBaseEvent(JpaEvent entity);
+    EventImpl toEventImpl(JpaEvent entity);
+    
+    @Mapping(target = "owner", source = "domain.owner")
+    @Mapping(target = "name", expression = "java(toDisplayableName(domain))")
+    @Mapping(target = "externalId", source = "externalId")
+    @Mapping(target = "website", source = "domain.website")
+    @Mapping(target = "description", source = "domain.description")
+    @Mapping(target = "labels", source = "domain.labels")
     JpaEvent toJpaEvent(Event domain);
-
-    // JpaWebEvent <-> WebEventImpl
-    @Mapping(target = "locations", source = "locations")
-    WebEvent toWebEventImpl(JpaWebEvent entity);
-
-    @InheritInverseConfiguration
-    JpaWebEvent toJpaWebEvent(WebEvent domain);
-
-    // JpaPhysicalEvent <-> PhysicalEventImpl
-    @Mapping(target = "locations", source = "locations")
-    PhysicalEvent toPhysicalEventImpl(JpaPhysicalEvent entity);
-
-    @InheritInverseConfiguration
-    JpaPhysicalEvent toJpaPhysicalEvent(PhysicalEvent domain);
+    
+    default PersistedDisplayableName toDisplayableName(final Event domain) {
+      return PersistedDisplayableName.builder()
+          .name(domain.getDisplayText())
+          .uri(domain.getUri())
+          .build();
+    }
 }

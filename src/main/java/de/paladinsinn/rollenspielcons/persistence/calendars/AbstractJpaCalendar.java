@@ -17,6 +17,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -63,7 +64,6 @@ public abstract class AbstractJpaCalendar extends AbstractBaseEntity implements 
    * Will be the discriminator column.
    * It has to match the values in {@link CalendarType}.
    */
-  @Enumerated(STRING)
   @Column(name = "CALENDAR_TYPE", insertable = false, updatable = false)
   @ToString.Include
   private String syncTypeValue;
@@ -77,15 +77,17 @@ public abstract class AbstractJpaCalendar extends AbstractBaseEntity implements 
   @NotBlank(message = "The calendar ID must be set.")
   @Size(min = URL_MIN_LENGTH, max = URL_MAX_LENGTH, message = "The calendar ID must be between {min} and {max} characters long.")
   private String calendarId;
+  
+  @Column(name = "SYNC_PERIOD", nullable = false)
+  @NotNull(message = "The sync period must be set.")
+  private Period syncPeriod;
 
   @Column(name = "LAST_SYNC_TIME")
   @Nullable
-  @ToString.Include
   private OffsetDateTime lastSyncTime;
   
   @Column(name = "LAST_SYNC_ATTEMPT_TIME")
   @Nullable
-  @ToString.Include
   private OffsetDateTime lastSyncAttemptTime;
 
   @Column(name = "LAST_SYNC_RESULT", nullable = false)

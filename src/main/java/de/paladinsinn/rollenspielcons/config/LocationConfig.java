@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 @NoArgsConstructor
 @XSlf4j
 public class LocationConfig {
-  @Value("${what3words.api.key:}")
+  @Value("${what3words.api.key:changeme}")
   private String what3wordsApiKey;
 
   @PostConstruct
@@ -40,8 +40,9 @@ public class LocationConfig {
     return log.exit(new What3WordsV3(what3wordsApiKey));
   }
   
-  
+
   // only for testing, deprecating it as warning.
+  @SuppressWarnings("DeprecatedIsStillUsed")
   @Deprecated
   LocationConfig(final String what3wordsApiKey) {
     log.entry(what3wordsApiKey);

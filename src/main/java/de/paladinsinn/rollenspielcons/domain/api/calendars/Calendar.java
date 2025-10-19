@@ -4,6 +4,7 @@ package de.paladinsinn.rollenspielcons.domain.api.calendars;
 import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import de.paladinsinn.rollenspielcons.domain.api.HasOwner;
+import de.paladinsinn.rollenspielcons.domain.api.HasVersion;
 import de.paladinsinn.rollenspielcons.domain.api.integrations.ImporterAuthentication;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
@@ -11,6 +12,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.time.Period;
+import org.springframework.http.HttpHeaders;
 
 import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MAX_LENGTH;
 import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MIN_LENGTH;
@@ -21,7 +24,7 @@ import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MIN_
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-10-11
  */
-public interface Calendar extends HasId, HasOwner, HasDisplayText, Serializable {
+public interface Calendar extends HasId, HasVersion, HasOwner, HasDisplayText, Serializable {
   /**
    * This is the calender to sync from.
    * Since every integration is different, it is a simple string.
@@ -51,6 +54,16 @@ public interface Calendar extends HasId, HasOwner, HasDisplayText, Serializable 
    * @return The authentication information to access the calendar.
    */
   ImporterAuthentication getAuthentication();
+  
+  /**
+   * Authenticates the given http headers.
+   * @param httpHeaders The headers to authenticate.
+   * @return The authenticated headers.
+   * @throws UnsupportedOperationException if the authentication is not supported by the importer.
+   */
+  default HttpHeaders authenticate(final HttpHeaders httpHeaders) {
+    return getAuthentication().authenticate(httpHeaders);
+  }
   
   /**
    * @return The outcome of the last synchronization attempt.
@@ -89,4 +102,11 @@ public interface Calendar extends HasId, HasOwner, HasDisplayText, Serializable 
   )
   @Nullable
   OffsetDateTime getLastSyncAttemptTime();
+  
+  @Schema(
+      description = "Synchronization interval. Not every calendar needs to be synched in the same period.",
+      examples = {"P1D", "P1W", "P1M"}
+  )
+  @NotNull
+  Period getSyncPeriod();
 }

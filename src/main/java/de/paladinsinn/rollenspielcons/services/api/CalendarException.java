@@ -1,16 +1,6 @@
 package de.paladinsinn.rollenspielcons.services.api;
 
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import lombok.extern.jackson.Jacksonized;
-
-
 /**
  *
  *
@@ -18,9 +8,6 @@ import lombok.extern.jackson.Jacksonized;
  * @since 2025-10-05
  */
 public class CalendarException extends Exception {
-  @Serial
-  private static final long serialVersionUID = 1L;
-
   public CalendarException() {
     super("Developer has been too lazy to provide a proper message.");
   }

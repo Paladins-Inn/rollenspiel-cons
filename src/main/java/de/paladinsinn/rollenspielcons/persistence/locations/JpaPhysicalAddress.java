@@ -1,12 +1,9 @@
 package de.paladinsinn.rollenspielcons.persistence.locations;
 
 
-import de.paladinsinn.rollenspielcons.domain.api.events.PhysicalEvent;
 import de.paladinsinn.rollenspielcons.domain.api.locations.PhysicalAddress;
-import de.paladinsinn.rollenspielcons.persistence.events.JpaPhysicalEvent;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
@@ -37,10 +34,6 @@ import org.hibernate.validator.constraints.Range;
 @ToString(callSuper = true, of = {"threeWords", "longitude", "latitude"})
 @EqualsAndHashCode(callSuper = true, of = {"longitude", "latitude"})
 public class JpaPhysicalAddress extends JpaLocation implements PhysicalAddress {
-  @ManyToOne(targetEntity = JpaPhysicalEvent.class, optional = false)
-  @NotBlank(message = "The event must be set.")
-  private PhysicalEvent event;
-  
   @Column(name = "ADDRESS", nullable = false, length = 250)
   @NotBlank(message = "Address must be set")
   @Size(min = 5, max = 250, message = "Address must be between 5 and 250 characters long")

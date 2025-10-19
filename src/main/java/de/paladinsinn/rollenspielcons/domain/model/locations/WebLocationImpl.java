@@ -4,7 +4,6 @@ package de.paladinsinn.rollenspielcons.domain.model.locations;
 import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,7 +40,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
+@NoArgsConstructor
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = true)
@@ -49,7 +48,7 @@ public class WebLocationImpl extends LocationImpl implements WebLocation {
   @Schema(
       title = "Name of the website",
       description = "The display name of the website.",
-      example = "Paladins Inn"
+      examples = {"Paladins Inn"}
   )
   @NotBlank(message = "The display text must be set.")
   @Size(min = 1, max = 250, message = "The name must be between {min} and {max} characters long.")
@@ -58,7 +57,7 @@ public class WebLocationImpl extends LocationImpl implements WebLocation {
   @Schema(
       title = "The URI of the website",
       description = "The URI (link) to the website.",
-      example = "https://discord.gg/your-invite-code"
+      examples = {"https://discord.gg/your-invite-code"}
   )
   @NotBlank(message = "The URI must be set.")
   @Size(min = 10, max = 250, message = "The URI must be between {min} and {max} characters long.")

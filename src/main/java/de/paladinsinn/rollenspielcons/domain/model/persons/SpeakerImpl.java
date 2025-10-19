@@ -1,16 +1,12 @@
 package de.paladinsinn.rollenspielcons.domain.model.persons;
 
 
-import de.paladinsinn.rollenspielcons.domain.api.persons.Person;
 import de.paladinsinn.rollenspielcons.domain.api.persons.Speaker;
-import de.paladinsinn.rollenspielcons.domain.model.AbstractModelBase;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 
 
@@ -21,9 +17,8 @@ import lombok.extern.jackson.Jacksonized;
  * @since 2025-10-04
  */
 @Jacksonized
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)

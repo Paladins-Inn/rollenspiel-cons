@@ -1,5 +1,7 @@
 package de.paladinsinn.rollenspielcons.domain.api;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The text to be displayed for an entity.
  *
@@ -26,6 +28,7 @@ public interface HasDisplayText {
    *
    * @return the email text
    */
+  @JsonIgnore
   default String getEmailText() {
     return getDisplayText() + " (" + getUri() + ")";
   }
@@ -35,6 +38,7 @@ public interface HasDisplayText {
    *
    * @return the HTML link
    */
+  @JsonIgnore
   default String getHtmlLink() {
     return "<a href=\"" + getUri() + "\">" + getDisplayText() + "</a>";
   }
@@ -44,6 +48,7 @@ public interface HasDisplayText {
    *
    * @return the Markdown link
    */
+  @JsonIgnore
   default String getMarkdownLink() {
     return "[" + getDisplayText() + "](" + getUri() + ")";
   }
@@ -53,6 +58,7 @@ public interface HasDisplayText {
    *
    * @return the AsciiDoc link
    */
+  @JsonIgnore
   default String getAsciiDocLink() {
     return "link:" + getUri() + "[" + getDisplayText() + "]";
   }

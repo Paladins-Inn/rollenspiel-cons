@@ -1,6 +1,8 @@
 package de.paladinsinn.rollenspielcons.services.caldav;
 
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
+import de.paladinsinn.rollenspielcons.domain.model.events.EventImpl;
+import de.paladinsinn.rollenspielcons.persistence.mapper.TemporalConverter;
 import de.paladinsinn.rollenspielcons.services.api.CalendarException;
 import de.paladinsinn.rollenspielcons.services.api.CalendarService;
 import de.paladinsinn.rollenspielcons.services.geo.LocationService;
@@ -10,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +22,6 @@ import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.Location;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -38,19 +39,16 @@ public class CaldavCalendarService implements CalendarService {
   /** The default number of months to fetch events if no end date ist specified. */
   public static final int MONTHS_TO_ADD = 3;
   
-  @Value("${caldav.url:-}")
-  private String calendarURL;
-  @Value("${caldav.username:-}")
-  private String username;
-  @Value("${caldav.password:-}")
-  private String password;
   
   private final VEventMapper mapper;
   private final WebClient webClient;
   private final LocationService locationService;
+  private final TemporalConverter temporalConverter;
   
   @Override
-  public List<Event> getEvents(@NotBlank final String calendar) throws CalendarException {
+  public List<Event> getEvents(
+      @NotNull final de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar calendar
+  ) throws CalendarException {
     log.entry(calendar);
     
     LocalDate start = calculateStartOfMonth();
@@ -58,7 +56,7 @@ public class CaldavCalendarService implements CalendarService {
     
     List<VEvent> vEvents = fetchEventsFromCalDav(calendar, start, end);
 
-    return log.exit(mapEvents(vEvents));
+    return log.exit(mapEvents(vEvents, calendar.getOwner()));
   }
   
   private LocalDate calculateStartOfMonth() {
@@ -70,52 +68,68 @@ public class CaldavCalendarService implements CalendarService {
   }
   
   @Override
-  public List<Event> getEvents(@NotBlank final String calendar, @NotNull final LocalDate from)
-      throws CalendarException {
+  public List<Event> getEvents(
+      @NotNull final de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar calendar,
+      @NotNull final LocalDate from
+  ) throws CalendarException {
     log.entry(calendar, from);
     
     List<VEvent> vEvents = fetchEventsFromCalDav(calendar, from, from.plusMonths(MONTHS_TO_ADD));
 
-    return log.exit(mapEvents(vEvents));
+    return log.exit(mapEvents(vEvents, calendar.getOwner()));
   }
   
   @Override
-  public List<Event> getEvents(@NotBlank final String calendar, @NotNull final LocalDate from, @NotNull final LocalDate till)
-      throws CalendarException {
+  public List<Event> getEvents(
+      @NotNull final de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar calendar,
+      @NotNull final LocalDate from,
+      @NotNull final LocalDate till
+  ) throws CalendarException {
     log.entry(calendar, from, till);
     
     List<VEvent> vEvents = fetchEventsFromCalDav(calendar, from, till);
 
-    return log.exit(mapEvents(vEvents));
+    return log.exit(mapEvents(vEvents, calendar.getOwner()));
   }
   
   
-  private List<VEvent> fetchEventsFromCalDav(@NotBlank final String calendar, @NotNull LocalDate from, LocalDate till) throws CalendarException {
-    log.entry(calendar, from, till);
+  private List<VEvent> fetchEventsFromCalDav(
+      @NotNull final de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar calendar,
+      @NotNull LocalDate from,
+      LocalDate till
+  ) throws CalendarException {
+    log.entry(webClient, calendar, from, till);
+    
+    if (webClient == null) {
+      log.error("WebClient is not configured.");
+    }
     
     List<VEvent> events = new ArrayList<>();
     byte[] calendarBytes = webClient
         .get()
         .uri(calculateCalendarUri(calendar, from, till))
-        .headers(h -> h.setBasicAuth(username, password))
+        .headers(calendar::authenticate)
         .retrieve()
         .bodyToMono(byte[].class)
         .block();
-    
+   
     if (calendarBytes == null) {
       return events;
     }
     
-    events = readEvents(calendarBytes);
+    events = readEvents(calendarBytes, from, till);
     
     return log.exit(events);
   }
   
-  private String calculateCalendarUri(@NotBlank final String calendar, final LocalDate from, final LocalDate till) throws CalendarException {
+  private String calculateCalendarUri(
+      @NotNull final de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar calendar,
+      final LocalDate from,
+      final LocalDate till
+  ) {
     log.entry(calendar, from, till);
     
-    String result = (calendarURL.endsWith("/") ? calendarURL : calendarURL + "/") + username + "/"
-                    + calendar + "?export&expand=1";
+    String result = calendar.getCalendarId() + "?export&expand=1";
     
     if (from != null) {
       result += "&start=" + from.atStartOfDay().toEpochSecond(ZoneOffset.UTC);
@@ -128,40 +142,58 @@ public class CaldavCalendarService implements CalendarService {
     return log.exit(result);
   }
   
-  private List<VEvent> readEvents(@NotNull final byte[] calendarBytes) throws CalendarException {
-    log.entry(calendarBytes.length);
-    
-    List<VEvent> events = new ArrayList<>();
+  private List<VEvent> readEvents(
+      @NotNull final byte[] calendarBytes,
+      @NotNull final LocalDate from,
+      @NotNull final LocalDate till
+  ) throws CalendarException {
+    log.entry(calendarBytes.length, from, till);
     
     try (InputStream in = new java.io.ByteArrayInputStream(calendarBytes)) {
       Calendar calendar = new CalendarBuilder().build(in);
-      for (Object obj : calendar.getComponents("VEVENT")) {
-        events.add((VEvent) obj);
-      }
+      
+      List<VEvent> events = calendar.getComponents().stream()
+                       .map(c -> (VEvent) c)
+                       .filter(e -> isBetween(e, from, till))
+                       .toList();
+      
+      log.exit(events.size());
+      return events;
     } catch (ParserException | IOException e) {
-      log.warn(
-          e.getClass().getSimpleName() + " while reading calendar events from CALDAV service.",
-          e.getMessage()
+      throw log.throwing(
+          new CalendarException("Could not read the CALDAV events from external service.", e)
       );
-      throw new CalendarException("Could not read the CALDAV events from external service.", e);
     }
-    
-    return log.exit(events);
   }
   
-  private List<Event> mapEvents(List<VEvent> events) {
-    log.entry(events);
+  private boolean isBetween(
+      @NotNull final VEvent event,
+      @NotNull final LocalDate from,
+      @NotNull final LocalDate till
+  ) {
+    log.entry(event.getUid().isPresent() ? event.getUid().get().getValue() : "no-uid", from, till);
     
-    List<Event> result = new ArrayList<>();
-    for (VEvent e : events) {
-      String location = e.getLocation().orElse(new Location()).getValue();
-      if (location != null && !location.startsWith("http")) {
-        result.add(mapper.toPhysicalEvent(e, locationService));
-      } else {
-        result.add(mapper.toWebEvent(e));
-      }
+    if (event.getDateTimeStart().isEmpty()) {
+      log.debug("Event {} has no start date.", event.getUid());
+      return log.exit(true);
     }
     
-    return log.exit(result);
+    LocalDate date = LocalDate.ofInstant(temporalConverter.convertToDatabaseColumn(event.getDateTimeStart().get().getDate()), ZoneId.systemDefault());
+
+    return log.exit(
+        (date.isEqual(from) || date.isAfter(from)) &&
+        (date.isEqual(till) || date.isBefore(till))
+    );
+  }
+  
+  private List<Event> mapEvents(@NotNull List<VEvent> events, @NotBlank final String owner) {
+    log.entry(events.size(), owner);
+    
+    return log.exit(
+        events.stream()
+            .map(e -> mapper.toEvent(e, locationService))
+            .map(e -> (Event)e.toBuilder().owner(owner).build())
+            .toList()
+    );
   }
 }

@@ -4,6 +4,7 @@ package de.paladinsinn.rollenspielcons.domain.api.integrations;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.http.HttpHeaders;
 
 /**
  *
@@ -13,6 +14,10 @@ import jakarta.validation.constraints.Size;
  */
 @JsonDeserialize(as = de.paladinsinn.rollenspielcons.domain.model.importers.RefreshTokenAuthentication.class)
 public interface RefreshTokenAuthentication extends ImporterAuthentication {
+  default HttpHeaders authenticate(HttpHeaders headers) {
+    throw new UnsupportedOperationException("Not supported for refresh-token authentication.");
+  }
+  
   /**
    * @return the refresh token for the google-auth-library.
    */

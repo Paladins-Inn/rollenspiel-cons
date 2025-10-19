@@ -2,19 +2,18 @@ package de.paladinsinn.rollenspielcons.domain.model.events;
 
 
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
+import de.paladinsinn.rollenspielcons.domain.api.locations.PhysicalAddress;
 import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
 import de.paladinsinn.rollenspielcons.domain.api.time.TimeSpec;
 import de.paladinsinn.rollenspielcons.domain.model.AbstractImportableModelBase;
-import de.paladinsinn.rollenspielcons.domain.model.AbstractModelBase;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import javax.annotation.Nullable;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -62,11 +61,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 )
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE, onConstructor_ = @__(@Deprecated))
+@NoArgsConstructor
 @Getter
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-public class BaseEvent extends AbstractImportableModelBase implements Event {
+public class EventImpl extends AbstractImportableModelBase implements Event {
   @Serial
   private static final long serialVersionUID = 1L;
   
@@ -92,7 +91,7 @@ public class BaseEvent extends AbstractImportableModelBase implements Event {
   )
   @Size(max = 20, message = "There must be between {min} and {max} labels.")
   @Builder.Default
-  private List<String> labels = new ArrayList<>(20);
+  private Set<String> labels = new HashSet<>(20);
   
   
   /**
@@ -127,16 +126,20 @@ public class BaseEvent extends AbstractImportableModelBase implements Event {
   @NotNull(message = "The time spec must be present.")
   private TimeSpec temporalData;
   
-  private String googleId;
+  @Schema(
+      title = "The external ID",
+      description = "The ID of this event in the external source.",
+      nullable = true
+  )
+  @Nullable
+  private String externalId;
+  
+  private Set<PhysicalAddress> locations = new HashSet<>(1);
+  
+  private Set<WebLocation> webLocations = new HashSet<>(1);
   
   @Override
   public Optional<String> getExternalId() {
-    return Optional.ofNullable(googleId);
-  }
-  
-  
-  @Override
-  public String monitoredData() {
-    return toString();
+    return Optional.ofNullable(externalId);
   }
 }

@@ -7,7 +7,6 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serial;
 import java.util.Optional;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -15,7 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.jackson.Jacksonized;
 
 import static de.paladinsinn.rollenspielcons.domain.api.integrations.ImportDefinition.EMPTY;
 
@@ -26,14 +24,13 @@ import static de.paladinsinn.rollenspielcons.domain.api.integrations.ImportDefin
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-10-11
  */
-@Jacksonized
 @SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor
 @Getter
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(callSuper = true)
-public class AbstractImportableModelBase extends AbstractModelBase implements IsImportable {
+public abstract class AbstractImportableModelBase extends AbstractModelBase implements IsImportable {
   @Serial
   private static final long serialVersionUID = 1L;
   

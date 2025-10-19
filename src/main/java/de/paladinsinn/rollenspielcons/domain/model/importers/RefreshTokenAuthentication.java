@@ -1,7 +1,6 @@
 package de.paladinsinn.rollenspielcons.domain.model.importers;
 
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,10 +18,12 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor
 @Getter
 @ToString
 public class RefreshTokenAuthentication implements
                                         de.paladinsinn.rollenspielcons.domain.api.integrations.RefreshTokenAuthentication {
   private String refreshToken;
+  
+  
 }

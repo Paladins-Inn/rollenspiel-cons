@@ -54,12 +54,14 @@ It is database-agnostic, integrates seamlessly with JPA entities, and simplifies
 === Option 1: Application-side encryption (JPA AttributeConverter)
 
 *Pros:*
+
 * Database-agnostic, works with any JPA-compatible database
 * Encryption logic is testable and maintainable in Java
 * No need for database extensions or custom SQL
 * Easy to migrate and backup encrypted data
 
 *Cons:*
+
 * Key management and rotation must be implemented in the application
 * Performance impact on application server
 * All developers must follow encryption conventions
@@ -67,11 +69,13 @@ It is database-agnostic, integrates seamlessly with JPA entities, and simplifies
 === Option 2: Database-side encryption (pgcrypto + Hibernate @ColumnTransformer)
 
 *Pros:*
+
 * Encryption and decryption handled by the database
 * Keys can be managed by the database administrator
 * Transparent for non-JPA clients
 
 *Cons:*
+
 * Requires PostgreSQL and pgcrypto extension
 * Hibernate mapping with @ColumnTransformer is more complex
 * Migration to other databases is difficult
