@@ -25,7 +25,6 @@ public interface EventMapper {
     @Mapping(target = "owner", source = "domain.owner")
     @Mapping(target = "name", expression = "java(toDisplayableName(domain))")
     @Mapping(target = "externalId", source = "externalId")
-    @Mapping(target = "website", source = "domain.website")
     @Mapping(target = "description", source = "domain.description")
     @Mapping(target = "labels", source = "domain.labels")
     JpaEvent toJpaEvent(Event domain);

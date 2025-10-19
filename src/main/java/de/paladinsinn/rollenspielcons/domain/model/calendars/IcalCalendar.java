@@ -8,7 +8,7 @@ import de.paladinsinn.rollenspielcons.domain.model.AbstractModelBase;
 import de.paladinsinn.rollenspielcons.domain.model.importers.NullAuthentication;
 import java.io.Serial;
 import java.time.OffsetDateTime;
-import java.time.Period;
+import java.time.Duration;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -43,7 +43,7 @@ public class IcalCalendar extends AbstractModelBase implements Calendar {
   
   private CalendarType syncType;
   private SyncSuccess lastSyncResult;
-  private Period syncPeriod;
+  private Duration syncPeriod;
   private OffsetDateTime lastSyncAttemptTime;
   private OffsetDateTime lastSyncTime;
 }

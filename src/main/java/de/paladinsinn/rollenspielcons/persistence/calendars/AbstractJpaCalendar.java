@@ -17,7 +17,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.time.OffsetDateTime;
-import java.time.Period;
+import java.time.Duration;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -80,7 +80,7 @@ public abstract class AbstractJpaCalendar extends AbstractBaseEntity implements 
   
   @Column(name = "SYNC_PERIOD", nullable = false)
   @NotNull(message = "The sync period must be set.")
-  private Period syncPeriod;
+  private Duration syncPeriod;
 
   @Column(name = "LAST_SYNC_TIME")
   @Nullable

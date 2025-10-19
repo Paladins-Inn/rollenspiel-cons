@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.time.Period;
+import java.time.Duration;
 import org.springframework.http.HttpHeaders;
 
 import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MAX_LENGTH;
@@ -108,5 +108,5 @@ public interface Calendar extends HasId, HasVersion, HasOwner, HasDisplayText, S
       examples = {"P1D", "P1W", "P1M"}
   )
   @NotNull
-  Period getSyncPeriod();
+  Duration getSyncPeriod();
 }

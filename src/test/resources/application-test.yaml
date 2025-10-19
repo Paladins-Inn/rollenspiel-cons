@@ -1,3 +1,7 @@
 what3words:
   api:
     key: changeme
+    
+spring:
+  liquibase:
+    enabled: false
