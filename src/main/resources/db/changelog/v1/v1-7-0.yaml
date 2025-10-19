@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: klenkes74-20251019-001
+      author: klenkes74
+      changes:
+        - addColumn:
+            schemaName: cons
+            tableName: CALENDARS
+            columns:
+              - column:
+                  name: USERNAME
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: PASSWORD
+                  type: varchar(800)
+                  constraints:
+                    nullable: true

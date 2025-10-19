@@ -2,6 +2,7 @@ package de.paladinsinn.rollenspielcons.persistence.mapper;
 
 
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 import java.security.SecureRandom;
 import java.util.Base64;
 import javax.crypto.Cipher;
@@ -16,7 +17,7 @@ import lombok.extern.slf4j.XSlf4j;
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-10-12
  */
-//@Converter
+@Converter
 @XSlf4j
 public class AesGcmStringCryptoConverter implements AttributeConverter<String, String> {
   // 256-bit Schlüssel (Base64, z. B. aus Vault/KMS laden)
