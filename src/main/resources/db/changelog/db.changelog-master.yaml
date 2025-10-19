@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - property:
+      name: db.changelog-Author
+      value: klenkes74
+
+  - include:
+      file: v1/v1.yaml
+      relativeToChangelogFile: true
+

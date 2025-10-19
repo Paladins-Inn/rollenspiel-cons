@@ -23,7 +23,7 @@ import static jakarta.persistence.InheritanceType.SINGLE_TABLE;
  * @since 2025-10-04
  */
 @Entity(name = "Person")
-@Table(name = "PERSONS")
+@Table(schema = "cons", name = "PERSONS")
 @Inheritance(strategy = SINGLE_TABLE)
 @DiscriminatorColumn(name = "PERSON_TYPE", length = 15)
 @SuperBuilder(toBuilder = true)
