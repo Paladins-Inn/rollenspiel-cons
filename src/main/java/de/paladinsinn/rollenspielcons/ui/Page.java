@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 @Builder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor
 @Getter
 @ToString()
 @EqualsAndHashCode(of = {"id"})

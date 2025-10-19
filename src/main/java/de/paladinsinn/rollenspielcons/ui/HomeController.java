@@ -1,6 +1,5 @@
 package de.paladinsinn.rollenspielcons.ui;
 
-import de.paladinsinn.rollenspielcons.services.GoogleCalendarService;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import jakarta.annotation.security.PermitAll;
@@ -25,8 +24,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 @XSlf4j
 public class HomeController extends AbstractBaseController {
-  
-  private final GoogleCalendarService googleCalendarService;
 
   @PermitAll
   @GetMapping
@@ -52,6 +49,6 @@ public class HomeController extends AbstractBaseController {
     LocalDateTime startDate = start != null ? start : LocalDateTime.now().minusMonths(1);
     LocalDateTime endDate = end != null ? end : LocalDateTime.now().plusMonths(3);
     
-    return log.exit(googleCalendarService.getEvents(startDate, endDate));
+    return log.exit(null);
   }
 }

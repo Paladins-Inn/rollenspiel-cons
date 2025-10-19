@@ -1,7 +1,7 @@
 package de.paladinsinn.rollenspielcons;
 
 
-import de.paladinsinn.rollenspielcons.domain.persistence.AbstractBaseEntity;
+import de.paladinsinn.rollenspielcons.persistence.AbstractBaseEntity;
 import lombok.ToString;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.boot.SpringApplication;

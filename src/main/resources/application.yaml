@@ -69,9 +69,14 @@ management:
     port: 8081
 
 google:
-  calendar:
-    service-account-key-path: file:./calendar-service-account.json
-    id: changeme
+  client-id: changeme
+  client-secret: changeme
+    
+caldav:
+  url: changeme
+  calendar: changeme
+  username: changeme
+  password: changeme
 
 snowflake:
   datacenter-id: 1

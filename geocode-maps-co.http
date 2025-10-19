@@ -1,0 +1,4 @@
+### Rollenspiel Cons Google Calendar
+GET https://geocode.maps.co/search?format=geocodejson&api_key={{geocode-maps-co}}&q=Burggasse 10, 35460 Staufenberg
+
+###

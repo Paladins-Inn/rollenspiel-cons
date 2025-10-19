@@ -18,6 +18,11 @@ include::partial$config.adoc[]
 | Programming Languages
 | The main programming language is Java.
 https://spring.io/projects/spring-boot[spring-boot] will be used as main framework.
+
+.2+| [[CT004,CT-004 CalDav]] CT-004
+| Nextcloud as Calendar Storage
+| The calendar data is stored in a https://nextcloud.com/[Nextcloud] instance via CalDAV.
+This way the system is independent of an external service.
 |===
 
 
