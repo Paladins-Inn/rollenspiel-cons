@@ -39,6 +39,9 @@ public class AesGcmStringCryptoConverter implements AttributeConverter<String, S
       c.init(Cipher.ENCRYPT_MODE, KEY_SPEC, new GCMParameterSpec(GCM_TAG_BITS, iv));
       byte[] ct = c.doFinal(attr.getBytes(java.nio.charset.StandardCharsets.UTF_8));
       // Format: base64(iv || ct)
+      if (ct.length > Integer.MAX_VALUE - iv.length) {
+        throw new IllegalStateException("Output array size would overflow (iv.length + ct.length).");
+      }
       byte[] out = new byte[iv.length + ct.length];
       System.arraycopy(iv, 0, out, 0, iv.length);
       System.arraycopy(ct, 0, out, iv.length, ct.length);
