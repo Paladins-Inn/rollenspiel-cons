@@ -134,8 +134,10 @@ public class EventImpl extends AbstractImportableModelBase implements Event {
   @Nullable
   private String externalId;
   
+  @Builder.Default
   private Set<PhysicalAddress> locations = new HashSet<>(1);
   
+  @Builder.Default
   private Set<WebLocation> webLocations = new HashSet<>(1);
   
   @Override

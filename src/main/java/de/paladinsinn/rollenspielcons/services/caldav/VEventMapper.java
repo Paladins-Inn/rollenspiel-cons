@@ -25,6 +25,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.Nullable;
 import net.fortuna.ical4j.model.Parameter;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.VEvent;
@@ -47,9 +48,6 @@ import static java.time.temporal.ChronoField.NANO_OF_SECOND;
     }
 )
 public interface VEventMapper {
-  
-  String DEFAULT_LANGUAGE = "de";
-  
   @Mapping(target = "id", ignore = true)
   @Mapping(target = "version", ignore = true)
   @Mapping(target = "owner", ignore = true)
@@ -156,7 +154,7 @@ public interface VEventMapper {
   default ZonedDateTime dtStartToZonedDateTime(DtStart<Temporal> dtStart, ZoneId fallbackZone) {
     return temporalToZonedDateTime(
         dtStart.getDate(),
-        dtStart.isUtc() ? ZoneOffset.UTC : ZoneId.systemDefault()
+        getTimeZone(dtStart, fallbackZone)
     );
   }
   
@@ -169,14 +167,8 @@ public interface VEventMapper {
     return tzid.map(Parameter::getValue).map(ZoneId::of).orElse(fallbackZone);
   }
   
-  default ZoneId getTimeZone(@NotNull DtEnd<Temporal> dtEnd, @NotNull ZoneId fallbackZone) {
-    return dtEnd.isUtc()
-        ? ZoneOffset.UTC
-        : dtEnd.getParameter("TZID").map(Parameter::getValue).map(ZoneId::of).orElse(fallbackZone);
-  }
-  
-  default ZonedDateTime dtEndToZonedDateTime(DtStart<Temporal> dtStart, DtEnd<java.time.temporal.Temporal> dtEnd, ZoneId fallbackZone) {
-    if (dtEnd.getDate() == null) {
+  default ZonedDateTime dtEndToZonedDateTime(DtStart<Temporal> dtStart, @Nullable DtEnd<Temporal> dtEnd, ZoneId fallbackZone) {
+    if (dtEnd == null || dtEnd.getDate() == null) {
       // return end of the start day
       return dtStartToZonedDateTime(dtStart, fallbackZone)
           .plusDays(1L)
@@ -185,8 +177,14 @@ public interface VEventMapper {
     
     return temporalToZonedDateTime(
         dtEnd.getDate(),
-        dtEnd.isUtc() ? ZoneOffset.UTC : ZoneId.systemDefault()
+        getTimeZone(dtEnd, fallbackZone)
     );
+  }
+  
+  default ZoneId getTimeZone(@NotNull DtEnd<Temporal> dtEnd, @NotNull ZoneId fallbackZone) {
+    return dtEnd.isUtc()
+           ? ZoneOffset.UTC
+           : dtEnd.getParameter("TZID").map(Parameter::getValue).map(ZoneId::of).orElse(fallbackZone);
   }
   
   default ZonedDateTime temporalToZonedDateTime(@NotNull Temporal d, @NotNull ZoneId zone) {
@@ -194,6 +192,9 @@ public interface VEventMapper {
   }
   
   default Instant temporalToInstant(final Temporal data, ZoneId zone) {
+    long e;
+    long nanos;
+    
     if (data instanceof LocalDate) {
       return Instant.from(((LocalDate) data).atStartOfDay().atZone(zone));
     }
