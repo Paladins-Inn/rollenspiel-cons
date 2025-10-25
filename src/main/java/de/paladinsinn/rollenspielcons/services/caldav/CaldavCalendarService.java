@@ -1,10 +1,9 @@
 package de.paladinsinn.rollenspielcons.services.caldav;
 
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
-import de.paladinsinn.rollenspielcons.domain.model.events.EventImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.TemporalConverter;
-import de.paladinsinn.rollenspielcons.services.api.CalendarException;
-import de.paladinsinn.rollenspielcons.services.api.CalendarService;
+import de.paladinsinn.rollenspielcons.domain.api.services.CalendarException;
+import de.paladinsinn.rollenspielcons.domain.api.services.CalendarService;
 import de.paladinsinn.rollenspielcons.services.geo.LocationService;
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.NotBlank;
