@@ -25,7 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/events2")
 @RequiredArgsConstructor
 @XSlf4j
-public class EventController extends AbstractBaseController {
+public class EventController {
   private final EventRepository eventRepository;
   
   // FIXME 2025-10-03 klenkes74: implement the API fully

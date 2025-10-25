@@ -23,7 +23,7 @@ import java.util.Map;
 @RequestMapping("/")
 @RequiredArgsConstructor
 @XSlf4j
-public class HomeController extends AbstractBaseController {
+public class HomeController {
 
   @PermitAll
   @GetMapping
@@ -32,7 +32,7 @@ public class HomeController extends AbstractBaseController {
   public String calendar(@AuthenticationPrincipal OAuth2User user, Model model) {
     log.entry(user, model);
     
-    return forwarder(user, model, "pages/calendar");
+    return "pages/calendar";
   }
   
   @PermitAll
