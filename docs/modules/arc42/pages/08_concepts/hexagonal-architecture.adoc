@@ -4,7 +4,7 @@ include::partial$config.adoc[]
 [NOTE]
 ====
 Hexagonal Architecture (also known as Ports and Adapters) was first introduced by Alistair Cockburn {hexagonal} and has since become a fundamental approach for creating maintainable, testable software systems.
-
+Kaiserpfalz EDV-Service uses it by default ({co002}).
 Our {adr-005} documents our decision to adopt this architecture pattern to enhance the modularity and adaptability of our application.
 ====
 

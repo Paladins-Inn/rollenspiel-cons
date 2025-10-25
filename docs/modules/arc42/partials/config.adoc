@@ -1,8 +1,3 @@
 // asciidoc settings for EN (English)
 // ==================================
 include::ROOT:partial$config.adoc[]
-include::partial$includes/02_architecture_constraints.adoc[]
-include::partial$includes/03_stakeholder.adoc[]
-include::partial$includes/09_architecture_decisions.adoc[]
-include::partial$includes/10_quality_requirements.adoc[]
-include::partial$includes/11_technical_risks.adoc[]

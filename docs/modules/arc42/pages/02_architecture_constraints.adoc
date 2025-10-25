@@ -34,6 +34,11 @@ This way the system is independent of an external service.
 .2+| [[CO001,CO-001 Paladins-Inn]] CO-001
 | Paladins-Inn
 | The software will be distributed by Paladins-Inn, the non-commercial RPG support branch of Kaiserpfalz EDV-Service.
+
+.2+| [[CO002,CO-002 Hexagonal Architecture]] CO-002
+| Hexagonal Architecture, {hexagonal}
+| The application shall follow a hexagonal (ports-and-adapters) architecture to strictly separate domain logic from infrastructure concerns.
+All inbound and outbound interactions must go through well-defined ports and adapters, ensuring the core domain has no direct dependencies on frameworks or external services.
 |===
 
 
