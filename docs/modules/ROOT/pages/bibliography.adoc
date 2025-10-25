@@ -22,6 +22,9 @@ The bibliography is shared between all components of the whole {rpg-cons} projec
 | [[cleancode,CLEANCODE]]CLEANCODE
 | **S. L. Ralph Westphal**, 'Clean Code Developer'. [Online]. Available: https://clean-code-developer.com.
 
+| [[common-mark,COMMON-MARK]]COMMON-MARK
+| [Online]. CommonMark specification. Available: https://commonmark.org
+
 | [[vernon-ddd-hexagonal,DDD-HEXAGONAL]]DDD-HEXAGONAL
 | **Vernon, Vaughn**, 'DDD and Hexagonal Architecture'. 17. Januar 2013, [Online]. Available: https://vaughnvernon.co/?p=879
 
@@ -31,8 +34,17 @@ The bibliography is shared between all components of the whole {rpg-cons} projec
 | [[richtlinie-barrierefreiheit,EU-BARIEREFREIHEIT]]EU-BARRIEREFREIHEIT
 | 'Richtlinie (EU) 2016/2102 des Europäischen Parlaments und des Rates vom 26. Oktober 2016 über den barrierefreien Zugang zu den Websites und mobilen Anwendungen öffentlicher Stellen'. 2016, [Online]. Available: https://digital-strategy.ec.europa.eu/de/policies/web-accessibility-directive-standards-and-harmonisation.
 
+| [[flexmark,FLEXMARK-JAVA]]FLEXMARK-JAVA
+| [Online]. flexmark-java — Java Markdown processor (CommonMark). Available: https://github.com/vsch/flexmark-java
+
 | [[cockburn-hexagonal,HEXAGONAL]]HEXAGONAL
 | **Cockburn, Alistair**, 'Hexagonal Architecture'. 2005, [Online]. Available: https://alistair.cockburn.us/hexagonal-architecture/
+
+| [[jte,JTE]]JTE
+| [Online]. JTE template engine documentation. Available: https://jte.gg
+
+| [[owasp-java-html,OWASP-JAVA-HTML]]OWASP-JAVA-HTML
+| [Online]. Java HTML Sanitizer (OWASP). Available: https://github.com/OWASP/java-html-sanitizer
 
 | [[graca-ports-adapters,PORTS-ADAPTERS]]PORTS-ADAPTERS
 | **Graça, Herberto**, 'Ports & Adapters Architecture'. 14. September 2017, [Online]. Available: https://herbertograca.com/2017/09/14/ports-adapters-architecture/
@@ -53,5 +65,3 @@ The bibliography is shared between all components of the whole {rpg-cons} projec
 | 'Attribute-based access control', Wikipedia, [Online]. Available: https://en.wikipedia.org/wiki/Attribute-based_access_control
 
 |===
-
-<<<

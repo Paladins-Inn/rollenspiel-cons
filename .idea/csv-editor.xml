@@ -6,18 +6,11 @@
         <entry key="/">
           <value>
             <Attribute>
-              <option name="separator" value="," />
+              <option name="separator" value=":" />
             </Attribute>
           </value>
         </entry>
-        <entry key="/dumpDataPreview">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/src/main/resources/db/changelog/v1/calendars.csv">
+        <entry key="/src/main/resources/db/changelog/v1/initial-calendars.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

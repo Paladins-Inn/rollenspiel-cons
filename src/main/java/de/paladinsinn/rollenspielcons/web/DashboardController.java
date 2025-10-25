@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.ui;
+package de.paladinsinn.rollenspielcons.web;
 
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.security.access.prepost.PreAuthorize;

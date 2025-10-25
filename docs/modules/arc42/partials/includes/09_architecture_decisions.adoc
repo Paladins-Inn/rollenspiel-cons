@@ -8,3 +8,4 @@
 :adr-008: xref:rollenspiel-cons:arc42:09_architecture_decisions/008_api_versioning.adoc[&uparrow;ADR-008]
 :adr-009: xref:rollenspiel-cons:arc42:09_architecture_decisions/009_caldav-library.adoc[&uparrow;ADR-009]
 :adr-010: xref:rollenspiel-cons:arc42:09_architecture_decisions/010_encryption-for-database-fields.adoc[&uparrow;ADR-010]
+:adr-011: xref:rollenspiel-cons:arc42:09_architecture_decisions/011_markdown.adoc[&uparrow;ADR-011]
