@@ -102,6 +102,17 @@ jobs:
         git tag -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
         git push origin -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
     
+    - name: Create `./.properties-local`
+      run: |
+        cat > .properties-local <<'EOF'
+        spring.datasource.url=jdbc:h2:mem:testdb
+        spring.datasource.driverClassName=org.h2.Driver
+        spring.datasource.username=sa
+        spring.datasource.password=sa
+        what3words.api.key=${{ secrets.WHAT3WORDS_API_KEY }}
+        geocoding.api.key=${{ secrets.GEOCODING_API_KEY }}
+        EOF
+      shell: bash
     
     - name: Set an AES256 secret key for testing
       run: |
