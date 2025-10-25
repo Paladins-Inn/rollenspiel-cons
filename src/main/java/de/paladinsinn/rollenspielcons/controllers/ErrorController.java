@@ -1,5 +1,6 @@
-package de.paladinsinn.rollenspielcons.web;
+package de.paladinsinn.rollenspielcons.controllers;
 
+import de.paladinsinn.rollenspielcons.web.Page;
 import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,8 +30,8 @@ public class ErrorController extends AbstractBaseController implements org.sprin
     Object requestUri = request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI);
   
     Page page = Page.builder()
-                       .user(user)
-                       .build();
+                    .user(user)
+                    .build();
   
     if (status != null) {
       int statusCode = Integer.parseInt(status.toString());

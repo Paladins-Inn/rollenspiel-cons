@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.web;
+package de.paladinsinn.rollenspielcons.controllers;
 
 import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.http.HttpServletRequest;
