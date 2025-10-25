@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.services.api;
+package de.paladinsinn.rollenspielcons.domain.api.services;
 
 
 import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;

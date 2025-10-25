@@ -15,7 +15,7 @@ import de.paladinsinn.rollenspielcons.persistence.mapper.OwnerMapperImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.PersonMapperImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.TemporalConverter;
 import de.paladinsinn.rollenspielcons.persistence.mapper.TimeSpecMapperImpl;
-import de.paladinsinn.rollenspielcons.services.api.CalendarException;
+import de.paladinsinn.rollenspielcons.domain.api.services.CalendarException;
 import de.paladinsinn.rollenspielcons.services.geo.GeoCoordinateMapperImpl;
 import de.paladinsinn.rollenspielcons.services.geo.GeocodeMapsCoClient;
 import de.paladinsinn.rollenspielcons.services.geo.GeocodingService;
