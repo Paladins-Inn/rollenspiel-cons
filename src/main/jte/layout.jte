@@ -1,5 +1,5 @@
 @import gg.jte.Content
-@import de.paladinsinn.rollenspielcons.ui.Page
+@import de.paladinsinn.rollenspielcons.web.Page
 
 @param Page page
 @param String title

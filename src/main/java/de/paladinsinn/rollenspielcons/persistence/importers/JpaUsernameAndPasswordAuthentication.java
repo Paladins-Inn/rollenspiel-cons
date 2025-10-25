@@ -10,10 +10,10 @@ import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.http.HttpHeaders;
 
@@ -25,7 +25,7 @@ import org.springframework.http.HttpHeaders;
  * @since 2025-10-19
  */
 @Embeddable
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

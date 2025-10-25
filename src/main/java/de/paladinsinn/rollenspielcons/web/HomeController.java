@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.ui;
+package de.paladinsinn.rollenspielcons.web;
 
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;

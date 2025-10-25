@@ -15,3 +15,7 @@
 :baeldung01: xref:rollenspiel-cons:ROOT:bibliography.adocs#baeldung01[&uparrow;BAELDUNG01]
 :w3c01: xref:rollenspiel-cons:ROOT:bibliography.adoc#w3c01[&uparrow;W3C Accessibility Guidelines]
 :wiki01: xref:rollenspiel-cons:ROOT:bibliography.adoc#wiki01[&uparrow;WIKI01]
+:flexmark: xref:rollenspiel-cons:ROOT:bibliography.adoc#flexmark[&uparrow;FLEXMARK-JAVA]
+:owasp-java-html: xref:rollenspiel-cons:ROOT:bibliography.adoc#owasp-java-html[&uparrow;OWASP-JAVA-HTML]
+:jte: xref:rollenspiel-cons:ROOT:bibliography.adoc#jte[&uparrow;JTE]
+:common-mark: xref:rollenspiel-cons:ROOT:bibliography.adoc#common-mark[&uparrow;COMMON-MARK]

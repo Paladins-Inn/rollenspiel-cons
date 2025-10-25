@@ -1,4 +1,4 @@
-package de.paladinsinn.rollenspielcons.ui;
+package de.paladinsinn.rollenspielcons.web;
 
 
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
