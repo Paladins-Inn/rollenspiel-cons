@@ -77,6 +77,10 @@ jobs:
     - name: Set project.version in pom.xml with versions-maven-plugin
       run: |
         mvn versions:set -U --batch-mode --no-transfer-progress -DnewVersion=${POM_VERSION} -DgenerateBackupPoms=false
+        
+    - name: Set an AES256 secret key for testing
+      run: |
+        echo "APP_AES256_KEY=$(openssl rand -base64 32)" >> $GITHUB_ENV
     
     - name: Compile stuff
       id: build-java

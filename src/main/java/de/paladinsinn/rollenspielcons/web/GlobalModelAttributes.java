@@ -1,6 +1,5 @@
 package de.paladinsinn.rollenspielcons.web;
 
-import de.paladinsinn.rollenspielcons.services.markdown.MarkdownService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
