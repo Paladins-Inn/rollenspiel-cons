@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/dashboard")
 @XSlf4j
-public class DashboardController extends AbstractBaseController {
+public class DashboardController {
   
   @PreAuthorize("isAuthenticated()")
   @GetMapping
   public String dashboard(@AuthenticationPrincipal OAuth2User user, Model model) {
     log.entry(user, model);
     
-    return forwarder(user, model, "pages/dashboard");
+    return "pages/dashboard";
   }
 }

@@ -4,6 +4,8 @@ import de.paladinsinn.rollenspielcons.services.markdown.MarkdownService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.XSlf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -26,6 +28,17 @@ public class GlobalModelAttributes {
   public String contextPath() {
     log.entry();
     return log.exit(contextPath);
+  }
+  
+  @ModelAttribute("page")
+  public Page page(@AuthenticationPrincipal OAuth2User user) {
+    log.entry(user);
+    
+    Page page = Page.builder()
+                    .user(user)
+                    .build();
+    
+    return log.exit(page);
   }
 }
 

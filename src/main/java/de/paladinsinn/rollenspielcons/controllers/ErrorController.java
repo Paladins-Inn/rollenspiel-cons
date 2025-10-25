@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @XSlf4j
-public class ErrorController extends AbstractBaseController implements org.springframework.boot.web.servlet.error.ErrorController {
+public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
   
   @PermitAll
   @RequestMapping("/error")
@@ -40,15 +40,15 @@ public class ErrorController extends AbstractBaseController implements org.sprin
   
       // Spezifische Templates für verschiedene HTTP-Status-Codes
       if (statusCode == HttpStatus.NOT_FOUND.value()) {
-          return forwarder(null, model, "pages/error/404");
+          return "pages/error/404";
       } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-          return forwarder(null, model, "pages/error/403");
+          return "pages/error/403";
       } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-          return forwarder(null, model, "pages/error/500");
+          return "pages/error/500";
       }
     }
     
-    return forwarder(null, model,"pages/error/general");
+    return "pages/error/general";
   }
   
   @PermitAll
@@ -70,6 +70,6 @@ public class ErrorController extends AbstractBaseController implements org.sprin
       model.addAttribute("logoutMessage", "Sie wurden erfolgreich abgemeldet.");
   }
     
-    return forwarder(null, model, "pages/login");
+    return "pages/login";
   }
 }
