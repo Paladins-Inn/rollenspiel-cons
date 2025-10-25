@@ -5,7 +5,6 @@ import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.XSlf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @XSlf4j
 public class ErrorController extends AbstractBaseController implements org.springframework.boot.web.servlet.error.ErrorController {
-  @Value("${server.servlet.context-path:}")
-  private String contextPath;
   
   @PermitAll
   @RequestMapping("/error")
@@ -40,7 +37,6 @@ public class ErrorController extends AbstractBaseController implements org.sprin
       model.addAttribute("errorMessage", errorMessage != null ? errorMessage.toString() : "Unbekannter Fehler");
       model.addAttribute("requestUri", requestUri != null ? requestUri.toString() : "");
       model.addAttribute("page", page);
-      model.addAttribute("contextPath", contextPath);
   
       // Spezifische Templates für verschiedene HTTP-Status-Codes
       if (statusCode == HttpStatus.NOT_FOUND.value()) {

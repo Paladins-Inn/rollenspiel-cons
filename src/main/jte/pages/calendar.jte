@@ -1,7 +1,7 @@
 @import de.paladinsinn.rollenspielcons.web.Page
 
 @param Page page
-@param String contextPath
+@param String contextPath = ""
 
 
 @template.layout(
