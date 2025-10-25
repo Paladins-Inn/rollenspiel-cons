@@ -1,9 +1,9 @@
 @import de.paladinsinn.rollenspielcons.web.Page
 @param Page page
-@param String contextPath
 @param int statusCode
 @param String errorMessage
 @param String requestUri
+@param String contextPath = ""
 
 @template.layout(
     page = page,

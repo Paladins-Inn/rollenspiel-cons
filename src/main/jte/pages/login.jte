@@ -1,10 +1,10 @@
 @import de.paladinsinn.rollenspielcons.web.Page
 @param Page page
-@param String contextPath
 @param boolean loginError = false
 @param String errorMessage = ""
 @param boolean logoutSuccess = false
 @param String logoutMessage = ""
+@param String contextPath = ""
 
 @template.layout(
     page = page,
