@@ -62,7 +62,7 @@ jobs:
         spring.datasource.driverClassName=org.h2.Driver
         spring.datasource.username=sa
         spring.datasource.password=sa
-        app.aes256.key=${{ env.APP_AES256_KEY }}
+        app.aes256.key=${APP_AES256_KEY}
         what3words.api.key=${{ secrets.WHAT3WORDS_API_KEY }}
         geocoding.api.key=${{ secrets.GEOCODING_API_KEY }}
         EOF
