@@ -5,7 +5,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-09-30
  */
-@XSlf4j
+@Slf4j
 public class TimeSpecTest {
   private static final long DURATION_IN_SECONDS = 3600*6 - 1;
   private static final Duration DURATION = Duration.ofSeconds(DURATION_IN_SECONDS);
@@ -37,38 +37,38 @@ public class TimeSpecTest {
   
   @Test
   public void shouldReturnTheCorrectStartWhenADurationIsSet() {
-    log.entry(SUT, LOCAL_START);
+    log.trace("enter - {}", new Object[] {SUT, LOCAL_START});
 
     assertEquals(LOCAL_START, SUT.getStart());
     
-    log.exit();
+    log.trace("exit - ");
   }
   
   @Test
   public void shouldReturnTheCorrectEndWhenADurationIsSet() {
-    log.entry(SUT, LOCAL_END);
+    log.trace("enter - {}", new Object[] {SUT, LOCAL_END});
     
     assertEquals(LOCAL_END, SUT.getEnd());
     
-    log.exit();
+    log.trace("exit - ");
   }
   
   
   @Test
   public void shouldReturnTheCorrectStartWhenNoDurationIsSet() {
-    log.entry(SUT_WITHOUT_DURATION, LOCAL_START);
+    log.trace("enter - {}", new Object[] {SUT_WITHOUT_DURATION, LOCAL_START});
     
     assertEquals(LOCAL_START, SUT_WITHOUT_DURATION.getStart());
     
-    log.exit();
+    log.trace("exit - ");
   }
   
   @Test
   public void shouldReturnTheCorrectEndWhenNoDurationIsSet() {
-    log.entry(SUT_WITHOUT_DURATION, LOCAL_END_WITHOUT_DURATION);
+    log.trace("enter - {}", new Object[] {SUT_WITHOUT_DURATION, LOCAL_END_WITHOUT_DURATION});
     
     assertEquals(LOCAL_END_WITHOUT_DURATION, SUT_WITHOUT_DURATION.getEnd());
     
-    log.exit();
+    log.trace("exit - ");
   }
 }

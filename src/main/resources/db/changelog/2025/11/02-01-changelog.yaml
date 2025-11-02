@@ -1,0 +1,211 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1762064835204-1
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: event_labels_pkey
+                  name: event_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: event_labels_pkey
+                  name: label
+                  type: VARCHAR(255)
+            tableName: event_labels
+            schemaName: cons
+  - changeSet:
+      id: 1762064835204-2
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: duration
+                  type: NUMBER(21)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: version
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: events_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: start
+                  type: timestamp
+              - column:
+                  constraints:
+                    nullable: false
+                  name: website_id
+                  type: BIGINT
+              - column:
+                  name: external_id
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: owner
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(250)
+              - column:
+                  name: uri
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: description
+                  type: VARCHAR(4000)
+            tableName: events
+            schemaName: cons
+  - changeSet:
+      id: 1762064835204-3
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: latitude
+                  type: DOUBLE precision
+              - column:
+                  constraints:
+                    nullable: false
+                  name: longitude
+                  type: DOUBLE precision
+              - column:
+                  constraints:
+                    nullable: false
+                  name: version
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: event_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: physicaladdresses_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: owner
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: three_words
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: address
+                  type: VARCHAR(250)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(250)
+              - column:
+                  name: uri
+                  type: VARCHAR(250)
+            tableName: physicaladdresses
+            schemaName: cons
+  - changeSet:
+      id: 1762064835204-4
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: version
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: event_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: weblocations_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: owner
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(250)
+              - column:
+                  name: uri
+                  type: VARCHAR(250)
+            tableName: weblocations
+            schemaName: cons
+  - changeSet:
+      id: 1762064835204-5
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addPrimaryKey:
+            columnNames: id
+            constraintName: calendars_pkey
+            tableName: calendars
+            schemaName: cons
+  - changeSet:
+      id: 1762064835204-6
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addPrimaryKey:
+            columnNames: id
+            constraintName: persons_pkey
+            tableName: persons
+            schemaName: cons
+  - changeSet:
+      id: 1762064835204-7
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: website_id
+            indexName: events_website_id_key
+            tableName: events
+            unique: true
+            schemaName: cons
+

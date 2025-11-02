@@ -4,6 +4,4 @@ databaseChangeLog:
       value: klenkes74
 
   - include:
-      file: v1/v1.yaml
-      relativeToChangelogFile: true
-
+      file: db/changelog/2025.11/02-01-changelog.yaml

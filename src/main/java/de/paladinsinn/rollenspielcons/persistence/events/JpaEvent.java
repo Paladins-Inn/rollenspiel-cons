@@ -72,6 +72,7 @@ public class JpaEvent extends AbstractBaseEntity implements Event {
   
   @OneToMany(
       targetEntity = JpaPhysicalAddress.class,
+      mappedBy = "event",
       orphanRemoval = true,
       fetch = EAGER,
       cascade = {PERSIST, MERGE, DETACH, REFRESH, REMOVE}
@@ -83,6 +84,7 @@ public class JpaEvent extends AbstractBaseEntity implements Event {
   
   @OneToMany(
       targetEntity = JpaWebLocation.class,
+      mappedBy = "event",
       orphanRemoval = true,
       fetch = EAGER,
       cascade = {PERSIST, MERGE, DETACH, REFRESH, REMOVE}

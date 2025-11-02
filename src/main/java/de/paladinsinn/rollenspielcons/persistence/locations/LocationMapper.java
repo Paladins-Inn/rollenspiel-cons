@@ -1,12 +1,12 @@
-package de.paladinsinn.rollenspielcons.persistence.mapper;
+package de.paladinsinn.rollenspielcons.persistence.locations;
 
 import de.paladinsinn.rollenspielcons.domain.api.locations.PhysicalAddress;
 import de.paladinsinn.rollenspielcons.domain.api.locations.WebLocation;
 import de.paladinsinn.rollenspielcons.domain.model.locations.PhysicalAddressImpl;
 import de.paladinsinn.rollenspielcons.domain.model.locations.WebLocationImpl;
 import de.paladinsinn.rollenspielcons.persistence.events.JpaEvent;
-import de.paladinsinn.rollenspielcons.persistence.locations.JpaPhysicalAddress;
-import de.paladinsinn.rollenspielcons.persistence.locations.JpaWebLocation;
+import de.paladinsinn.rollenspielcons.persistence.mapper.DisplayTextMapper;
+import de.paladinsinn.rollenspielcons.persistence.mapper.OwnerMapper;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

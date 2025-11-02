@@ -5,24 +5,24 @@ import de.paladinsinn.rollenspielcons.config.HateoasConfig;
 import de.paladinsinn.rollenspielcons.config.LocationConfig;
 import de.paladinsinn.rollenspielcons.config.WebClientConfig;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
+import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarException;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import de.paladinsinn.rollenspielcons.domain.model.calendars.IcalCalendar;
 import de.paladinsinn.rollenspielcons.domain.model.importers.NullAuthentication;
+import de.paladinsinn.rollenspielcons.persistence.locations.LocationMapperImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.DisplayTextMapperImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.ExternalIdMapperImpl;
-import de.paladinsinn.rollenspielcons.persistence.mapper.LocationMapperImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.OwnerMapperImpl;
-import de.paladinsinn.rollenspielcons.persistence.mapper.PersonMapperImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.TemporalConverter;
 import de.paladinsinn.rollenspielcons.persistence.mapper.TimeSpecMapperImpl;
-import de.paladinsinn.rollenspielcons.domain.api.services.CalendarException;
+import de.paladinsinn.rollenspielcons.persistence.persons.PersonMapperImpl;
 import de.paladinsinn.rollenspielcons.services.geo.GeoCoordinateMapperImpl;
 import de.paladinsinn.rollenspielcons.services.geo.GeocodeMapsCoClient;
 import de.paladinsinn.rollenspielcons.services.geo.GeocodingService;
 import de.paladinsinn.rollenspielcons.services.geo.LocationService;
 import java.time.Duration;
 import java.util.List;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +65,7 @@ import org.springframework.context.annotation.Profile;
         HibernateJpaAutoConfiguration.class
     }
 )
-@XSlf4j
+@Slf4j
 public class CaldavCalendarServiceTest {
   private static final String CALENDAR_URL = "https://calendar.google.com/calendar/ical/88fb7669d9909b5ae6a8ac88c09526c3c09ff0ac32e840363094c2e758e4dd12@group.calendar.google.com/public/basic.ics";
   
@@ -83,12 +83,12 @@ public class CaldavCalendarServiceTest {
   
   @Test
   public void CalendarShouldBeDownloadedFromGoogleWhenSyncIsStarted() throws CalendarException {
-    log.entry();
+    log.trace("enter - ");
     
     List<Event> result = sut.getEvents(calender);
     
     log.info("Result: {}", result);
     
-    log.exit();
+    log.trace("exit - ");
   }
 }

@@ -4,7 +4,7 @@ import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -22,7 +22,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
-@XSlf4j
+@Slf4j
 public class HomeController {
 
   @PermitAll
@@ -30,8 +30,9 @@ public class HomeController {
   @Counted(value = "calendar_count", description = "Total calls to the calender display page")
   @Timed(value = "calendar_duration", description = "Time of calls to the calender display page", percentiles = {0.5, 0.95, 0.99})
   public String calendar(@AuthenticationPrincipal OAuth2User user, Model model) {
-    log.entry(user, model);
+    log.trace("enter - {}", new Object[] {user, model});
     
+    log.trace("exit - pages/calendar");
     return "pages/calendar";
   }
   
@@ -44,11 +45,12 @@ public class HomeController {
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end
     ) {
-    log.entry(start, end);
+    log.trace("enter - {}", new Object[] {start, end});
 
     LocalDateTime startDate = start != null ? start : LocalDateTime.now().minusMonths(1);
     LocalDateTime endDate = end != null ? end : LocalDateTime.now().plusMonths(3);
     
-    return log.exit(null);
+    log.trace("exit - null");
+    return null;
   }
 }

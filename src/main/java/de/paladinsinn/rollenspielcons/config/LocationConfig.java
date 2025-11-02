@@ -4,7 +4,7 @@ package de.paladinsinn.rollenspielcons.config;
 import com.what3words.javawrapper.What3WordsV3;
 import jakarta.annotation.PostConstruct;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +18,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @NoArgsConstructor
-@XSlf4j
+@Slf4j
 public class LocationConfig {
   @Value("${what3words.api.key:changeme}")
   private String what3wordsApiKey;
 
   @PostConstruct
   public void checkWhat3WordsApiKey() {
-    log.entry(what3wordsApiKey);
+    log.trace("enter -  {}", what3wordsApiKey);
     
     if (what3wordsApiKey == null || what3wordsApiKey.isBlank()) {
       log.warn("No What3Words API key configured! Please set the 'what3words.api.key' property.");
@@ -37,7 +37,9 @@ public class LocationConfig {
   
   @Bean
   public What3WordsV3 what3words() {
-    return log.exit(new What3WordsV3(what3wordsApiKey));
+    log.trace("exit - {}", new What3WordsV3(what3wordsApiKey));
+
+    return new What3WordsV3(what3wordsApiKey);
   }
   
 
@@ -45,10 +47,10 @@ public class LocationConfig {
   @SuppressWarnings("DeprecatedIsStillUsed")
   @Deprecated
   LocationConfig(final String what3wordsApiKey) {
-    log.entry(what3wordsApiKey);
+    log.trace("enter -  {}", what3wordsApiKey);
     
     this.what3wordsApiKey = what3wordsApiKey;
     
-    log.exit(what3wordsApiKey);
+    log.trace("exit - {}", new Object[] {what3wordsApiKey});
   }
 }

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
  */
 @Service
 @RequiredArgsConstructor
-@XSlf4j
+@Slf4j
 public class GeocodingService {
   @Value("${geocoding.api.key:}")
   String apiKey;
@@ -40,13 +40,13 @@ public class GeocodingService {
   
   @PostConstruct
   public void init() {
-    log.entry(rateLimit);
+    log.trace("enter -  {}", rateLimit);
 
     worker = new Thread(this::threadWorker, "geocode-queue-worker");
     worker.setDaemon(true);
     worker.start();
     
-    log.exit(worker);
+    log.trace("exit - {}", new Object[] {worker});
   }
   
   @PreDestroy
@@ -62,7 +62,7 @@ public class GeocodingService {
   }
   
   public Set<GeoCoordinates> search(final String address) {
-    log.entry(address);
+    log.trace("enter -  {}", address);
     
     Set<GeoCoordinates> result = Set.of();
     int retry = 1;
@@ -85,18 +85,22 @@ public class GeocodingService {
         }
       }
     } while ((result == null || result.isEmpty()) && retry++ <= 3);
-
-    return log.exit(result);
+    
+    log.trace("exit - {}", result);
+    return result;
   }
   
   private Mono<Set<GeocodeMapsResult>> callClient(final String q) {
-    log.entry(q);
+    log.trace("enter -  {}", q);
     
     CompletableFuture<Set<GeocodeMapsResult>> future = new CompletableFuture<>();
     queue.offer(new Request(q, future));
     
-    return log.exit(Mono.fromFuture(future));
-  }
+    var result = Mono.fromFuture(future);
+
+    log.trace("exit - {}", result);
+    return result;
+ }
   
   private void threadWorker() {
     final long sleepMillis = rateLimit * 1000L;
@@ -108,7 +112,7 @@ public class GeocodingService {
       try {
         Request r = queue.take();
         counter++;
-        log.entry(counter, r.address);
+        log.trace("enter -  {}, {}", counter, r.address);
         
         try {
           Set<GeocodeMapsResult> results = client.search(r.address, apiKey);
@@ -118,12 +122,12 @@ public class GeocodingService {
         } catch (Exception e) {
           log.warn("Error while processing geocoding request. address="
                    + r.address + ", counter=" + counter, e);
-          log.throwing(e);
           r.future.completeExceptionally(e);
         }
         
         // Enforce rate limit
         try {
+          //noinspection BusyWait
           Thread.sleep(sleepMillis);
         } catch (InterruptedException e) {
           Thread.currentThread().interrupt();

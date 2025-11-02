@@ -1,7 +1,6 @@
-package de.paladinsinn.rollenspielcons.domain.api.services;
+package de.paladinsinn.rollenspielcons.domain.api.calendars;
 
 
-import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;

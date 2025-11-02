@@ -4,7 +4,7 @@ package de.paladinsinn.rollenspielcons.config;
 import cn.ipokerface.snowflake.SnowflakeIdGenerator;
 import jakarta.annotation.PostConstruct;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @NoArgsConstructor
-@XSlf4j
+@Slf4j
 public class SnowflakeIdGeneratorConfig {
   private static final long LOWER_BOUND_FOR_DATACENTER_AND_WORKER_ID = 0L;
   private static final long UPPER_BOUND_FOR_DATACENTER_AND_WORKER_ID = 31L;
@@ -29,7 +29,12 @@ public class SnowflakeIdGeneratorConfig {
    */
   @Bean
   public SnowflakeIdGenerator generator() {
-    return log.exit(new SnowflakeIdGenerator(datacenterId, machineId));
+    log.trace("enter - ");
+    
+    var result = new SnowflakeIdGenerator(datacenterId, machineId);
+
+    log.trace("exit -  {}", result);
+    return result;
   }
   
   @Value("${snowflake.datacenter-id:0}")
@@ -41,25 +46,25 @@ public class SnowflakeIdGeneratorConfig {
   
   //just for testing
   SnowflakeIdGeneratorConfig(final long datacenterId, final long machineId) {
-    log.entry(datacenterId, machineId);
+    log.trace("enter -  {}, {}", datacenterId, machineId);
     
     this.datacenterId = datacenterId;
     this.machineId = machineId;
     
     init();
     
-    log.exit();
+    log.trace("Exiting method");
   }
   
   
   @PostConstruct
   public void init() {
-    log.entry();
+    log.trace("enter - ");
     
     validateDatacenterId(datacenterId);
     validateMachineId(machineId);
     
-    log.exit();
+    log.trace("Exiting method");
   }
   
   private static void validateDatacenterId(final long datacenterId) {

@@ -4,7 +4,7 @@ import de.paladinsinn.rollenspielcons.web.Page;
 import jakarta.annotation.security.PermitAll;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@XSlf4j
+@Slf4j
 public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
   
   @PermitAll
   @RequestMapping("/error")
   public String handleError(@AuthenticationPrincipal OAuth2User user, HttpServletRequest request, Model model) {
-    log.entry(user, request);
+    log.trace("enter - {}", new Object[] {user, request});
     
     Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
     Object errorMessage = request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
@@ -58,7 +58,7 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
       @RequestParam(value = "logout", required = false) String logout,
       Model model
   ) {
-    log.entry(error, logout);
+    log.trace("enter - {}", new Object[] {error, logout});
     
     if (error != null) {
       model.addAttribute("loginError", true);

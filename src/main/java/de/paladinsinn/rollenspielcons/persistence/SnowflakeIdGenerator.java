@@ -2,7 +2,7 @@ package de.paladinsinn.rollenspielcons.persistence;
 
 
 import de.paladinsinn.rollenspielcons.config.SnowflakeIdGeneratorConfig;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @since 2025-10-01
  */
 @Component
-@XSlf4j
+@Slf4j
 public class SnowflakeIdGenerator implements ApplicationContextAware {
   /**
    * The context to be used for injecting the id generator.
@@ -26,11 +26,11 @@ public class SnowflakeIdGenerator implements ApplicationContextAware {
   @Override
   public void setApplicationContext(final ApplicationContext context)
       throws BeansException {
-    log.entry(context);
+    log.trace("enter -  {}", context);
     
     generator = context.getBean(SnowflakeIdGeneratorConfig.class).generator();
     
-    log.exit();
+    log.trace("Exiting method");
   }
   
   /**
@@ -39,8 +39,11 @@ public class SnowflakeIdGenerator implements ApplicationContextAware {
    * @return the new id.
    */
   public static long generateId() {
-    log.entry();
+    log.trace("enter - ");
     
-    return log.exit(generator.nextId());
+    var result = generator.nextId();
+
+    log.trace("exit - {}", result);
+    return result;
   }
 }

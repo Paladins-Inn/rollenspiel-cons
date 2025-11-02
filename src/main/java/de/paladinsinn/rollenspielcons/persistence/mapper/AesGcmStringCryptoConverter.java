@@ -1,6 +1,7 @@
 package de.paladinsinn.rollenspielcons.persistence.mapper;
 
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 import java.security.SecureRandom;
@@ -8,7 +9,8 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 
 
 /**
@@ -18,16 +20,26 @@ import lombok.extern.slf4j.XSlf4j;
  * @since 2025-10-12
  */
 @Converter
-@XSlf4j
+@Slf4j
 public class AesGcmStringCryptoConverter implements AttributeConverter<String, String> {
-  // 256-bit Schlüssel (Base64, z. B. aus Vault/KMS laden)
-  private static final byte[] KEY = Base64
-      .getDecoder()
-      .decode(System.getenv("APP_AES256_KEY")); // nie hardcodieren!
-  private static final SecretKeySpec KEY_SPEC = new SecretKeySpec(KEY, "AES");
   private static final SecureRandom RNG = new SecureRandom();
   private static final int GCM_TAG_BITS = 128;
   private static final int IV_LEN = 12;
+  
+  @Value("${aes256.key:}")
+  private String aes256Key;
+  private SecretKeySpec secretKey;
+  
+  @PostConstruct
+  public void init() {
+    if (aes256Key == null || aes256Key.isBlank()) {
+      log.warn("No AES-256 key configured! Encryption/Decryption will not work!");
+    } else {
+      byte[] key = Base64.getDecoder().decode(aes256Key);
+      secretKey = new SecretKeySpec(key, "AES");
+      log.info("AES-256 key configured.");
+    }
+  }
   
   @Override
   public String convertToDatabaseColumn(String attr) {
@@ -37,7 +49,7 @@ public class AesGcmStringCryptoConverter implements AttributeConverter<String, S
       byte[] iv = new byte[IV_LEN];
       RNG.nextBytes(iv);
       Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
-      c.init(Cipher.ENCRYPT_MODE, KEY_SPEC, new GCMParameterSpec(GCM_TAG_BITS, iv));
+      c.init(Cipher.ENCRYPT_MODE, secretKey, new GCMParameterSpec(GCM_TAG_BITS, iv));
       byte[] ct = c.doFinal(attr.getBytes(java.nio.charset.StandardCharsets.UTF_8));
       // Format: base64(iv || ct)
       if (ct.length > Integer.MAX_VALUE - iv.length) {
@@ -52,6 +64,11 @@ public class AesGcmStringCryptoConverter implements AttributeConverter<String, S
     }
   }
   
+  private SecretKeySpec getKeySpec() {
+    byte[] key = Base64.getDecoder().decode(aes256Key);
+    return new SecretKeySpec(key, "AES");
+  }
+  
   @Override
   public String convertToEntityAttribute(String dbData) {
     if (dbData == null) return null;
@@ -61,7 +78,7 @@ public class AesGcmStringCryptoConverter implements AttributeConverter<String, S
       byte[] iv = java.util.Arrays.copyOfRange(all, 0, IV_LEN);
       byte[] ct = java.util.Arrays.copyOfRange(all, IV_LEN, all.length);
       Cipher c = Cipher.getInstance("AES/GCM/NoPadding");
-      c.init(Cipher.DECRYPT_MODE, KEY_SPEC, new GCMParameterSpec(GCM_TAG_BITS, iv));
+      c.init(Cipher.DECRYPT_MODE, secretKey, new GCMParameterSpec(GCM_TAG_BITS, iv));
       byte[] pt = c.doFinal(ct);
       return new String(pt, java.nio.charset.StandardCharsets.UTF_8);
     } catch (Exception e) {

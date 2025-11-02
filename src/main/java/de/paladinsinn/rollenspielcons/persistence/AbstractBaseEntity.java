@@ -21,7 +21,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -37,7 +37,7 @@ import lombok.extern.slf4j.XSlf4j;
 @Data
 @ToString(onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@XSlf4j
+@Slf4j
 public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOwner, Serializable {
   @Serial
   private static final long serialVersionUID = 1L;
@@ -108,12 +108,12 @@ public abstract class AbstractBaseEntity implements HasId, HasDisplayText, HasOw
    */
   @PrePersist
   private void ensureIdIsSetWithSnowflakeId() {
-    log.entry(id);
+    log.trace("enter -  {}", id);
     
     if (id == 0L) {
       id = SnowflakeIdGenerator.generateId();
     }
     
-    log.exit(id);
+    log.trace("exit - {}", new Object[] {id});
   }
 }

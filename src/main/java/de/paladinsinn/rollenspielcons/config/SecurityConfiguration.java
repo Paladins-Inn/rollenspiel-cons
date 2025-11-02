@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@XSlf4j
+@Slf4j
 public class SecurityConfiguration {
   
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri:-}")
@@ -33,7 +33,7 @@ public class SecurityConfiguration {
   
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    log.entry(http);
+    log.trace("enter -  {}", http);
     
     http
         .oauth2Login(oauth2 -> oauth2
@@ -76,7 +76,10 @@ public class SecurityConfiguration {
         )
     ;
     
-    return log.exit(http.build());
+    var result = http.build();
+    
+    log.trace("exit - {}", result);
+    return result;
   }
   
   
@@ -114,10 +117,10 @@ public class SecurityConfiguration {
   @Bean
   public LogoutSuccessHandler ssoLogoutHandler() {
     return (request, response, authentication) -> {
-      log.entry(request, response, authentication);
+      log.trace("enter -  {}, {}, {}", request, response, authentication);
       String result = issuerUri + "/protocol/openid-connect/logout?redirect_uri=" + appUrl;
       response.sendRedirect(result);
-      log.exit(result);
+      log.trace("exit - {}", new Object[] {result});
     };
   }
 }

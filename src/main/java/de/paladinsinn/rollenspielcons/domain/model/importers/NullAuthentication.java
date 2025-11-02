@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.jackson.Jacksonized;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 
 
@@ -22,11 +22,15 @@ import org.springframework.http.HttpHeaders;
 @AllArgsConstructor
 @Getter
 @ToString
-@XSlf4j
+@Slf4j
 public class NullAuthentication implements ImporterAuthentication {
   @Override
   public HttpHeaders authenticate(final HttpHeaders httpHeaders) {
-    log.entry(httpHeaders);
-    return log.exit(httpHeaders);
+    log.trace("enter -  {}", httpHeaders);
+
+    var result = httpHeaders;
+
+    log.trace("exit - {}", result);
+    return result;
   }
 }

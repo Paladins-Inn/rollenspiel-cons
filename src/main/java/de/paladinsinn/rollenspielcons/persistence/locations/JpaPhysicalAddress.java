@@ -16,7 +16,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.validator.constraints.Range;
 
 
 /**
@@ -46,12 +45,12 @@ public class JpaPhysicalAddress extends JpaLocation implements PhysicalAddress {
   
   @Column(name = "LONGITUDE", nullable = false)
   @NotNull(message = "Longitude must be set")
-  @Range(min = -180, max = 180, message = "Longitude must be between {min} and {max}")
+  @Size(min = -180, max = 180, message = "Longitude must be between {min} and {max}")
   private Double longitude;
   
   @Column(name = "LATITUDE", nullable = false)
   @NotNull(message = "Latitude must be set")
-  @Range(min = -90, max = 90, message = "Latitude must be between {min} and {max}")
+  @Size(min = -90, max = 90, message = "Latitude must be between {min} and {max}")
   private Double latitude;
   
   

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**

@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ import org.springframework.boot.test.context.SpringBootTest;
         GeoCoordinateMapperImpl.class
     }
 )
-@XSlf4j
+@Slf4j
 public class GeocodingServiceTest {
   private static final String TEST_ADDRESS = "Darmstädter Str. 12, 64625 Bensheim";
   private static final String[] TEST_ADDRESSES = {
@@ -51,17 +51,17 @@ public class GeocodingServiceTest {
   
   @Test
   public void shouldFindCoordinatesForAddress() {
-    log.entry();
+    log.trace("enter - ");
     
     Set<GeoCoordinates> result = sut.search(TEST_ADDRESS);
     log.info("Result: {}", result);
     
-    log.exit();
+    log.trace("exit - ");
   }
   
   @Test
   public void shouldThrottleToOnePerSecondWhenMultipleRequestsAreSentInParallel() throws Exception {
-    log.entry();
+    log.trace("enter - ");
     int             parallel = 5;
     ExecutorService exec     = Executors.newFixedThreadPool(parallel);
     CountDownLatch  start    = new CountDownLatch(1);
@@ -99,6 +99,6 @@ public class GeocodingServiceTest {
       throw new AssertionError("Nicht alle Anfragen haben ein Ergebnis geliefert");
     }
     
-    log.exit();
+    log.trace("exit - ");
   }
 }

@@ -13,7 +13,6 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.hibernate.validator.constraints.Range;
 
 
 /**
@@ -89,7 +88,7 @@ public class PhysicalAddressImpl extends LocationImpl implements PhysicalAddress
       required = true
   )
   @NotNull
-  @Range(min = -180, max = 180, message = "Longitude must be between {min} and {max}")
+  @Size(min =  -180, max = 180, message = "Longitude must be between {min} and {max} characters long")
   private Double longitude;
   
   @Schema(
@@ -101,7 +100,7 @@ public class PhysicalAddressImpl extends LocationImpl implements PhysicalAddress
       required = true
   )
   @NotNull
-  @Range(min = -90, max = 90, message = "Latitude must be between {min} and {max}")
+  @Size(min =  -180, max = 180, message = "Longitude must be between {min} and {max} characters long")
   private Double latitude;
   
   

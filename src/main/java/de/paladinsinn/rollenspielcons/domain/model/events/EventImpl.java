@@ -13,7 +13,7 @@ import java.io.Serial;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

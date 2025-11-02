@@ -44,9 +44,9 @@
     <argLine/>
 
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
-    <maven.compiler.release>21</maven.compiler.release>
+    <maven.compiler.source>25</maven.compiler.source>
+    <maven.compiler.target>25</maven.compiler.target>
+    <maven.compiler.release>25</maven.compiler.release>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.inputEncoding>UTF-8</project.reporting.inputEncoding>
@@ -447,10 +447,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-ext</artifactId>
+      <version>2.0.17</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -520,6 +517,12 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-inline</artifactId>
+      <version>5.2.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -672,6 +675,7 @@
               <nonFilteredFileExtension>jpg</nonFilteredFileExtension>
               <nonFilteredFileExtension>gpg</nonFilteredFileExtension>
               <nonFilteredFileExtension>license</nonFilteredFileExtension>
+              <nonFilteredFileExtension>p12</nonFilteredFileExtension>
             </nonFilteredFileExtensions>
           </configuration>
           <executions>
@@ -683,6 +687,25 @@
               </goals>
               <configuration>
                 <skip>${skipTests}</skip>
+              </configuration>
+            </execution>
+            <execution>
+              <id>copy-local.properties</id>
+              <phase>generate-resources</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${project.build.testOutputDirectory}</outputDirectory>
+                <resources>
+                  <resource>
+                    <directory>${project.basedir}</directory>
+                    <includes>
+                      <include>local.properties</include>
+                    </includes>
+                    <filtering>false</filtering>
+                  </resource>
+                </resources>
               </configuration>
             </execution>
           </executions>
@@ -822,24 +845,12 @@
           </executions>
         </plugin>
 
-        <!-- Add Mockito as javaagent to the runtime for unit tests. -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <executions>
-            <execution>
-              <goals>
-                <goal>properties</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.3</version>
           <configuration>
-            <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
+            <argLine>@{argLine}</argLine>
             <environmentVariables>
               <APP_AES256_KEY>${app.aes256.key}</APP_AES256_KEY>
             </environmentVariables>
@@ -852,13 +863,13 @@
           <version>1.0.0</version>
           <configuration>
             <files>
-              <file>./.properties-local</file>
+              <file>local.properties</file>
             </files>
             <outputFile>
               ${project.build.directory}/generated-resources/app.properties
             </outputFile>
             <properties>
-              <property>app.aes256.key</property>
+              <property>aes256.key</property>
             </properties>
           </configuration>
           <executions>
@@ -1162,7 +1173,7 @@
             <version>1.0.0</version>
             <configuration>
               <files>
-                <file>./.properties-local</file>
+                <file>local.properties</file>
               </files>
               <outputFile>
                 ${project.build.directory}/generated-resources/db.properties

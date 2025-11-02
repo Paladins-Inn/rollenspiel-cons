@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.time.Duration;
 import java.util.HexFormat;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
@@ -25,12 +25,12 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableCaching
-@XSlf4j
+@Slf4j
 public class CacheConfig {
 
   @Bean
   public CacheManager cacheManager() {
-    log.entry();
+    log.trace("Creating cache manager");
     CaffeineCacheManager cm = new CaffeineCacheManager();
     cm.setCaffeine(
         Caffeine.newBuilder()
@@ -38,23 +38,31 @@ public class CacheConfig {
                 .expireAfterWrite(Duration.ofMinutes(60)) // TTL anpassen
     );
     
-    return log.exit(cm);
+    log.trace("Cache manager created: {}", cm);
+    return cm;
   }
 
   @Bean("contentHashKeyGenerator")
   public KeyGenerator contentHashKeyGenerator() {
     return (target, method, params) -> {
-      log.entry(target.getClass().getSimpleName(), method.getName(), params.length);
+      log.trace("Generating cache key for {}.{} with {} params", target.getClass().getSimpleName(), method.getName(), params.length);
       
-      if (params.length == 0 || params[0] == null) return log.exit("null");
+      if (params.length == 0 || params[0] == null) {
+        log.trace("Returning null key");
+        return "null";
+      }
       
       try {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] digest = md.digest(((String) params[0]).getBytes(StandardCharsets.UTF_8));
-        return log.exit(HexFormat.of().formatHex(digest));
+        String hash = HexFormat.of().formatHex(digest);
+        log.trace("Generated hash key: {}", hash);
+        return hash;
       } catch (Exception e) {
         // fallback: use string hash
-        return log.exit(Integer.toHexString(params[0].hashCode()));
+        String hash = Integer.toHexString(params[0].hashCode());
+        log.trace("Generated fallback hash key: {}", hash);
+        return hash;
       }
     };
   }

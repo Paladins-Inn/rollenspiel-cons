@@ -66,11 +66,11 @@ public abstract class AbstractJpaCalendar extends AbstractBaseEntity implements 
    */
   @Column(name = "CALENDAR_TYPE", insertable = false, updatable = false)
   @ToString.Include
-  private String syncTypeValue;
+  private String synctypevalue;
   
   @Override
   public CalendarType getSyncType() {
-    return CalendarType.valueOf(syncTypeValue);
+    return CalendarType.valueOf(synctypevalue);
   }
   
   @Column(name = "CALENDAR_ID", nullable = false)

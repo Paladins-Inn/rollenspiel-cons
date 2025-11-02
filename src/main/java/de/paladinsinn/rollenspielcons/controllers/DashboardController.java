@@ -1,6 +1,6 @@
 package de.paladinsinn.rollenspielcons.controllers;
 
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/dashboard")
-@XSlf4j
+@Slf4j
 public class DashboardController {
   
   @PreAuthorize("isAuthenticated()")
   @GetMapping
   public String dashboard(@AuthenticationPrincipal OAuth2User user, Model model) {
-    log.entry(user, model);
+    log.trace("enter -  {}, {}", user, model);
     
     return "pages/dashboard";
   }

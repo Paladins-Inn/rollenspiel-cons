@@ -4,8 +4,8 @@ package de.paladinsinn.rollenspielcons.domain.model.calendars;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarType;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.SyncSuccess;
+import de.paladinsinn.rollenspielcons.domain.api.integrations.ImporterAuthentication;
 import de.paladinsinn.rollenspielcons.domain.model.AbstractModelBase;
-import de.paladinsinn.rollenspielcons.domain.model.importers.NullAuthentication;
 import java.io.Serial;
 import java.time.OffsetDateTime;
 import java.time.Duration;
@@ -39,7 +39,7 @@ public class IcalCalendar extends AbstractModelBase implements Calendar {
   
   private String calendarId;
   
-  private NullAuthentication authentication;
+  private ImporterAuthentication authentication;
   
   private CalendarType syncType;
   private SyncSuccess lastSyncResult;

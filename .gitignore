@@ -13,6 +13,8 @@ target/
 /src/main/resources/static/register.html
 /src/main/resources/static/tables.html
 calendar-service-account.json
-/.*-local
+.*-local
+local.properties
+.local-*
 /http-client.private.env.json
-/.properties-local
+/src/test/resources/local.propertes

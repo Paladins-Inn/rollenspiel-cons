@@ -1,13 +1,14 @@
 package de.paladinsinn.rollenspielcons.persistence;
 
 
-import brave.internal.Nullable;
+import jakarta.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ import lombok.extern.jackson.Jacksonized;
 @Data
 @EqualsAndHashCode(of = {"name", "uri"})
 public class PersistedDisplayableName implements HasDisplayText, Serializable {
+  @Serial
   private static final long serialVersionUID = 1L;
   
   @Column(name = "NAME", length = 250, nullable = false)

@@ -7,7 +7,7 @@ import de.paladinsinn.rollenspielcons.services.security.model.ResourceResponse;
 import jakarta.annotation.PostConstruct;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 @RequiredArgsConstructor
-@XSlf4j
+@Slf4j
 public class KeycloakProtectionClient {
   private final WebClient.Builder webClientBuilder;
   private final KeycloakTokenClient tokens;
@@ -28,22 +28,25 @@ public class KeycloakProtectionClient {
   
   @PostConstruct
   public void init() {
-    log.entry(webClientBuilder, protectionApiUrl);
+    log.trace("enter -  {}, {}", webClientBuilder, protectionApiUrl);
     
     protectionClient = webClientBuilder.baseUrl(protectionApiUrl)
                                        .defaultHeader("Accept", "application/json")
                                        .build();
     
-    log.exit(protectionClient);
+    log.trace("exit - {}", new Object[] {protectionClient});
   }
   
   
   private WebClient withBearer(WebClient wc, String token) {
-    log.entry(wc, token);
+    log.trace("enter -  {}, {}", wc, token);
     
-    return log.exit(wc.mutate()
-                      .defaultHeaders(h -> h.setBearerAuth(token))
-                      .build());
+    var result = wc.mutate()
+        .defaultHeaders(h -> h.setBearerAuth(token))
+        .build();
+
+    log.trace("exit - {}", result);
+    return result;
   }
   
   /**
@@ -51,17 +54,21 @@ public class KeycloakProtectionClient {
    */
   @SuppressWarnings("unused")
   public ResourceResponse createResource(ResourceRepresentation res) {
-    log.entry(res);
+    log.trace("enter -  {}", res);
     
-    return log.exit(tokens.getProtectionApiToken()
-                          .flatMap(pat -> withBearer(protectionClient, pat)
-                              .post()
-                              .uri("/resource_set")
-                              .contentType(MediaType.APPLICATION_JSON)
-                              .bodyValue(res)
-                              .retrieve()
-                              .bodyToMono(ResourceResponse.class))
-                          .block());
+    var result = tokens
+        .getProtectionApiToken()
+        .flatMap(pat -> withBearer(protectionClient, pat)
+        .post()
+        .uri("/resource_set")
+        .contentType(MediaType.APPLICATION_JSON)
+        .bodyValue(res)
+        .retrieve()
+        .bodyToMono(ResourceResponse.class))
+        .block();
+
+    log.trace("exit - {}", result);
+    return result;
   }
   
   /**
@@ -69,15 +76,19 @@ public class KeycloakProtectionClient {
    */
   @SuppressWarnings("unused")
   public ResourceResponse getResource(String resourceId) {
-    log.entry(resourceId);
+    log.trace("enter -  {}", resourceId);
     
-    return log.exit(tokens.getProtectionApiToken()
-                          .flatMap(pat -> withBearer(protectionClient, pat)
-                              .get()
-                              .uri("/resource_set/{id}", resourceId)
-                              .retrieve()
-                              .bodyToMono(ResourceResponse.class))
-                          .block());
+    var result = tokens
+        .getProtectionApiToken()
+        .flatMap(pat -> withBearer(protectionClient, pat)
+        .get()
+        .uri("/resource_set/{id}", resourceId)
+        .retrieve()
+        .bodyToMono(ResourceResponse.class))
+        .block();
+
+    log.trace("exit - {}", result);
+    return result;
   }
   
   /**
@@ -85,7 +96,7 @@ public class KeycloakProtectionClient {
    */
   @SuppressWarnings("unused")
   public void deleteResource(String resourceId) {
-    log.entry(resourceId);
+    log.trace("enter -  {}", resourceId);
     
     tokens.getProtectionApiToken()
           .flatMap(pat -> withBearer(protectionClient, pat)
@@ -95,7 +106,7 @@ public class KeycloakProtectionClient {
               .bodyToMono(Void.class)).block()
     ;
     
-    log.exit();
+    log.trace("Exiting method");
   }
   
   /**
@@ -103,14 +114,18 @@ public class KeycloakProtectionClient {
    */
   @SuppressWarnings("unused")
   public List<ResourceResponse> listResources() {
-    log.entry();
+    log.trace("enter - ");
     
-    return log.exit(tokens.getProtectionApiToken()
-                          .flatMapMany(pat -> withBearer(protectionClient, pat)
-                              .get()
-                              .uri(uriBuilder -> uriBuilder.path("/resource_set").build())
-                              .retrieve()
-                              .bodyToFlux(ResourceResponse.class)).toStream().toList());
+    var result = tokens
+        .getProtectionApiToken()
+        .flatMapMany(pat -> withBearer(protectionClient, pat)
+        .get()
+        .uri(uriBuilder -> uriBuilder.path("/resource_set").build())
+        .retrieve()
+        .bodyToFlux(ResourceResponse.class)).toStream().toList();
+
+    log.trace("exit - {}", result);
+    return result;
   }
   
   /**
@@ -118,16 +133,19 @@ public class KeycloakProtectionClient {
    */
   @SuppressWarnings("unused")
   public PermissionTicketResponse createPermissionTicket(List<PermissionRequest> requests) {
-    log.entry(requests);
+    log.trace("enter -  {}", requests);
     
-    return log.exit(tokens.getProtectionApiToken()
-                          .flatMap(pat -> withBearer(protectionClient, pat)
-                              .post()
-                              .uri("/permission")
-                              .contentType(MediaType.APPLICATION_JSON)
-                              .bodyValue(requests)
-                              .retrieve()
-                              .bodyToMono(PermissionTicketResponse.class))
-                          .block());
+    var result = tokens.getProtectionApiToken()
+        .flatMap(pat -> withBearer(protectionClient, pat)
+        .post()
+        .uri("/permission")
+        .contentType(MediaType.APPLICATION_JSON)
+        .bodyValue(requests)
+        .retrieve()
+        .bodyToMono(PermissionTicketResponse.class))
+        .block();
+
+    log.trace("exit - {}", result);
+    return result;
   }
 }

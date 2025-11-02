@@ -3,12 +3,11 @@ package de.paladinsinn.rollenspielcons.config;
 
 import de.paladinsinn.rollenspielcons.services.geo.GeocodeMapsCoClient;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
-import org.springframework.web.service.invoker.HttpExchangeAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 
@@ -20,13 +19,16 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
  */
 @Configuration
 @RequiredArgsConstructor
-@XSlf4j
+@Slf4j
 public class WebClientConfig {
   @Bean
   public WebClient webClient() {
-    log.entry();
+    log.trace("enter - ");
     
-    return log.exit(WebClient.builder().build());
+    var result = WebClient.builder().build();
+
+    log.trace("exit - {}", result);
+    return result;
   }
   
   @Bean
@@ -40,7 +42,7 @@ public class WebClientConfig {
         .build()
         .createClient(GeocodeMapsCoClient.class);
     
-    log.exit(result.getClass());
+    log.trace("exit - {}", result.getClass());
     return result;
   }
 }

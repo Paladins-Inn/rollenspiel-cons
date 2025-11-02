@@ -2,7 +2,7 @@ package de.paladinsinn.rollenspielcons.web;
 
 
 import lombok.*;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.UUID;
@@ -20,7 +20,7 @@ import java.util.UUID;
 @Getter
 @ToString()
 @EqualsAndHashCode(of = {"id"})
-@XSlf4j
+@Slf4j
 public class Page {
   @Builder.Default
   private UUID id = UUID.randomUUID();

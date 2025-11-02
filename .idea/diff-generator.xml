@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DiffGenerationConfig">
+    <option name="sourceDbValue" value="9f297115-239f-4686-b7b4-9a883333992b__klenkes74_cons" />
+    <option name="sourceDiffType" value="DB" />
+    <option name="sourceModelValue" value="rollenspiel-cons:entityManagerFactory" />
+    <option name="targetDbValue" value="9f297115-239f-4686-b7b4-9a883333992b__klenkes74_empty" />
+  </component>
+</project>

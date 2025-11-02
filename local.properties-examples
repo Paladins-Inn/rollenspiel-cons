@@ -1,0 +1,7 @@
+# Local environment variables for rollenspiel-cons
+# Copy to .env-local (NOT committed) and fill values.
+spring.datasource.url=jdbc:postgresql://localhost:5432/klenkes74
+spring.datasource.username=changeme
+spring.datasource.password=changeme
+#
+aes256.key=9ITuE9U2rzZwZF76wLGURy1Jw/oRWChvG8bIRPzS7ps=

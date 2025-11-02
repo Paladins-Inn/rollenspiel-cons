@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 
 
@@ -25,7 +25,7 @@ import org.springframework.http.HttpHeaders;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(onlyExplicitlyIncluded = true)
-@XSlf4j
+@Slf4j
 public class UsernameAndPasswordAuthentication implements ImporterAuthentication {
   @Getter
   @Setter
@@ -33,11 +33,12 @@ public class UsernameAndPasswordAuthentication implements ImporterAuthentication
   private String username;
   
   @Setter
+  @Getter
   private String password;
   
   @Override
   public HttpHeaders authenticate(@NotNull HttpHeaders httpHeaders) {
-    log.entry(httpHeaders, username, "<redacted>");
+    log.trace("enter -  {}, {}, {}", httpHeaders, username, "<redacted>");
     
     if (
         username != null && password != null
@@ -46,7 +47,8 @@ public class UsernameAndPasswordAuthentication implements ImporterAuthentication
       httpHeaders.setBasicAuth(username, password);
     }
     
-    return log.exit(httpHeaders);
+    log.trace("exit - {}", httpHeaders);
+    return httpHeaders;
   }
   
 }

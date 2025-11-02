@@ -2,17 +2,10 @@ package de.paladinsinn.rollenspielcons.persistence.importers;
 
 
 import de.paladinsinn.rollenspielcons.domain.api.integrations.RefreshTokenAuthentication;
-import de.paladinsinn.rollenspielcons.persistence.mapper.AesGcmStringCryptoConverter;
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 
 
@@ -24,17 +17,14 @@ import lombok.extern.jackson.Jacksonized;
  */
 @Embeddable
 @Jacksonized
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
 @ToString(onlyExplicitlyIncluded = true)
-public class JpaRefreshTokenAuthentication implements RefreshTokenAuthentication {
-  private static final int MAXIMUM_TOKEN_LENTH = 800;
-  
-  @Column(name = "PASSWORD", length = MAXIMUM_TOKEN_LENTH)
-  @Convert(converter = AesGcmStringCryptoConverter.class)
-  @NotBlank(message = "The system does not work without refresh token.")
-  @Size(max = MAXIMUM_TOKEN_LENTH, message = "The refresh token must not be longer than {max} bytes.")
-  private String refreshToken;
+public class JpaRefreshTokenAuthentication
+    extends AbstractJpaAuthenticationBase
+    implements RefreshTokenAuthentication {
+  @Override
+  public String getRefreshToken() {
+    return getPassword();
+  }
 }

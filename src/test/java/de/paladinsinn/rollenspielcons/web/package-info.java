@@ -4,4 +4,4 @@
  * @author klenkes74
  * @since 07.09.25
  */
-package de.paladinsinn.rollenspielcons.ui;
+package de.paladinsinn.rollenspielcons.web;

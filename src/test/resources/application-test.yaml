@@ -5,3 +5,7 @@ what3words:
 spring:
   liquibase:
     enabled: false
+  config:
+    import: optional:chlasspath:local.properties
+  main:
+    banner-mode: log

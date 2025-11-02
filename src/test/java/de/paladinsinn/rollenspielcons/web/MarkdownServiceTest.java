@@ -1,9 +1,8 @@
-package de.paladinsinn.rollenspielcons.services.ui;
+package de.paladinsinn.rollenspielcons.web;
 
 
 import de.paladinsinn.rollenspielcons.config.CacheConfig;
-import de.paladinsinn.rollenspielcons.web.MarkdownService;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,14 +20,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     MarkdownService.class,
     CacheConfig.class,
 })
-@XSlf4j
+@Slf4j
 public class MarkdownServiceTest {
   @Autowired
   private MarkdownService sut;
   
   @Test
   public void shouldReturnValidHtmlWhenCorrectMarkdownIsProvided() {
-    log.entry();
+    log.trace("enter - ");
     
     String markdown = "# Hello World\nThis is a **bold** text with a [link](https://example.com).";
     
@@ -39,12 +38,12 @@ public class MarkdownServiceTest {
     assertTrue(html.contains("<strong>bold</strong>"), "Bold text missing");
     assertTrue(html.contains("<a href=\"https://example.com\" rel=\"nofollow\">link</a>"), "Link missing or not sanitized");
     
-    log.exit();
+    log.trace("exit - ");
   }
   
   @Test
   public void shouldReturnSanitizedHtmlWhenMaliciousMarkdownIsProvided() {
-    log.entry();
+    log.trace("enter - ");
     
     String markdown = "Click [here](javascript:alert('XSS')) to see something.";
     
@@ -53,6 +52,6 @@ public class MarkdownServiceTest {
     
     assertEquals("<p>Click here to see something.</p>\n", html, "Malicious link not sanitized");
     
-    log.exit();
+    log.trace("exit - ");
   }
 }

@@ -1,18 +1,20 @@
 package de.paladinsinn.rollenspielcons.domain.api.calendars;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import de.paladinsinn.rollenspielcons.domain.api.HasDisplayText;
 import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import de.paladinsinn.rollenspielcons.domain.api.HasOwner;
 import de.paladinsinn.rollenspielcons.domain.api.HasVersion;
 import de.paladinsinn.rollenspielcons.domain.api.integrations.ImporterAuthentication;
-import io.swagger.v3.oas.annotations.media.Schema;
+import de.paladinsinn.rollenspielcons.domain.model.calendars.IcalCalendar;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.OffsetDateTime;
 import java.time.Duration;
+import java.time.OffsetDateTime;
 import org.springframework.http.HttpHeaders;
 
 import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MAX_LENGTH;
@@ -24,6 +26,7 @@ import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MIN_
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-10-11
  */
+@JsonDeserialize(as = IcalCalendar.class)
 public interface Calendar extends HasId, HasVersion, HasOwner, HasDisplayText, Serializable {
   /**
    * This is the calender to sync from.

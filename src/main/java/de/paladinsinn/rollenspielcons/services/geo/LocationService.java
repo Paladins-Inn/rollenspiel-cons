@@ -8,7 +8,7 @@ import com.what3words.javawrapper.response.ConvertTo3WA;
 import com.what3words.javawrapper.response.ConvertToCoordinates;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.server.core.AnnotationLinkRelationProvider;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +21,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-@XSlf4j
+@Slf4j
 public class LocationService {
   
   /** The what3words service */
   private final What3WordsV3 service;
   private final GeocodingService geocoding;
-  private final AnnotationLinkRelationProvider annotationLinkRelationProvider;
   
   private What3WordsV3 rateLimitedService() {
     try {
@@ -40,9 +39,12 @@ public class LocationService {
   }
   
   public GeoCoordinates convertAddressToCoordinates(final String address) {
-    log.entry(address);
-
-    return log.exit(geocoding.search(address).stream().findFirst().orElse(null));
+    log.trace("enter -  {}", address);
+    
+    var result = geocoding.search(address).stream().findFirst().orElse(null);
+    
+    log.trace("exit - {}", result);
+    return result;
   }
   
   /**
@@ -57,19 +59,22 @@ public class LocationService {
       @NotNull final double longitude,
       @NotNull final String language
   ) {
-    log.entry(latitude, longitude, language);
+    log.trace("enter -  {}, {}, {}", latitude, longitude, language);
     
     
-    ConvertTo3WA result = rateLimitedService()
+    ConvertTo3WA coord = rateLimitedService()
         .convertTo3wa(new Coordinates(latitude, longitude))
         .language(language)
         .execute();
     
-    if (!result.isSuccessful()) {
-      report3WordsError(result.getError());
+    if (!coord.isSuccessful()) {
+      report3WordsError(coord.getError());
     }
     
-    return log.exit(result.getWords());
+    var result = coord.getWords();
+
+    log.trace("exit - {}", result);
+    return result;
   }
   
   private void report3WordsError(What3WordsError error) {
@@ -115,15 +120,18 @@ public class LocationService {
    * @return the coordinates of the locations in "longitude,latitude" format.
    */
   public String convertToCoordinates(final String threeWords) {
-    log.entry(threeWords);
+    log.trace("enter -  {}", threeWords);
     
-    ConvertToCoordinates result = rateLimitedService().convertToCoordinates(threeWords).execute();
+    ConvertToCoordinates coord = rateLimitedService().convertToCoordinates(threeWords).execute();
     
-    if (!result.isSuccessful()) {
-      report3WordsError(result.getError());
+    if (!coord.isSuccessful()) {
+      report3WordsError(coord.getError());
     }
     
-    return log.exit(result.getCoordinates().getLng() + "," + result.getCoordinates().getLat());
+    var result = coord.getCoordinates().getLng() + "," + coord.getCoordinates().getLat();
+    
+    log.trace("exit - {}", result);
+    return result;
   }
   
   
@@ -134,14 +142,17 @@ public class LocationService {
    * @return the nearest known place to the locations.
    */
   public String convertToAddress(final String threeWords) {
-    log.entry(threeWords);
+    log.trace("enter -  {}", threeWords);
     
-    ConvertToCoordinates result = rateLimitedService().convertToCoordinates(threeWords).execute();
+    ConvertToCoordinates coord = rateLimitedService().convertToCoordinates(threeWords).execute();
     
-    if (!result.isSuccessful()) {
-      report3WordsError(result.getError());
+    if (!coord.isSuccessful()) {
+      report3WordsError(coord.getError());
     }
     
-    return log.exit(result.getNearestPlace());
+    var result = coord.getNearestPlace();
+    
+    log.trace("exit - {}", result);
+    return result;
   }
 }

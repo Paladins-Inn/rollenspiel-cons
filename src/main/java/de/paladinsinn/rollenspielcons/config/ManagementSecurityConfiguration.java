@@ -1,6 +1,6 @@
 package de.paladinsinn.rollenspielcons.config;
 
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.actuate.health.HealthEndpoint;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.UUID;
 
 @Configuration
-@XSlf4j
+@Slf4j
 public class ManagementSecurityConfiguration {
 
     @Value("${spring.security.user.name:admin}")
@@ -33,7 +33,7 @@ public class ManagementSecurityConfiguration {
     @Bean
     @Order(1)
     public SecurityFilterChain actuatorSecurityFilterChain(HttpSecurity http) throws Exception {
-      log.entry(http);
+      log.trace("enter -  {}", http);
       
         http
             .securityMatcher(EndpointRequest.toAnyEndpoint())
@@ -45,12 +45,15 @@ public class ManagementSecurityConfiguration {
             .userDetailsService(actuatorUserDetailsService())
             .csrf(AbstractHttpConfigurer::disable);
 
-        return log.exit(http.build());
+        SecurityFilterChain result = http.build();
+        
+        log.trace("exit - {}", result);
+        return result;
     }
 
     @Bean
     public UserDetailsService actuatorUserDetailsService() {
-      log.entry();
+      log.trace("enter - ");
       
       generateRandomPasswordWhenNeeded();
       
@@ -60,11 +63,14 @@ public class ManagementSecurityConfiguration {
           .roles("ACTUATOR")
           .build();
       
-      return log.exit(new InMemoryUserDetailsManager(user));
+      UserDetailsService result = new InMemoryUserDetailsManager(user);
+      
+      log.trace("exit - {}", result);
+      return result;
     }
     
     private void generateRandomPasswordWhenNeeded() {
-      log.entry(password);
+      log.trace("enter -  {}", password);
 
       if ("./.".equals(password)) {
         password = UUID.randomUUID().toString();
@@ -72,12 +78,15 @@ public class ManagementSecurityConfiguration {
         log.info("No password for actuator user configured. Generated password: {}", password);
       }
       
-      log.exit(password);
+      log.trace("exit - {}", new Object[] {password});
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-      log.entry();
-      return log.exit(new BCryptPasswordEncoder());
+      log.trace("enter - ");
+      
+      PasswordEncoder result = new BCryptPasswordEncoder();
+      log.trace("exit - {}", result);
+      return result;
     }
 }
