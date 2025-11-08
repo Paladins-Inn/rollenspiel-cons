@@ -14,6 +14,16 @@
       "name": "google.client-secret",
       "type": "java.lang.String",
       "description": "The client-secret for google Oauth2."
+    },
+    {
+      "name": "geocode.url",
+      "type": "java.lang.String",
+      "description": "The URL used to access the geocode.maps.co API."
+    },
+    {
+      "name": "google.calendar.id",
+      "type": "java.lang.String",
+      "description": "The ID of the Google Calendar to be used."
     }
   ]
 }

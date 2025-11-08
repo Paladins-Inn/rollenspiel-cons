@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -13,8 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestClientResponseException;
 
 
 /**
@@ -65,38 +65,46 @@ public class GeocodingService {
     log.trace("enter -  {}", address);
     
     Set<GeoCoordinates> result = Set.of();
-    int retry = 1;
+    int attempt = 1;
     do {
       try {
-        final int retryOutput = retry;
         result = callClient(address)
-            .map(r -> r.stream()
-                       .map(mapper::toGeoCordinates)
-                       .collect(Collectors.toSet())
-            )
-            .doOnError(e -> log.warn("Error while geocoding address. retry=" + retryOutput + ", address=" + address, e))
-            .block();
+            .stream()
+              .map(mapper::toGeoCordinates)
+              .collect(Collectors.toSet());
+      } catch (RestClientResponseException e) {
+        log.debug("Rest client error while geocoding address. retry={}, address={}, status={}, response={}",
+                  attempt, address, e.getStatusCode().value(), e.getResponseBodyAsString(), e);
         
-      } catch (WebClientResponseException.Unauthorized e) {
-        try {
-          Thread.sleep(5000L * retry);
-        } catch (InterruptedException interruptedException) {
-          Thread.currentThread().interrupt();
-        }
+        sleep(attempt);
+      } catch (ExecutionException|InterruptedException e) {
+        log.debug("Error while geocoding address. retry={}, address={}",
+                  attempt, address, e);
+        
+        sleep(attempt);
       }
-    } while ((result == null || result.isEmpty()) && retry++ <= 3);
+    } while (result.isEmpty() && attempt++ <= 3);
     
     log.trace("exit - {}", result);
     return result;
   }
   
-  private Mono<Set<GeocodeMapsResult>> callClient(final String q) {
+  private static void sleep(final int attempt) {
+    try {
+      Thread.sleep(5000L * attempt);
+    } catch (InterruptedException interruptedException) {
+      Thread.currentThread().interrupt();
+    }
+  }
+  
+  private Set<GeocodeMapsResult> callClient(final String q)
+      throws ExecutionException, InterruptedException {
     log.trace("enter -  {}", q);
     
     CompletableFuture<Set<GeocodeMapsResult>> future = new CompletableFuture<>();
     queue.offer(new Request(q, future));
     
-    var result = Mono.fromFuture(future);
+    var result = future.get();
 
     log.trace("exit - {}", result);
     return result;

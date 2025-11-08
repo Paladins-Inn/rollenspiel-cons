@@ -1,10 +1,10 @@
 package de.paladinsinn.rollenspielcons.services.caldav;
 
+import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarException;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarImportException;
+import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarService;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
 import de.paladinsinn.rollenspielcons.persistence.mapper.TemporalConverter;
-import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarException;
-import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarService;
 import de.paladinsinn.rollenspielcons.services.geo.LocationService;
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.NotBlank;
@@ -23,7 +23,7 @@ import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VEvent;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestClient;
 
 
 /**
@@ -41,7 +41,7 @@ public class CaldavCalendarService implements CalendarService {
   
   
   private final VEventMapper mapper;
-  private final WebClient webClient;
+  private final RestClient restClient;
   private final LocationService locationService;
   private final TemporalConverter temporalConverter;
   
@@ -110,19 +110,18 @@ public class CaldavCalendarService implements CalendarService {
       @NotNull LocalDate from,
       LocalDate till
   ) throws CalendarException {
-    log.trace("enter -  {}, {}, {}, {}", webClient, calendar, from, till);
+    log.trace("enter -  {}, {}, {}, {}", restClient, calendar, from, till);
     
     
     List<VEvent> events = new ArrayList<>();
     byte[] calendarBytes = null;
-    if (webClient != null) {
-      calendarBytes = webClient
+    if (restClient != null) {
+      calendarBytes = restClient
           .get()
           .uri(calculateCalendarUri(calendar, from, till))
           .headers(calendar::authenticate)
           .retrieve()
-          .bodyToMono(byte[].class)
-          .block();
+          .body(byte[].class);
     } else {
       log.error("WebClient is not configured.");
     }

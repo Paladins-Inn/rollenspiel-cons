@@ -1,0 +1,25 @@
+{
+  "id" : "a82f8fdf-c52e-3000-afc5-b5c7a2035f96",
+  "request" : {
+    "url" : "/search?q=Hildastra%C3%9Fe%2032%2C%2076297%20Stutensee&apiKey=",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-search-UClOi.json",
+    "headers" : {
+      "Date" : "Sun, 02 Nov 2025 09:57:43 GMT",
+      "Content-Type" : "application/json; charset=utf-8",
+      "Server" : "cloudflare",
+      "Nel" : "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Access-Control-Allow-Origin" : "*",
+      "Last-Modified" : "Sun, 02 Nov 2025 09:57:43 GMT",
+      "CF-Cache-Status" : "MISS",
+      "Report-To" : "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=1LzpASxEE%2Bmw1Xd0rVZ6KITKqzJIw60ZIpmV4GBr%2Beu3bZyop3LdgZVWiqDVgRejZQTtUlEWNJJ79nwEBSPiZJUg20TBWO7Xj5MS9cIt\"}]}",
+      "Vary" : "accept-encoding",
+      "CF-RAY" : "9982c4f1dda94914-AMS",
+      "alt-svc" : "h3=\":443\"; ma=86400"
+    }
+  },
+  "uuid" : "a82f8fdf-c52e-3000-afc5-b5c7a2035f96"
+}

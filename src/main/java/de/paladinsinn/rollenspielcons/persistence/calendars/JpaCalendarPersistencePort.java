@@ -69,7 +69,7 @@ public class JpaCalendarPersistencePort implements CalendarPersistencePort {
     
     Optional<AbstractJpaCalendar> jpa = repository.findById(id);
     jpa.ifPresent(
-        jpa -> log.debug("Loaded calendar by id. calendar={}", jpa)
+        j -> log.debug("Loaded calendar by id. calendar={}", j)
     );
     
     Optional<Calendar> result = jpa.map(mapper::toDomain);

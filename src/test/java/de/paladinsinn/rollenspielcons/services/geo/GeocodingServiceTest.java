@@ -1,7 +1,7 @@
 package de.paladinsinn.rollenspielcons.services.geo;
 
 
-import de.paladinsinn.rollenspielcons.config.WebClientConfig;
+import de.paladinsinn.rollenspielcons.config.RestClientConfig;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -31,7 +31,7 @@ import org.springframework.boot.test.context.SpringBootTest;
         GeocodingService.class,
         GeocodeMapsResult.class,
         GeocodeMapsCoClient.class,
-        WebClientConfig.class,
+        RestClientConfig.class,
         GeoCoordinateMapperImpl.class
     }
 )

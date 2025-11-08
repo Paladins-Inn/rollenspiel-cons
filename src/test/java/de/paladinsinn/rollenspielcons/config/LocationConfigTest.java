@@ -5,7 +5,9 @@ import com.what3words.javawrapper.What3WordsV3;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 /**
@@ -47,7 +49,7 @@ public class LocationConfigTest {
     
     @SuppressWarnings("deprecation") // using deprecated constructor for testing only
     LocationConfig config = new LocationConfig("SOME-API-KEY");
-    What3WordsV3 result = config.what3words();
+    What3WordsV3 result = config.what3WordsV3("SOME-API-KEY", "http://api.what3words.com/v3/");
     
     assertNotNull(result);
     assertEquals(What3WordsV3.class, result.getClass());

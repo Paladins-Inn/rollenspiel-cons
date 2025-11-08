@@ -1,0 +1,25 @@
+{
+  "id" : "57d5b100-b361-3f9e-b170-53a0e60e9c77",
+  "request" : {
+    "url" : "/search?q=Darmst%C3%A4dter%20Str.%2012%2C%2064625%20Bensheim&apiKey=",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-search-4TcDG.json",
+    "headers" : {
+      "Date" : "Sun, 02 Nov 2025 09:57:33 GMT",
+      "Content-Type" : "application/json; charset=utf-8",
+      "Server" : "cloudflare",
+      "Nel" : "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Vary" : "Accept-Encoding",
+      "Access-Control-Allow-Origin" : "*",
+      "Last-Modified" : "Sun, 02 Nov 2025 09:57:33 GMT",
+      "CF-Cache-Status" : "MISS",
+      "Report-To" : "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=h7BS2t06md4gDuqlJfQbloHwHUpcDQYdE702JEWqLdalZloLd51bAlZl28W44yO7VTH%2BE7oL9HNIfzK0eo%2BV8mNwcl2YSrenozxaQFUR\"}]}",
+      "CF-RAY" : "9982c4b16ee3b981-AMS",
+      "alt-svc" : "h3=\":443\"; ma=86400"
+    }
+  },
+  "uuid" : "57d5b100-b361-3f9e-b170-53a0e60e9c77"
+}

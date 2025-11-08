@@ -9,36 +9,38 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestClient;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class KeycloakProtectionClient {
-  private final WebClient.Builder webClientBuilder;
   private final KeycloakTokenClient tokens;
+  private final RestClient.Builder restClientBuilder;
   
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
   private String protectionApiUrl;
   
-  private WebClient protectionClient;
+  private RestClient protectionClient;
   
   
   @PostConstruct
   public void init() {
-    log.trace("enter -  {}, {}", webClientBuilder, protectionApiUrl);
+    log.trace("enter -  {}, {}", restClientBuilder, protectionApiUrl);
     
-    protectionClient = webClientBuilder.baseUrl(protectionApiUrl)
-                                       .defaultHeader("Accept", "application/json")
-                                       .build();
-    
+    protectionClient = restClientBuilder
+        .baseUrl(protectionApiUrl)
+        .defaultHeader("Accept", "application/json")
+        .build();
+
     log.trace("exit - {}", new Object[] {protectionClient});
   }
   
   
-  private WebClient withBearer(WebClient wc, String token) {
+  private RestClient withBearer(RestClient wc, String token) {
     log.trace("enter -  {}, {}", wc, token);
     
     var result = wc.mutate()
@@ -56,16 +58,13 @@ public class KeycloakProtectionClient {
   public ResourceResponse createResource(ResourceRepresentation res) {
     log.trace("enter -  {}", res);
     
-    var result = tokens
-        .getProtectionApiToken()
-        .flatMap(pat -> withBearer(protectionClient, pat)
+    var result = withBearer(protectionClient, tokens.getProtectionApiToken())
         .post()
         .uri("/resource_set")
         .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(res)
+        .body(res)
         .retrieve()
-        .bodyToMono(ResourceResponse.class))
-        .block();
+        .body(ResourceResponse.class);
 
     log.trace("exit - {}", result);
     return result;
@@ -78,14 +77,11 @@ public class KeycloakProtectionClient {
   public ResourceResponse getResource(String resourceId) {
     log.trace("enter -  {}", resourceId);
     
-    var result = tokens
-        .getProtectionApiToken()
-        .flatMap(pat -> withBearer(protectionClient, pat)
+    var result = withBearer(protectionClient, tokens.getProtectionApiToken())
         .get()
         .uri("/resource_set/{id}", resourceId)
         .retrieve()
-        .bodyToMono(ResourceResponse.class))
-        .block();
+        .body(ResourceResponse.class);
 
     log.trace("exit - {}", result);
     return result;
@@ -98,13 +94,11 @@ public class KeycloakProtectionClient {
   public void deleteResource(String resourceId) {
     log.trace("enter -  {}", resourceId);
     
-    tokens.getProtectionApiToken()
-          .flatMap(pat -> withBearer(protectionClient, pat)
+    var result = withBearer(protectionClient, tokens.getProtectionApiToken())
               .delete()
               .uri("/resource_set/{id}", resourceId)
               .retrieve()
-              .bodyToMono(Void.class)).block()
-    ;
+              .body(Void.class);
     
     log.trace("Exiting method");
   }
@@ -116,13 +110,11 @@ public class KeycloakProtectionClient {
   public List<ResourceResponse> listResources() {
     log.trace("enter - ");
     
-    var result = tokens
-        .getProtectionApiToken()
-        .flatMapMany(pat -> withBearer(protectionClient, pat)
+    var result = withBearer(protectionClient, tokens.getProtectionApiToken())
         .get()
         .uri(uriBuilder -> uriBuilder.path("/resource_set").build())
         .retrieve()
-        .bodyToFlux(ResourceResponse.class)).toStream().toList();
+        .body(new ParameterizedTypeReference<List<ResourceResponse>>() {});
 
     log.trace("exit - {}", result);
     return result;
@@ -135,15 +127,13 @@ public class KeycloakProtectionClient {
   public PermissionTicketResponse createPermissionTicket(List<PermissionRequest> requests) {
     log.trace("enter -  {}", requests);
     
-    var result = tokens.getProtectionApiToken()
-        .flatMap(pat -> withBearer(protectionClient, pat)
+    var result = withBearer(protectionClient, tokens.getProtectionApiToken())
         .post()
         .uri("/permission")
         .contentType(MediaType.APPLICATION_JSON)
-        .bodyValue(requests)
+        .body(requests)
         .retrieve()
-        .bodyToMono(PermissionTicketResponse.class))
-        .block();
+        .body(PermissionTicketResponse.class);
 
     log.trace("exit - {}", result);
     return result;

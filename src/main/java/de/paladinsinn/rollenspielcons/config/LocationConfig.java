@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 
 /**
@@ -25,7 +26,7 @@ public class LocationConfig {
 
   @PostConstruct
   public void checkWhat3WordsApiKey() {
-    log.trace("enter -  {}", what3wordsApiKey);
+    log.trace("enter - {}", what3wordsApiKey);
     
     if (what3wordsApiKey == null || what3wordsApiKey.isBlank()) {
       log.warn("No What3Words API key configured! Please set the 'what3words.api.key' property.");
@@ -36,10 +37,17 @@ public class LocationConfig {
   }
   
   @Bean
-  public What3WordsV3 what3words() {
-    log.trace("exit - {}", new What3WordsV3(what3wordsApiKey));
+  @Primary
+  public What3WordsV3 what3WordsV3(
+      @Value("${what3words.api.key}") final String apiKey,
+      @Value("${what3words.api.url:http://api.what3words.com/v3/}") final String url
+  ) {
+    log.trace("enter - {}, {}", apiKey, url);
+    
+    What3WordsV3 result = new What3WordsV3(apiKey, url);
 
-    return new What3WordsV3(what3wordsApiKey);
+    log.trace("exit - {}", result);
+    return result;
   }
   
 

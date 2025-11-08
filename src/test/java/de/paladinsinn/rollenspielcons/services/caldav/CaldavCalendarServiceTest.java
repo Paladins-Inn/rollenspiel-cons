@@ -3,7 +3,7 @@ package de.paladinsinn.rollenspielcons.services.caldav;
 
 import de.paladinsinn.rollenspielcons.config.HateoasConfig;
 import de.paladinsinn.rollenspielcons.config.LocationConfig;
-import de.paladinsinn.rollenspielcons.config.WebClientConfig;
+import de.paladinsinn.rollenspielcons.config.RestClientConfig;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarException;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
@@ -41,7 +41,7 @@ import org.springframework.context.annotation.Profile;
 //TODO 2025-10-19 klenkes74: Add tests with wiremock for this
 @Disabled("Only for manual smoke check")
 @SpringBootTest(classes = {
-    WebClientConfig.class,
+    RestClientConfig.class,
     LocationConfig.class,
     HateoasConfig.class,
     CaldavCalendarService.class,

@@ -1,0 +1,25 @@
+{
+  "id" : "a563fa1d-cf77-3bb2-965b-4728d1c28fe9",
+  "request" : {
+    "url" : "/search?q=Walonenstra%C3%9Fe%2012%2C%2076297%20Stutensee&apiKey=",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-search-TdJLH.json",
+    "headers" : {
+      "Date" : "Sun, 02 Nov 2025 09:57:36 GMT",
+      "Content-Type" : "application/json; charset=utf-8",
+      "Server" : "cloudflare",
+      "Nel" : "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Access-Control-Allow-Origin" : "*",
+      "Last-Modified" : "Sun, 02 Nov 2025 09:57:36 GMT",
+      "CF-Cache-Status" : "MISS",
+      "Report-To" : "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2FGNE1c4YfVZ0jK78E7zRDCXeama4FUc2XwLZXVCsQWGva8SGKjkqpTbp%2FGjGTuqVJiroz8s%2BZUCRbzB5DOcrBnYXCQU3n9CNpqEVYlod\"}]}",
+      "Vary" : "accept-encoding",
+      "CF-RAY" : "9982c4c78f390b34-AMS",
+      "alt-svc" : "h3=\":443\"; ma=86400"
+    }
+  },
+  "uuid" : "a563fa1d-cf77-3bb2-965b-4728d1c28fe9"
+}

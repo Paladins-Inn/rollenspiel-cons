@@ -11,14 +11,13 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.client.RestClient;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 @Slf4j
 public class KeycloakTokenClient {
-  private final WebClient.Builder webClientBuilder;
+  private final RestClient.Builder webClientBuilder;
   
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
   private String protectionApiUrl;
@@ -30,7 +29,7 @@ public class KeycloakTokenClient {
   private String clientSecret;
   
   
-  private WebClient webClient;
+  private RestClient webClient;
   
   @PostConstruct
   public void init() {
@@ -46,7 +45,7 @@ public class KeycloakTokenClient {
   /**
    * Holt ein PAT (Protection API Token) über Client Credentials.
    */
-  public Mono<String> getProtectionApiToken() {
+  public String getProtectionApiToken() {
     log.trace("enter - ");
     
     MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
@@ -59,10 +58,10 @@ public class KeycloakTokenClient {
     var result = webClient
         .post()
         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-        .bodyValue(form)
+        .body(form)
         .retrieve()
-        .bodyToMono(TokenResponse.class)
-        .map(TokenResponse::getAccessToken);
+        .body(TokenResponse.class)
+        .getAccessToken();
     
     log.trace("exit - {}", result);
     return result;
@@ -73,7 +72,7 @@ public class KeycloakTokenClient {
    * (z. B. SPA).
    */
   @SuppressWarnings("unused")
-  public Mono<String> exchangeUmaTicketForRpt(String ticket, String audience) {
+  public String exchangeUmaTicketForRpt(String ticket, String audience) {
     log.trace("enter - ");
     
     MultiValueMap<String, String> form = new LinkedMultiValueMap<>();
@@ -86,10 +85,10 @@ public class KeycloakTokenClient {
     var result = webClient
         .post()
         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-        .bodyValue(form)
+        .body(form)
         .retrieve()
-        .bodyToMono(TokenResponse.class)
-        .map(TokenResponse::getAccessToken);
+        .body(TokenResponse.class)
+        .getAccessToken();
 
     log.trace("exit - {}", result);
     return result;

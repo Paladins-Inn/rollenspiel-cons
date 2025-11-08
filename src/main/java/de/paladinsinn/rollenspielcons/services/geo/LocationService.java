@@ -1,7 +1,7 @@
 package de.paladinsinn.rollenspielcons.services.geo;
 
 
-import com.what3words.javawrapper.What3WordsV3;
+import com.what3words.javawrapper.What3WordsJavaWrapper;
 import com.what3words.javawrapper.request.Coordinates;
 import com.what3words.javawrapper.response.APIResponse.What3WordsError;
 import com.what3words.javawrapper.response.ConvertTo3WA;
@@ -9,7 +9,6 @@ import com.what3words.javawrapper.response.ConvertToCoordinates;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.hateoas.server.core.AnnotationLinkRelationProvider;
 import org.springframework.stereotype.Service;
 
 
@@ -25,10 +24,10 @@ import org.springframework.stereotype.Service;
 public class LocationService {
   
   /** The what3words service */
-  private final What3WordsV3 service;
+  private final What3WordsJavaWrapper service;
   private final GeocodingService geocoding;
   
-  private What3WordsV3 rateLimitedService() {
+  private What3WordsJavaWrapper rateLimitedService() {
     try {
       Thread.sleep(100L);
     } catch (InterruptedException e) {

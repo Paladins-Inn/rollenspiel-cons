@@ -14,7 +14,6 @@ module de.paladinsinn.rollenspielcons {
   requires jakarta.inject;
   requires spring.core;
   requires spring.web;
-  requires spring.webflux;
   requires spring.security.core;
   requires spring.security.config;
   requires spring.security.oauth2.client;
@@ -25,8 +24,6 @@ module de.paladinsinn.rollenspielcons {
   requires spring.security.crypto;
   requires spring.boot.actuator;
   requires spring.boot.actuator.autoconfigure;
-  requires reactor.core;
-  requires org.reactivestreams;
   requires micrometer.core;
   requires micrometer.tracing;
   requires micrometer.jakarta9;
@@ -66,7 +63,11 @@ module de.paladinsinn.rollenspielcons {
 
   // Öffnen für Jackson / Spring Reflection (JSON-Deserialisierung, Proxies)
   opens de.paladinsinn.rollenspielcons.domain.api
-        to com.fasterxml.jackson.databind;
+        to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
   opens de.paladinsinn.rollenspielcons.domain.model
-      to com.fasterxml.jackson.databind;
+      to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
+  opens de.paladinsinn.rollenspielcons.config
+      to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
+  opens de.paladinsinn.rollenspielcons.services.geo
+      to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
 }

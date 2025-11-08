@@ -62,7 +62,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>3.5.6</version>
+        <version>3.5.7</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -227,20 +227,14 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <exclusions>
-        <exclusion><!-- CVE-2025-11-226 -->
-          <groupId>ch.qos.logback</groupId>
-          <artifactId>logback-core</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency><!-- WebClient -->
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-webflux</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-hateoas</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web-services</artifactId>
     </dependency>
 
 
@@ -277,6 +271,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+
 
     <!-- Persistence -->
     <dependency>
@@ -319,6 +314,7 @@
       <artifactId>jackson-datatype-jsr310</artifactId>
     </dependency>
 
+
     <!-- OpenAPI / Swagger -->
     <dependency>
       <groupId>org.springdoc</groupId>
@@ -331,6 +327,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+
 
     <!-- Caching -->
     <dependency>
@@ -429,8 +426,6 @@
       <artifactId>spotbugs-annotations</artifactId>
       <version>4.9.3</version>
     </dependency>
-
-
 
 
     <!-- Observability -->
@@ -1214,6 +1209,87 @@
               <migrationSqlOutputFile>${project.build.directory}/db.sql</migrationSqlOutputFile>
               <outputFile>${project.build.directory}/db.out</outputFile>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- xml -->
+    <profile>
+      <id>localhost-ssl</id>
+
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <properties>
+        <tls.dir>${project.build.directory}/generated-resources/tls</tls.dir>
+        <tls.password>changeit</tls.password>
+        <tls.keystore>${tls.dir}/localhost.p12</tls.keystore>
+        <tls.truststore>${tls.dir}/test-truststore.jks</tls.truststore>
+        <tls.cert>${tls.dir}/localhost.crt</tls.cert>
+
+        <!-- Von Surefire (siehe Dein POM) via @{argLine} übernommen -->
+        <argLine>
+          -Djavax.net.ssl.trustStore=${tls.truststore}
+          -Djavax.net.ssl.trustStorePassword=${tls.password}
+        </argLine>
+      </properties>
+
+      <build>
+        <plugins>
+          <!-- erzeugt Keystore, exportiert Cert und baut Truststore -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>generate-localhost-truststore</id>
+                <phase>generate-test-resources</phase>
+                <configuration>
+                  <target>
+                    <mkdir dir="${tls.dir}"/>
+
+                    <!-- 1) localhost-KeyPair -->
+                    <exec executable="keytool" failonerror="true">
+                      <arg value="-genkeypair"/>
+                      <arg value="-alias"/><arg value="localhost"/>
+                      <arg value="-keyalg"/><arg value="RSA"/>
+                      <arg value="-keysize"/><arg value="2048"/>
+                      <arg value="-storetype"/><arg value="PKCS12"/>
+                      <arg value="-keystore"/><arg value="${tls.keystore}"/>
+                      <arg value="-storepass"/><arg value="${tls.password}"/>
+                      <arg value="-keypass"/><arg value="${tls.password}"/>
+                      <arg value="-dname"/><arg value="CN=localhost, OU=Dev, O=Local, L=local, S=NA, C=DE"/>
+                      <arg value="-ext"/><arg value="SAN=dns:localhost,ip:127.0.0.1,ip:0:0:0:0:0:0:0:1"/>
+                      <arg value="-validity"/><arg value="36500"/>
+                    </exec>
+
+                    <!-- 2) Zertifikat exportieren -->
+                    <exec executable="keytool" failonerror="true">
+                      <arg value="-exportcert"/>
+                      <arg value="-alias"/><arg value="localhost"/>
+                      <arg value="-keystore"/><arg value="${tls.keystore}"/>
+                      <arg value="-storepass"/><arg value="${tls.password}"/>
+                      <arg value="-rfc"/>
+                      <arg value="-file"/><arg value="${tls.cert}"/>
+                    </exec>
+
+                    <!-- 3) Truststore erstellen/füllen -->
+                    <exec executable="keytool" failonerror="true">
+                      <arg value="-importcert"/>
+                      <arg value="-noprompt"/>
+                      <arg value="-alias"/><arg value="localhost"/>
+                      <arg value="-file"/><arg value="${tls.cert}"/>
+                      <arg value="-keystore"/><arg value="${tls.truststore}"/>
+                      <arg value="-storepass"/><arg value="${tls.password}"/>
+                    </exec>
+                  </target>
+                </configuration>
+                <goals><goal>run</goal></goals>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

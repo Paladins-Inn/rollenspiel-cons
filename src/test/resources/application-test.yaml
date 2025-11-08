@@ -1,11 +1,7 @@
-what3words:
-  api:
-    key: changeme
-    
 spring:
   liquibase:
     enabled: false
   config:
-    import: optional:chlasspath:local.properties
+    import: optional:classpath:local.properties
   main:
     banner-mode: log

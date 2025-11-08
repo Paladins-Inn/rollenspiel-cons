@@ -1,0 +1,25 @@
+{
+  "id" : "2ee8dbf9-69fa-32fc-91bd-cbd6ad8adddd",
+  "request" : {
+    "url" : "/search?q=Ernst-Blickle-Stra%C3%9Fe%2042%2C%2076464%20Bruchsal&apiKey=",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-search-V0hx9.json",
+    "headers" : {
+      "Date" : "Sun, 02 Nov 2025 09:57:50 GMT",
+      "Content-Type" : "application/json; charset=utf-8",
+      "Server" : "cloudflare",
+      "Nel" : "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Vary" : "Accept-Encoding",
+      "Access-Control-Allow-Origin" : "*",
+      "Last-Modified" : "Sun, 02 Nov 2025 09:57:50 GMT",
+      "CF-Cache-Status" : "MISS",
+      "Report-To" : "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=W%2BRXYzpVrg2pDFHiOB5IvG1FTM5D4MA11kvXVnCs2sJmDoXpRJdFvL9eX5VFMVlCcONKqBRBBRn0Clj2YNiy9GsQXd60a2qvQg2cRHYz\"}]}",
+      "CF-RAY" : "9982c51aa9678ed2-AMS",
+      "alt-svc" : "h3=\":443\"; ma=86400"
+    }
+  },
+  "uuid" : "2ee8dbf9-69fa-32fc-91bd-cbd6ad8adddd"
+}

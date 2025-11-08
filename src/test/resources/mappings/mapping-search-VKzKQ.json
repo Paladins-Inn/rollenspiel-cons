@@ -1,0 +1,25 @@
+{
+  "id" : "2f66855d-fcbc-3e58-a215-131abfb1ad02",
+  "request" : {
+    "url" : "/search?q=Rheinstra%C3%9Fe%2084%2C%2076297%20Stutensee&apiKey=",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-search-VKzKQ.json",
+    "headers" : {
+      "Date" : "Sun, 02 Nov 2025 09:57:40 GMT",
+      "Content-Type" : "application/json; charset=utf-8",
+      "Server" : "cloudflare",
+      "Nel" : "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+      "Access-Control-Allow-Origin" : "*",
+      "Last-Modified" : "Sun, 02 Nov 2025 09:57:40 GMT",
+      "CF-Cache-Status" : "MISS",
+      "Report-To" : "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZJf6lkR2mFir2LZNrul919hVp8tAF0b0TXdQYobSIdZt%2BT54MW88lGlQgyGHzX56eODIcwrUXk0EKQgf7PkEX%2Fdd5wl70sAxMq%2FmI6yt\"}]}",
+      "Vary" : "accept-encoding",
+      "CF-RAY" : "9982c4dc58211cb0-AMS",
+      "alt-svc" : "h3=\":443\"; ma=86400"
+    }
+  },
+  "uuid" : "2f66855d-fcbc-3e58-a215-131abfb1ad02"
+}

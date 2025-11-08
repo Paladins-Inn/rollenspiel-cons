@@ -100,6 +100,16 @@ management:
 google:
   client-id: changeme
   client-secret: changeme
+  calendar:
+    id: changeme
+  
+what3words:
+  api:
+    key: changeme
+    url: https://api.what3words.com/
+
+geocode:
+  url: http://geocode.maps.co/search
 
 snowflake:
   datacenter-id: 1
