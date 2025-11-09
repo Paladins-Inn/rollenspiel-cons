@@ -35,7 +35,7 @@ import org.springframework.web.client.RestClient;
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 @Slf4j
-public class CaldavCalendarService implements CalendarService {
+public class ICalCalendarService implements CalendarService {
   /** The default number of months to fetch events if no end date ist specified. */
   public static final int MONTHS_TO_ADD = 3;
   

@@ -56,6 +56,7 @@ module de.paladinsinn.rollenspielcons {
   requires org.apache.tomcat.embed.core;
   requires owasp.java.html.sanitizer;
   requires gg.jte.runtime;
+  requires annotations;
   
   // Export top-level packages (note: subpackages must be exported individually if compile-time export is required)
   exports de.paladinsinn.rollenspielcons.domain.api;

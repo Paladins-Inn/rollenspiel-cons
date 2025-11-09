@@ -31,7 +31,7 @@ import lombok.extern.jackson.Jacksonized;
 @Getter
 @ToString(callSuper = true, onlyExplicitlyIncluded = true)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-public class IcalCalendar extends AbstractModelBase implements Calendar {
+public class ICalCalendar extends AbstractModelBase implements Calendar {
   @Serial
   private static final long serialVersionUID = 1L;
   

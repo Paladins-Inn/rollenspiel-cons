@@ -7,7 +7,7 @@ import de.paladinsinn.rollenspielcons.domain.api.HasId;
 import de.paladinsinn.rollenspielcons.domain.api.HasOwner;
 import de.paladinsinn.rollenspielcons.domain.api.HasVersion;
 import de.paladinsinn.rollenspielcons.domain.api.integrations.ImporterAuthentication;
-import de.paladinsinn.rollenspielcons.domain.model.calendars.IcalCalendar;
+import de.paladinsinn.rollenspielcons.domain.model.calendars.ICalCalendar;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
@@ -26,7 +26,7 @@ import static de.paladinsinn.rollenspielcons.domain.api.SystemConstants.URL_MIN_
  * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
  * @since 2025-10-11
  */
-@JsonDeserialize(as = IcalCalendar.class)
+@JsonDeserialize(as = ICalCalendar.class)
 public interface Calendar extends HasId, HasVersion, HasOwner, HasDisplayText, Serializable {
   /**
    * This is the calender to sync from.

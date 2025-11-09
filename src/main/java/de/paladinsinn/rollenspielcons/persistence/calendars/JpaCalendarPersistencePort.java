@@ -5,7 +5,7 @@ import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarPersistenceException;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarPersistencePort;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarType;
-import de.paladinsinn.rollenspielcons.domain.model.calendars.IcalCalendar;
+import de.paladinsinn.rollenspielcons.domain.model.calendars.ICalCalendar;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +32,7 @@ public class JpaCalendarPersistencePort implements CalendarPersistencePort {
   public Calendar create(final Calendar calendar) throws CalendarPersistenceException {
     log.trace("enter -  {}", calendar);
     
-    Calendar result = saveCalendar(calendar, mapper.toJpa((IcalCalendar) calendar));
+    Calendar result = saveCalendar(calendar, mapper.toJpa((ICalCalendar) calendar));
     
     log.trace("exit - {}", result);
     return result;
@@ -124,7 +124,7 @@ public class JpaCalendarPersistencePort implements CalendarPersistencePort {
   public void update(final Calendar calendar) throws CalendarPersistenceException {
     log.trace("enter -  {}", calendar);
     
-    Calendar result = saveCalendar(calendar, mapper.toJpa((IcalCalendar) calendar));
+    Calendar result = saveCalendar(calendar, mapper.toJpa((ICalCalendar) calendar));
     log.debug("Updated calendar. orig={}, updated={}", calendar, result);
     
     log.trace("exit -");

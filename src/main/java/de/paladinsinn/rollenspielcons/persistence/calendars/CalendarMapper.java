@@ -1,6 +1,6 @@
 package de.paladinsinn.rollenspielcons.persistence.calendars;
 
-import de.paladinsinn.rollenspielcons.domain.model.calendars.IcalCalendar;
+import de.paladinsinn.rollenspielcons.domain.model.calendars.ICalCalendar;
 import de.paladinsinn.rollenspielcons.persistence.importers.ImportAuthenticationMapper;
 import de.paladinsinn.rollenspielcons.persistence.mapper.OwnerMapper;
 import org.mapstruct.Mapper;
@@ -16,9 +16,9 @@ import org.mapstruct.Mapper;
     }
 )
 public interface CalendarMapper {
-  IcalCalendar toDomain(AbstractJpaCalendar jpa);
+  ICalCalendar toDomain(AbstractJpaCalendar jpa);
   
-  IcalCalendar toDomain(JpaCalDavCalendar jpa);
+  ICalCalendar toDomain(JpaCalDavCalendar jpa);
   
-  JpaCalDavCalendar toJpa(IcalCalendar domain);
+  JpaCalDavCalendar toJpa(ICalCalendar domain);
 }

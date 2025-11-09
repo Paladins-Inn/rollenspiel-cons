@@ -7,7 +7,7 @@ import de.paladinsinn.rollenspielcons.config.RestClientConfig;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.Calendar;
 import de.paladinsinn.rollenspielcons.domain.api.calendars.CalendarException;
 import de.paladinsinn.rollenspielcons.domain.api.events.Event;
-import de.paladinsinn.rollenspielcons.domain.model.calendars.IcalCalendar;
+import de.paladinsinn.rollenspielcons.domain.model.calendars.ICalCalendar;
 import de.paladinsinn.rollenspielcons.domain.model.importers.NullAuthentication;
 import de.paladinsinn.rollenspielcons.persistence.locations.LocationMapperImpl;
 import de.paladinsinn.rollenspielcons.persistence.mapper.DisplayTextMapperImpl;
@@ -44,7 +44,7 @@ import org.springframework.context.annotation.Profile;
     RestClientConfig.class,
     LocationConfig.class,
     HateoasConfig.class,
-    CaldavCalendarService.class,
+    ICalCalendarService.class,
     GeocodingService.class,
     GeocodeMapsCoClient.class,
     GeoCoordinateMapperImpl.class,
@@ -66,10 +66,10 @@ import org.springframework.context.annotation.Profile;
     }
 )
 @Slf4j
-public class CaldavCalendarServiceTest {
+public class ICalCalendarServiceTest {
   private static final String CALENDAR_URL = "https://calendar.google.com/calendar/ical/88fb7669d9909b5ae6a8ac88c09526c3c09ff0ac32e840363094c2e758e4dd12@group.calendar.google.com/public/basic.ics";
   
-  private static final Calendar calender = IcalCalendar
+  private static final Calendar calender = ICalCalendar
       .builder()
       .calendarId(CALENDAR_URL)
       .owner("ich")
@@ -78,7 +78,7 @@ public class CaldavCalendarServiceTest {
       .build();
   
   @Autowired
-  private CaldavCalendarService sut;
+  private ICalCalendarService sut;
 
   
   @Test
