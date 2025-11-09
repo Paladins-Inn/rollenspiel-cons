@@ -14,16 +14,13 @@ import org.springframework.web.service.annotation.HttpExchange;
  * @since 2025-10-18
  */
 @Service
-@HttpExchange(
-    url = "https://geocode.maps.co"
-)
+@HttpExchange
 public interface GeocodeMapsCoClient {
   /**
    * Search for a location.
-   * @param q      The address to search for.
-   * @param apiKey The API KEY to use.
+   * @param q The address to search for.
    * @return The geocode results.
    */
   @GetExchange(url = "/search", accept = "application/json")
-  Set<GeocodeMapsResult> search(@RequestParam String q, @RequestParam String apiKey);
+  Set<GeocodeMapsResult> search(@RequestParam String q);
 }

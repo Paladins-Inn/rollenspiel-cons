@@ -3,6 +3,7 @@ package de.paladinsinn.rollenspielcons.config;
 
 import de.paladinsinn.rollenspielcons.services.geo.GeocodeMapsCoClient;
 import jakarta.validation.constraints.NotNull;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,8 @@ import org.springframework.security.oauth2.client.web.client.OAuth2ClientHttpReq
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+import org.springframework.web.util.DefaultUriBuilderFactory;
+import org.springframework.web.util.UriBuilderFactory;
 
 
 /**
@@ -26,6 +29,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @RequiredArgsConstructor
 @Slf4j
 public class RestClientConfig {
+  
   @Bean
   public RestClient restClient(@NotNull final RestClient.Builder builder) {
     log.trace("enter - ");
@@ -38,9 +42,10 @@ public class RestClientConfig {
 
   @Bean
   public GeocodeMapsCoClient geocodeMapsCoClient(
-      @NotNull @Value("${geocode.url") final String url,
+      @NotNull @Value("${geocoding.api.url") final String url,
       @NotNull RestClient.Builder clientBuilder,
       @NotNull JdkClientHttpRequestFactory requestFactory,
+      @NotNull UriBuilderFactory apiKeyInjectorFactory,
       @NotNull OAuth2ClientHttpRequestInterceptor oauth2Interceptor
   ) {
     log.trace("enter - {}, {}, {}, {}", url, clientBuilder, requestFactory, oauth2Interceptor);
@@ -49,6 +54,7 @@ public class RestClientConfig {
         url,
         clientBuilder,
         requestFactory,
+        apiKeyInjectorFactory,
         oauth2Interceptor
     );
 
@@ -66,12 +72,14 @@ public class RestClientConfig {
       @NotNull final String url,
       @NotNull RestClient.Builder clientBuilder,
       @NotNull JdkClientHttpRequestFactory requestFactory,
+      @NotNull UriBuilderFactory apiKeyInjectorFactory,
       @NotNull OAuth2ClientHttpRequestInterceptor oauth2Interceptor
   ) {
-    log.trace("enter - {}, {}, {}, {}", url, clientBuilder, requestFactory, oauth2Interceptor);
+    log.trace("enter - {}, {}, {}, {}, {}", url, clientBuilder, requestFactory, apiKeyInjectorFactory, oauth2Interceptor);
     
     var result = clientBuilder
         .requestFactory(requestFactory)
+        .uriBuilderFactory(apiKeyInjectorFactory)
         .baseUrl(url)
         .requestInterceptor(oauth2Interceptor)
         .build();
@@ -89,6 +97,20 @@ public class RestClientConfig {
     log.trace("exit - {}", result);
     return result;
   }
+  
+  @Bean
+  public UriBuilderFactory uriBuilderFactory(
+      @Value("${geocoding.api.key:changeme}") final String apiKey
+  ) {
+    log.trace("enter - {}", apiKey);
+    
+    var result = new DefaultUriBuilderFactory();
+    result.setDefaultUriVariables(Map.of("api_key", apiKey));
+    
+    log.trace("exit - {}", result);
+    return result;
+  }
+  
   
   @Bean
   public OAuth2ClientHttpRequestInterceptor oauth2HttpRequestInterceptor(

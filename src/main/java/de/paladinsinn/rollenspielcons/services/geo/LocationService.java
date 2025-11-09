@@ -1,7 +1,7 @@
 package de.paladinsinn.rollenspielcons.services.geo;
 
 
-import com.what3words.javawrapper.What3WordsJavaWrapper;
+import com.what3words.javawrapper.What3WordsV3;
 import com.what3words.javawrapper.request.Coordinates;
 import com.what3words.javawrapper.response.APIResponse.What3WordsError;
 import com.what3words.javawrapper.response.ConvertTo3WA;
@@ -24,12 +24,12 @@ import org.springframework.stereotype.Service;
 public class LocationService {
   
   /** The what3words service */
-  private final What3WordsJavaWrapper service;
+  private final What3WordsV3 service;
   private final GeocodingService geocoding;
   
-  private What3WordsJavaWrapper rateLimitedService() {
+  private What3WordsV3 rateLimitedService() {
     try {
-      Thread.sleep(100L);
+      Thread.sleep(200L);
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
     }
@@ -116,9 +116,9 @@ public class LocationService {
    * Converts the given 3 word address to coordinates.
    *
    * @param threeWords The 3 word address to convert.
-   * @return the coordinates of the locations in "longitude,latitude" format.
+   * @return the coordinates of the location.
    */
-  public String convertToCoordinates(final String threeWords) {
+  public GeoCoordinates convertToCoordinates(final String threeWords) {
     log.trace("enter -  {}", threeWords);
     
     ConvertToCoordinates coord = rateLimitedService().convertToCoordinates(threeWords).execute();
@@ -127,7 +127,10 @@ public class LocationService {
       report3WordsError(coord.getError());
     }
     
-    var result = coord.getCoordinates().getLng() + "," + coord.getCoordinates().getLat();
+    var result = GeoCoordinates.builder()
+        .latitude(coord.getCoordinates().getLat())
+        .longitude(coord.getCoordinates().getLng())
+        .build();
     
     log.trace("exit - {}", result);
     return result;

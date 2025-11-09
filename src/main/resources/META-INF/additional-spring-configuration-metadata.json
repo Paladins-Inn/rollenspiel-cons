@@ -16,14 +16,29 @@
       "description": "The client-secret for google Oauth2."
     },
     {
-      "name": "geocode.url",
+      "name": "google.calendar.id",
+      "type": "java.lang.String",
+      "description": "The ID of the Google Calendar to be used."
+    },
+    {
+      "name": "geocoding.api.key",
+      "type": "java.lang.String",
+      "description": "The API key for accessing the geocode.maps.co service."
+    },
+    {
+      "name": "geocoding.api.url",
       "type": "java.lang.String",
       "description": "The URL used to access the geocode.maps.co API."
     },
     {
-      "name": "google.calendar.id",
+      "name": "what3words.api.key",
       "type": "java.lang.String",
-      "description": "The ID of the Google Calendar to be used."
+      "description": "The API key for accessing the What3Words service."
+    },
+    {
+      "name": "what3words.api.url",
+      "type": "java.lang.String",
+      "description": "The URL used to access the What3Words API."
     }
   ]
 }

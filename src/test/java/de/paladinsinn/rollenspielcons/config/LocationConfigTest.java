@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 /**
@@ -20,35 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class LocationConfigTest {
   
   @Test
-  public void shouldComplainAboutMissingApiKeyIfApiKeyIsMissing() {
-    log.trace("enter - ");
-    
-    LocationConfig config = new LocationConfig();
-    
-    assertThrows(IllegalStateException.class, config::checkWhat3WordsApiKey);
-    
-    log.trace("exit - ");
-  }
-  
-  @Test
-  public void shouldComplainAboutMissingApiKeyIfApiKeyIsBlank() {
-    log.trace("enter - ");
-    
-    @SuppressWarnings("deprecation") // using deprecated constructor for testing only
-    LocationConfig config = new LocationConfig("   ");
-    
-    assertThrows(IllegalStateException.class, config::checkWhat3WordsApiKey);
-    
-    log.trace("exit - ");
-  }
-  
-  
-  @Test
   public void shouldReturnWhat3WordsInstanceIfApiKeyIsSet() {
     log.trace("enter - ");
     
-    @SuppressWarnings("deprecation") // using deprecated constructor for testing only
-    LocationConfig config = new LocationConfig("SOME-API-KEY");
+    LocationConfig config = new LocationConfig();
     What3WordsV3 result = config.what3WordsV3("SOME-API-KEY", "http://api.what3words.com/v3/");
     
     assertNotNull(result);

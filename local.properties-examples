@@ -1,7 +1,19 @@
 # Local environment variables for rollenspiel-cons
 # Copy to .env-local (NOT committed) and fill values.
-spring.datasource.url=jdbc:postgresql://localhost:5432/klenkes74
-spring.datasource.username=changeme
-spring.datasource.password=changeme
+spring.datasource.url=jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+spring.datasource.username=sa
+spring.datasource.password=sa
 #
 aes256.key=9ITuE9U2rzZwZF76wLGURy1Jw/oRWChvG8bIRPzS7ps=
+#
+what3words.api.key=ABCDEFGH
+what3words.api.url=https://localhost:8089/
+#
+geocoding.api.key=ABCDEFGH
+geocoding.api.url=https://localhost:8089/
+geocoding.rate-limit=3
+
+#
+google.calendar.id=88fb7669d9909b5ae6a8ac88c09526c3c09ff0ac32e840363094c2e758e4dd12@group.calendar.google.com
+google.client.id=changeme
+google.client.secret=changeme

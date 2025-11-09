@@ -70,4 +70,6 @@ module de.paladinsinn.rollenspielcons {
       to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
   opens de.paladinsinn.rollenspielcons.services.geo
       to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
+  opens de.paladinsinn.rollenspielcons
+      to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
 }

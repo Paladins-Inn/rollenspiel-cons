@@ -27,9 +27,6 @@ import org.springframework.web.client.RestClientResponseException;
 @RequiredArgsConstructor
 @Slf4j
 public class GeocodingService {
-  @Value("${geocoding.api.key:}")
-  String apiKey;
-  
   @Value("${geocoding.rate-limit:3}")
   long rateLimit; // every <rateLimit> seconds
   
@@ -46,7 +43,7 @@ public class GeocodingService {
     worker.setDaemon(true);
     worker.start();
     
-    log.trace("exit - {}", new Object[] {worker});
+    log.trace("exit - {}", worker);
   }
   
   @PreDestroy
@@ -123,7 +120,7 @@ public class GeocodingService {
         log.trace("enter -  {}, {}", counter, r.address);
         
         try {
-          Set<GeocodeMapsResult> results = client.search(r.address, apiKey);
+          Set<GeocodeMapsResult> results = client.search(r.address);
           log.debug("Gecoding results. counter={}, address={}, results={}",
                     counter, r.address, results.size());
           r.future.complete(results);

@@ -108,8 +108,11 @@ what3words:
     key: changeme
     url: https://api.what3words.com/
 
-geocode:
-  url: http://geocode.maps.co/search
+geocoding:
+  api:
+    key: changeme
+    url: http://geocode.maps.co/search
+  rate-limit: 3
 
 snowflake:
   datacenter-id: 1
