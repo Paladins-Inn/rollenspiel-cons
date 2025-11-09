@@ -67,6 +67,7 @@ The decision drivers are addressed as follows:
 *License:* Apache 2.0
 
 *Pros:*
+
 * Mature Java library for iCalendar and CalDAV
 * Good documentation and active development
 * Large user base and community
@@ -77,6 +78,7 @@ The decision drivers are addressed as follows:
 * Fulfills maintainability and reliability requirements
 
 *Cons:*
+
 * API can be complex for advanced CalDAV features
 * Some CalDAV operations require manual handling
 
@@ -86,12 +88,14 @@ The decision drivers are addressed as follows:
 *License:* MIT
 
 *Pros:*
+
 * Used by Nextcloud as backend (full protocol support)
 * Large community (Nextcloud ecosystem)
 * REST API can be consumed with any HTTP client (flexible)
 * Open source, permissive license (MIT)
 
 *Cons:*
+
 * PHP-based, no native Java library
 * Integration requires custom REST client code
 * No direct Spring Boot integration
@@ -103,12 +107,14 @@ The decision drivers are addressed as follows:
 *License:* Apache 2.0
 
 *Pros:*
+
 * Lightweight Java WebDAV client
 * Simple API for basic CalDAV operations
 * Maven Central support
 * Open source, permissive license (Apache 2.0)
 
 *Cons:*
+
 * Less active development, smaller community
 * Limited CalDAV-specific features
 * May not fulfill all functional suitability requirements
