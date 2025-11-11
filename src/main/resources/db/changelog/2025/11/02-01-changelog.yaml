@@ -1,5 +1,16 @@
 databaseChangeLog:
   - changeSet:
+      id: 1762064835204-0
+      author: klenkes74
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - sql:
+            sql: |-
+              create schema if not exists cons;
+            stripComments: true
+            comment: 'Create schema cons if not exists'
+  
+  - changeSet:
       id: 1762064835204-1
       author: klenkes74
       objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
