@@ -102,9 +102,9 @@ jobs:
         git tag -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
         git push origin -f ${{ steps.release-version.outputs.RELEASE_VERSION }}
     
-    - name: Create `./.properties-local`
+    - name: Create `./local.properties`
       run: |
-        cat > .properties-local <<'EOF'
+        cat > local.properties <<'EOF'
         spring.datasource.url=jdbc:h2:mem:testdb
         spring.datasource.driverClassName=org.h2.Driver
         spring.datasource.username=sa
