@@ -1,4 +1,5 @@
 = Level 2: Components of the SCS
+include::partial$config.adoc[]
 
 == Overview Diagram
 [plantuml, scs-level-2]
@@ -12,20 +13,20 @@ actor "User" <<User>> as ingress
 
 component "rollenspiel-cons" <<SCS,spring-boot>> as service {
   component "Frontend" as frontend {
-    [Web Application] <<Java, JTE>> as app
-    [REST API] <<Java>> as api
+    interface "Web Application" <<Java, JTE>> as app
+    interface "REST API" <<Java>> as api
+    [Controller] <<Java>> as controller
   }
 
 
   component "Core" as core {
-    [Service/Controller] <<Java>> as servicecore
+    [Service] <<Java>> as servicecore
     [Persistence] <<JPA>> as persistence
     component "Domain" <<Java>> as domain {
       [API] <<Java>> as apicore
       [Model] <<Java>> as model
-      [Service] <<Java>> as domainservice
+      [Services] <<Java>> as services
     }
-    [UMA Client] <<Java>> as uma
   }
 
 
@@ -34,31 +35,35 @@ component "rollenspiel-cons" <<SCS,spring-boot>> as service {
     [Discord Bot Service] <<Java>> as discordsvc
     [3words Service] <<Java>> as what3wordssvc
     [OpenStreetMap Service] <<Java>> as osmsvc
+    [UMA Client] <<Java>> as uma
   }
 }
 
 ingress --> app : HTML
 ingress --> api : REST\nGRAPHQL\nJSON
 
-app --> servicecore
-api --> servicecore
+app --> controller
+api --> controller
 
-servicecore --> domainservice
+controller --> servicecore
+controller --> uma
+
+servicecore --> services
 servicecore -left-> persistence
 servicecore .down.> apicore
 servicecore -right-> uma
-domainservice -left-> model
-domainservice .left.> apicore
+services -left-> model
+services .left.> apicore
 model .left.> apicore
 
 model <-- persistence
 persistence -left-> data : Postgres
 persistence .down.> apicore
 
-gcalsvc <-up- domainservice
-discordsvc <-up-> domainservice
-what3wordssvc <-up- domainservice
-osmsvc <-up- domainservice
+gcalsvc <-up- services
+discordsvc <-up-> services
+what3wordssvc <-up- services
+osmsvc <-up- services
 
 circle "Google Calendar" as gcal
 circle "Discord" as discord
@@ -67,12 +72,12 @@ circle "3words" as what3words
 
 gcalsvc -down-> gcal : Java-API
 discordsvc <-down-> discord : Java-API
-osmsvc -down-> osm : REST
 what3wordssvc -down-> what3words : REST
 uma -down-> keycloak : REST
+osmsvc -down-> osm : REST
 
 @enduml
 ----
 
 == List of Building Blocks
-include::partial$building-blocks-level-2.adoc[]
+include::_level2.adoc[]

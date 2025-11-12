@@ -3,4 +3,4 @@ include::partial$config.adoc[]
 
 This chapter lists the current architecture decisions (ADRs) of the {rpg-cons} project.
 
-include::partial$nav.adr.adoc[]
+include::_nav.adoc[]

@@ -5,3 +5,7 @@ include::partial$config.adoc[]
 == Whitebox Overall System
 
 include::partial$whitebox-overall-system.adoc[]
+
+== List of Building Blocks
+
+include::_level2.adoc[]

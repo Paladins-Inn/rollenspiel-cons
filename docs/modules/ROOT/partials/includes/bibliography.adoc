@@ -5,7 +5,7 @@
 :cleancode: xref:rollenspiel-cons:ROOT:bibliography.adoc#cleancode[&uparrow;CLEANCODE]
 :ddd-hexagonal: xref:rollenspiel-cons:ROOT:bibliography.adoc#vernon-ddd-hexagonal[&uparrow;DDD-HEXAGONAL]
 :eu-barrierefreiheit: xref:rollenspiel-cons:ROOT:bibliography.adoc#richtlinie-barrierefreiheit[&uparrow;EU-Richtlinie 2016/2102]
-:hexagonal: xref:rollenspiel-cons:ROOT:bibliography.adoc#cockburn-hexagonal[&uparrow;HEXAGONAL]
+:hexagonal: xref:rollenspiel-cons:ROOT:bibliography.adoc#vernon-ddd-hexagonal[&uparrow;DDD-HEXAGONAL]
 :implementing-ddd: xref:rollenspiel-cons:ROOT:bibliography.adoc#vernon-implementing-ddd[&uparrow;IMPLEMENTING-DDD]
 :parks01: xref:rollenspiel-cons:ROOT:bibliography.adoc#parks01[&uparrow;PARKS01]
 :parks01-full: Parks, Yvonne: API Versioning: URL vs Header vs Media Type versioning, {parks01}.

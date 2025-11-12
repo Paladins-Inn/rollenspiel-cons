@@ -13,24 +13,26 @@ component "rollenspiel-cons" <<SCS,spring-boot>> as service {
 
   database "rollenspiel-cons" <<Postgres>> as data
 
-  [Integrations] <<Java, spring-boot, API>> as integrations
+  [Integrations] <<Java, spring-boot, API>> as services
 }
 
 
 ingress --> frontend : uses
 frontend -right-> core : uses
-core --> integrations : uses
+core --> services : uses
 core -right-> data
 
 [Google Calendar] as gcal
+[ICal] as ical
 [Discord] as discord
 [OpenStreetMap] as osm
 [3words] as what3words
 
-integrations --> gcal : API
-integrations <--> discord : API
-integrations --> osm : REST
-integrations --> what3words : REST
+services --> ical : REST
+services --> gcal : API
+services <--> discord : API
+services --> osm : REST
+services --> what3words : REST
 
 @enduml
 ----

@@ -37,9 +37,6 @@ The bibliography is shared between all components of the whole {rpg-cons} projec
 | [[flexmark,FLEXMARK-JAVA]]FLEXMARK-JAVA
 | [Online]. flexmark-java — Java Markdown processor (CommonMark). Available: https://github.com/vsch/flexmark-java
 
-| [[cockburn-hexagonal,HEXAGONAL]]HEXAGONAL
-| **Cockburn, Alistair**, 'Hexagonal Architecture'. 2005, [Online]. Available: https://alistair.cockburn.us/hexagonal-architecture/
-
 | [[jte,JTE]]JTE
 | [Online]. JTE template engine documentation. Available: https://jte.gg
 

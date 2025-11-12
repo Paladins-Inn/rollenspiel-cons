@@ -1,4 +1,5 @@
-.Level 2 Building blocks of `rollenspiel-cons`
+include::partial$config.adoc[]
+.Level 3 Building blocks of `rollenspiel-cons`
 [cols="<.<4h,<.<8a,<.<4a",options="header",frame="topbot",grid="rows"]
 |===
 | Name | Description | Technology
@@ -20,6 +21,9 @@
 | Java, Spring
 | [[bb-model,Model]] **Model**
 | The model contains the data structures of the system.
+| Java
+| [[bb-persistence,Persistence]] **Persistence**
+| The persistence port of the {gloss_ports_adapters}.
 | Java, JPA
 
 | [[bb-database,Database]] **Database**
@@ -27,11 +31,14 @@
 | Postgresql
 
 
-3+h| Integrations
+3+h| Services
 
 | [[bb-gcalsvc,Google Calendar Service]] **Google Calendar Service**
 | The Google Calendar Service is used to integrate with Google Calendar.
 | Java, Spring, Google Calendar API
+| [[bb-ical,iCal Service]] **iCal Service**
+| The iCal Service is used to integrate with iCal calendars.
+| Java, Spring, iCal API
 | [[bb-discordsvc,Discord Bot Service]] **Discord Bot Service**
 | The Discord Bot Service is used to integrate with Discord.
 | Java, Spring, Discord API
