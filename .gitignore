@@ -14,7 +14,10 @@ target/
 /src/main/resources/static/tables.html
 calendar-service-account.json
 .*-local
-local.properties
+local.*
+
+!local.properties-example
 .local-*
+!.local-*-example
 /http-client.private.env.json
 /src/test/resources/local.propertes

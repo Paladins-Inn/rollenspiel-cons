@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../kaiserpfalz-edv/cluster-gitops/cluster-gitops.iml" filepath="$PROJECT_DIR$/../../kaiserpfalz-edv/cluster-gitops/cluster-gitops.iml" />
       <module fileurl="file://$PROJECT_DIR$/../docs/docs.iml" filepath="$PROJECT_DIR$/../docs/docs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../foundryvtt-k8s/foundryvtt-k8s.iml" filepath="$PROJECT_DIR$/../foundryvtt-k8s/foundryvtt-k8s.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-foundryvtt/gitops-foundryvtt.iml" filepath="$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-foundryvtt/gitops-foundryvtt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-kaiserpfalz-edv/gitops-kaiserpfalz-edv.iml" filepath="$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-kaiserpfalz-edv/gitops-kaiserpfalz-edv.iml" />
       <module fileurl="file://$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-paladins-inn/gitops-paladins-inn.iml" filepath="$PROJECT_DIR$/../../kaiserpfalz-edv/gitops-paladins-inn/gitops-paladins-inn.iml" />
       <module fileurl="file://$PROJECT_DIR$/rollenspiel-cons.iml" filepath="$PROJECT_DIR$/rollenspiel-cons.iml" />
     </modules>
