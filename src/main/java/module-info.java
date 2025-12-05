@@ -60,7 +60,19 @@ module de.paladinsinn.rollenspielcons {
   
   // Export top-level packages (note: subpackages must be exported individually if compile-time export is required)
   exports de.paladinsinn.rollenspielcons.domain.api;
+  exports de.paladinsinn.rollenspielcons.domain.api.calendars;
+  exports de.paladinsinn.rollenspielcons.domain.api.events;
+  exports de.paladinsinn.rollenspielcons.domain.api.integrations;
+  exports de.paladinsinn.rollenspielcons.domain.api.locations;
+  exports de.paladinsinn.rollenspielcons.domain.api.persons;
+  exports de.paladinsinn.rollenspielcons.domain.api.time;
   exports de.paladinsinn.rollenspielcons.domain.model;
+  exports de.paladinsinn.rollenspielcons.domain.model.calendars;
+  exports de.paladinsinn.rollenspielcons.domain.model.events;
+  exports de.paladinsinn.rollenspielcons.domain.model.importers;
+  exports de.paladinsinn.rollenspielcons.domain.model.locations;
+  exports de.paladinsinn.rollenspielcons.domain.model.persons;
+  exports de.paladinsinn.rollenspielcons.domain.model.time;
 
   // Öffnen für Jackson / Spring Reflection (JSON-Deserialisierung, Proxies)
   opens de.paladinsinn.rollenspielcons.domain.api
@@ -73,4 +85,6 @@ module de.paladinsinn.rollenspielcons {
       to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
   opens de.paladinsinn.rollenspielcons
       to com.fasterxml.jackson.databind, spring.core, spring.beans, spring.context;
+  opens de.paladinsinn.rollenspielcons.persistence
+      to com.fasterxml.jackson.databind, spring.beans, spring.context, spring.core;
 }

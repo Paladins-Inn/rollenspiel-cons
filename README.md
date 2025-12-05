@@ -53,7 +53,9 @@ Enough of the theory. Let's look at the current state:
 
 
 ## License
-The license for the software is LGPL 3.0 or newer. 
+The license for the software is Gnu Affero General Public License 3 or newer. 
+
+If you are interested in using parts of the code under a different license, please contact the author.
 
 
 ## Architecture

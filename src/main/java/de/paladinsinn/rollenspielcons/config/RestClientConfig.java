@@ -1,5 +1,21 @@
-package de.paladinsinn.rollenspielcons.config;
+/*
+ * Copyright (c) 2025. Roland T. Lichti, Kaiserpfalz EDV-Service
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
+package de.paladinsinn.rollenspielcons.config;
 
 import de.paladinsinn.rollenspielcons.services.geo.GeocodeMapsCoClient;
 import jakarta.validation.constraints.NotNull;
@@ -7,8 +23,10 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.security.oauth2.client.web.client.OAuth2ClientHttpRequestInterceptor;
@@ -31,7 +49,7 @@ import org.springframework.web.util.UriBuilderFactory;
 public class RestClientConfig {
   
   @Bean
-  public RestClient restClient(@NotNull final RestClient.Builder builder) {
+  public RestClient restClient(@NotNull @org.springframework.context.annotation.Lazy final RestClient.Builder builder) {
     log.trace("enter - ");
     
     var result = builder.build();
@@ -43,7 +61,7 @@ public class RestClientConfig {
   @Bean
   public GeocodeMapsCoClient geocodeMapsCoClient(
       @NotNull @Value("${geocoding.api.url") final String url,
-      @NotNull RestClient.Builder clientBuilder,
+      @NotNull @org.springframework.context.annotation.Lazy RestClient.Builder clientBuilder,
       @NotNull JdkClientHttpRequestFactory requestFactory,
       @NotNull UriBuilderFactory apiKeyInjectorFactory,
       @NotNull OAuth2ClientHttpRequestInterceptor oauth2Interceptor
@@ -122,5 +140,12 @@ public class RestClientConfig {
     
     log.trace("exit - {}", result);
     return result;
+  }
+  
+  @Bean
+  @Lazy
+  @ConditionalOnMissingBean(RestClient.Builder.class)
+  public RestClient.Builder restClientBuilder() {
+    return RestClient.builder();
   }
 }
