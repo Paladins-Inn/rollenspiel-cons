@@ -57,7 +57,7 @@ jobs:
       run: |
         APP_AES256_KEY=$(openssl rand -base64 32)
         echo "APP_AES256_KEY=${APP_AES256_KEY}" >> $GITHUB_ENV
-        cat > local.properties <<'EOF'
+        cat > local.properties <<EOF
         spring.datasource.url=jdbc:h2:mem:testdb
         spring.datasource.driverClassName=org.h2.Driver
         spring.datasource.username=sa
