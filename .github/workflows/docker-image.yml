@@ -66,6 +66,8 @@ jobs:
         what3words.api.key=${WHAT3WORDS_API_KEY}
         geocoding.api.key=${GEOCODING_API_KEY}
         EOF
+        cat local.properties
+        ls -la
       shell: bash
       env:
         WHAT3WORDS_API_KEY: ${{ secrets.WHAT3WORDS_API_KEY }}

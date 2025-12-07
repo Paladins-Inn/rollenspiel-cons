@@ -37,13 +37,13 @@ The software should help to organize the event, manage the players and game mast
 * User Management
   * [ ] User registration and login.
   * [ ] User profiles.
-  * User enablement
-    * [ ] Provide an activity list for users.
+* User enablement
+  * [ ] Provide an activity list for users.
 * Integrations
   * [ ] Website https://www.rollenspiel-cons.info as primary site.
   * [X] Integration Google Calendar
-  * [ ] Integration 3words
-  * [ ] Integration OpenStreetMap
+  * [X] Integration 3words
+  * [X] Integration OpenStreetMap
   * [ ] Discord for registering tables and games (like the late RPG-Schedule bot).
   * [ ] Calendar feeds (iCal) for gamers and game masters.
   * [ ] Email notifications for event changes.
