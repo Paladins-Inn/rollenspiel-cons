@@ -1,4 +1,17 @@
 spring:
+  config:
+    import: "optional:kubernetes:"
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: event
+        strategy: refresh
+      secrets:
+        sources:
+          - name: rollenspiel-cons-db
+        paths:
+          - /etc/secrets
   main:
     banner-mode: off
   
@@ -13,12 +26,12 @@ spring:
     enabled: false
   datasource:
     url: jdbc:postgresql://localhost:5432/rollenspiel-cons
-    username: changeme
-    password: changeme
+    username: ${SPRING_DATASOURCE_USERNAME:changeme}
+    password: ${SPRING_DATASOURCE_PASSWORD:changeme}
     driver-class-name: org.postgresql.Driver
     hikari:
-      maximum-pool-size: 10
-      minimum-idle: 2
+      maximum-pool-size: 3
+      minimum-idle: 1
       idle-timeout: 600000
       max-lifetime: 1800000
       connection-timeout: 30000
@@ -134,4 +147,3 @@ logging:
   level:
     root: INFO
     de.paladinsinn: TRACE
-    

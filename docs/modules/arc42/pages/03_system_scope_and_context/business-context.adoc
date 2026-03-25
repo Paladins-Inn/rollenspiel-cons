@@ -2,7 +2,7 @@
 
 include::partial$config.adoc[]
 
-.The business context of the DCIS.
+.The business context of rollenspiel-cons.
 [plantuml,business-context,svg]
 ----
 @startuml
@@ -17,6 +17,7 @@ together {
 rectangle <<External>> {
   [Discord] as discord << External Service >>
   [Google Calendar] as gcal << External Service >>
+  [ICal] as ical << External Service >>
   [3words] as what3words << External Service >>
   [OpenStreetMap] as osm << External Service >>
   [Mail Server] as mail << External Service >>
@@ -35,6 +36,7 @@ player --> sso : logs into
 
 service <--> discord : sends/receives
 service --> gcal
+service --> ical
 service --> what3words
 service --> osm
 

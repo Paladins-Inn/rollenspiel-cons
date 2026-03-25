@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/src/test/resources/mappings/mapping-oauth2-well-known.json">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/test/resources/mappings/mapping-oauth2-well-known.json" />
+              <option name="originalContent" value="{&#10;  &quot;id&quot; : &quot;oauth2-well-known-001&quot;,&#10;  &quot;request&quot; : {&#10;    &quot;url&quot; : &quot;/realms/pandur/.well-known/openid-configuration&quot;,&#10;    &quot;method&quot; : &quot;GET&quot;&#10;  },&#10;  &quot;response&quot; : {&#10;    &quot;status&quot; : 200,&#10;    &quot;bodyFileName&quot; : &quot;body-oauth2-well-known.json&quot;,&#10;    &quot;headers&quot; : {&#10;      &quot;Content-Type&quot; : &quot;application/json; charset=utf-8&quot;,&#10;      &quot;Date&quot; : &quot;{{now format='EEE, dd MMM yyyy HH:mm:ss z' timezone='GMT'}}&quot;&#10;    }&#10;  },&#10;  &quot;transformers&quot;: [&#10;    &quot;response-template&quot;&#10;  ],&#10;  &quot;uuid&quot; : &quot;28ec38bf-554c-4c05-a762-d5b3bf2ce1f4&quot;&#10;}" />
+              <option name="updatedContent" value="{&#10;  &quot;id&quot; : &quot;oauth2-well-known-001&quot;,&#10;  &quot;request&quot; : {&#10;    &quot;url&quot; : &quot;/realms/pandur/.well-known/openid-configuration&quot;,&#10;    &quot;method&quot; : &quot;GET&quot;&#10;  },&#10;  &quot;response&quot; : {&#10;    &quot;status&quot; : 200,&#10;    &quot;bodyFileName&quot; : &quot;body-oauth2-well-known.json&quot;,&#10;    &quot;headers&quot; : {&#10;      &quot;Content-Type&quot; : &quot;application/json; charset=utf-8&quot;,&#10;      &quot;Date&quot; : &quot;{{now format='EEE, dd MMM yyyy HH:mm:ss z' timezone='GMT'}}&quot;&#10;    }&#10;  },&#10;  &quot;transformers&quot;: [&#10;    &quot;response-template&quot;&#10;  ],&#10;  &quot;uuid&quot; : &quot;28ec38bf-554c-4c05-a762-d5b3bf2ce1f4&quot;&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

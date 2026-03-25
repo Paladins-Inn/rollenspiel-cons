@@ -1,0 +1,19 @@
+{
+  "id" : "oauth2-well-known-001",
+  "request" : {
+    "url" : "/realms/pandur/.well-known/openid-configuration",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-oauth2-well-known.json",
+    "headers" : {
+      "Content-Type" : "application/json; charset=utf-8",
+      "Date" : "{{now format='EEE, dd MMM yyyy HH:mm:ss z' timezone='GMT'}}"
+    }
+  },
+  "transformers": [
+    "response-template"
+  ],
+  "uuid" : "28ec38bf-554c-4c05-a762-d5b3bf2ce1f4"
+}
