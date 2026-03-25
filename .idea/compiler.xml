@@ -18,6 +18,16 @@
         </processorPath>
         <module name="rollenspiel-cons" />
       </profile>
+      <profile name="Annotation profile for de.paladins-inn:db-updater" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.44/lombok-1.18.44.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.44/lombok-1.18.44.jar" />
+        </processorPath>
+        <module name="db-updater" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="kp-checkstyle" target="17" />
@@ -65,6 +75,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="db-updater" options="-parameters" />
       <module name="kp-checkstyle" options="-parameters" />
       <module name="kp-commons-api" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
       <module name="kp-commons-api.main" options="-parameters -parameters -Amapstruct.verbose=true -Amapstruct.suppressGeneratorTimestamp=true -Amapstruct.defaultComponentModel=spring" />
