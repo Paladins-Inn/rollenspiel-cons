@@ -27,6 +27,44 @@
                         <p><strong>Benutzername:</strong> ${page.getUserName()}</p>
                         <p><strong>E-Mail:</strong> ${page.getEmail()}</p>
                         <p><strong>Discord ID:</strong> ${page.getDiscordId()}</p>
+                        <p>
+                            <strong>Announcement Mailinglist</strong>
+                            <form action="https://lists.rollenspiel-cons.info/mlmmj.php" method="post">
+                                <input name="mailinglist" type="hidden" value="announce@rollenspiel-cons.info">
+                                <input name="job" type="hidden" value="subscribe">
+                                <input name="redirect_failure" type="hidden" value="/dashboard">
+                                <input name="redirect_success" type="hidden" value="/dashboard">
+                                <input name="email" type="hidden" value="${page.getEmail()}">
+                                <input type="submit" value="subscribe">
+                            </form>
+                            <form action="https://lists.rollenspiel-cons.info/mlmmj.php" method="post">
+                                <input name="mailinglist" type="hidden" value="announce@rollenspiel-cons.info">
+                                <input name="job" type="hidden" value="unsubscribe">
+                                <input name="redirect_failure" type="hidden" value="/dashboard">
+                                <input name="redirect_success" type="hidden" value="/dashboard">
+                                <input name="email" type="hidden" value="${page.getEmail()}">
+                                <input type="submit" value="unsubscribe">
+                            </form>
+                        </p>
+                        <p>
+                            <strong>Con Orga Mailinglist</strong>
+                        <form action="https://lists.rollenspiel-cons.info/mlmmj.php" method="post">
+                            <input name="mailinglist" type="hidden" value="orgas@rollenspiel-cons.info">
+                            <input name="job" type="hidden" value="subscribe">
+                            <input name="redirect_failure" type="hidden" value="/dashboard">
+                            <input name="redirect_success" type="hidden" value="/dashboard">
+                            <input name="email" type="hidden" value="${page.getEmail()}">
+                            <input type="submit" value="subscribe">
+                        </form>
+                        <form action="https://lists.rollenspiel-cons.info/mlmmj.php" method="post">
+                            <input name="mailinglist" type="hidden" value="orgas@rollenspiel-cons.info">
+                            <input name="job" type="hidden" value="unsubscribe">
+                            <input name="redirect_failure" type="hidden" value="/dashboard">
+                            <input name="redirect_success" type="hidden" value="/dashboard">
+                            <input name="email" type="hidden" value="${page.getEmail()}">
+                            <input type="submit" value="unsubscribe">
+                        </form>
+                        </p>
                     </div>
                 </div>
             </div>
