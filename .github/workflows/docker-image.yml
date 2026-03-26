@@ -72,14 +72,21 @@ jobs:
       run: |
         APP_AES256_KEY=$(openssl rand -base64 32)
         echo "APP_AES256_KEY=${APP_AES256_KEY}" >> $GITHUB_ENV
-        cat > local.properties <<'EOF'
-        spring.datasource.url=jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+        cat > local.properties <<EOF
+        spring.datasource.url=jdbc:h2:mem:test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
         spring.datasource.driverClassName=org.h2.Driver
         spring.datasource.username=sa
         spring.datasource.password=sa
-        app.aes256.key=${APP_AES256_KEY}
-        what3words.api.key=${WHAT3WORDS_API_KEY}
-        geocoding.api.key=${GEOCODING_API_KEY}
+        spring.jpa.hibernate.ddl-auto=none
+        aes256.key=${APP_AES256_KEY}
+        what3words.api.key=${WHAT3WORDS_API_KEY:-changeme}
+        what3words.api.url=https://api.what3words.com/
+        geocoding.api.key=${GEOCODING_API_KEY:-changeme}
+        geocoding.api.url=https://geocode.maps.co/search
+        geocoding.rate-limit=3
+        google.calendar.id=changeme@group.calendar.google.com
+        google.client.id=changeme
+        google.client.secret=changeme
         EOF
       shell: bash
       env:
