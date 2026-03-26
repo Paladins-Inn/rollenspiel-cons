@@ -1,5 +1,5 @@
 include::partial$config.adoc[]
-.Level 1 Overview of the {rpg-cons} system.
+.Level 1 Overview of the {system} system.
 [plantuml, whitebox-scs]
 ----
 @startuml whitebox-scs

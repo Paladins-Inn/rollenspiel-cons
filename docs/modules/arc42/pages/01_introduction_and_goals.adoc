@@ -4,8 +4,7 @@ include::partial$config.adoc[]
 
 
 == Introduction
-The software is a {gloss_rpg} event management system.
-It helps connecting
+include::partial$abstract.adoc[]
 
 
 == Requirements Overview

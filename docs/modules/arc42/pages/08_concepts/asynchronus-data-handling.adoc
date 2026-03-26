@@ -4,7 +4,7 @@ include::partial$config.adoc[]
 This section describes the handling of the asynchronous data transfer within the DCIS.
 It may look a bit overcomplicated at first, but there is reason behind this madness.
 
-As example we show the domain of `rollenspiel-cons` but the same pattern is applied to every other domain with data lead, too.
+As example we show the domain of {system} but the same pattern is applied to every other domain with data lead, too.
 So a single client may have multiple of the `dcis-\*-client` and `dcis-*-store` libraries in use.
 
 

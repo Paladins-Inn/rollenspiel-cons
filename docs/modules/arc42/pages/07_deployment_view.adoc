@@ -80,7 +80,7 @@ scs --> what3words : HTTPS (REST)\n(Port 443)
 
 == Mapping Building Blocks to Infrastructure
 
-The pod `rollenspiel-cons` contains the SCS application.
+The pod {system} contains the SCS application.
 It consists of the building blocks level 1.
 
 include::partial$building-blocks-level-2.adoc[]

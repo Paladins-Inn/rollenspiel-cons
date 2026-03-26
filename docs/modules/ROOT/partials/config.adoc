@@ -7,13 +7,12 @@
 :chapter-label: Chapter
 :icons: font
 :partnums:
-include::partial$includes/glossary.adoc[]
-include::partial$includes/bibliography.adoc[]
+:toc: preamble
 :rpg-cons: `rollenspiel-cons`
-include::arc42:partial$includes/02_architecture_constraints.adoc[]
-include::arc42:partial$includes/03_stakeholder.adoc[]
-include::arc42:partial$includes/09_architecture_decisions.adoc[]
-include::arc42:partial$includes/10_quality_requirements.adoc[]
-include::arc42:partial$includes/11_technical_risks.adoc[]
-include::ROOT:partial$includes/bibliography.adoc[]
-include::ROOT:partial$includes/glossary.adoc[]
+include::arc42:page$_02_architecture_constraints.include.adoc[]
+include::arc42:page$03_system_scope_and_context/_include.adoc[]
+include::arc42:page$09_architecture_decisions/_include.adoc[]
+include::arc42:page$_10_quality_requirements.include.adoc[]
+include::arc42:page$_11_technical_risks.include.adoc[]
+include::ROOT:page$_bibliography.include.adoc[]
+include::ROOT:page$_glossary.include.adoc[]

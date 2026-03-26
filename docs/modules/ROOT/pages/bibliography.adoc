@@ -34,8 +34,26 @@ The bibliography is shared between all components of the whole {rpg-cons} projec
 | [[richtlinie-barrierefreiheit,EU-BARIEREFREIHEIT]]EU-BARRIEREFREIHEIT
 | 'Richtlinie (EU) 2016/2102 des Europäischen Parlaments und des Rates vom 26. Oktober 2016 über den barrierefreien Zugang zu den Websites und mobilen Anwendungen öffentlicher Stellen'. 2016, [Online]. Available: https://digital-strategy.ec.europa.eu/de/policies/web-accessibility-directive-standards-and-harmonisation.
 
+| [[expand-contract-fowler,EXPAND-CONTRACT]]EXPAND-CONTRACT
+| **Fowler, Martin**, 'Expand Contract'. martinfowler.com, [Online]. Available: https://martinfowler.com/bliki/ExpandContract.html
+
 | [[flexmark,FLEXMARK-JAVA]]FLEXMARK-JAVA
 | [Online]. flexmark-java — Java Markdown processor (CommonMark). Available: https://github.com/vsch/flexmark-java
+
+| [[fowler-evodb,EVODB]]EVODB
+| **Fowler, Martin; Sadalage, Pramod J.**, 'Evolutionary Database Design'. martinfowler.com, [Online]. Available: https://martinfowler.com/articles/evodb.html
+
+| [[liquibase,LIQUIBASE]]LIQUIBASE
+| [Online]. Liquibase — Database schema change management. Available: https://www.liquibase.org/documentation/index.html
+
+| [[liquibase-zddt,LIQUIBASE-ZDDT]]LIQUIBASE-ZDDT
+| [Online]. Liquibase: Zero Downtime Deployments. Available: https://www.liquibase.com/blog/zero-downtime-deployments
+
+| [[fowler-parallel-change,PARALLEL-CHANGE]]PARALLEL-CHANGE
+| **Fowler, Martin**, 'ParallelChange'. martinfowler.com, [Online]. Available: https://martinfowler.com/bliki/ParallelChange.html
+
+| [[ambler-sadalage-refactoring-db,REFACTORING-DB]]REFACTORING-DB
+| **Ambler, Scott W.; Sadalage, Pramod J.**, 'Refactoring Databases: Evolutionary Database Design'. Addison-Wesley Professional, 2006. ISBN: 978-0321293534
 
 | [[jte,JTE]]JTE
 | [Online]. JTE template engine documentation. Available: https://jte.gg

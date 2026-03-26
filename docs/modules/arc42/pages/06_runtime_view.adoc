@@ -1,10 +1,10 @@
-= rollenspiel-cons
+= Runtime View
 include::partial$config.adoc[]
 
 [[runtime-users-pages]]
 == Pages
 
-.Web based UI of the {rpg-cons} system
+.Web based UI of the {system} system
 [cols="<.<4,<.<4m,<.<8m,<.<4a",options="header",frame="topbot",grid="rows"]
 |===
 | Name | Method | URL | Permission
@@ -20,7 +20,7 @@ include::partial$config.adoc[]
 [[runtime-rest]]
 == REST API
 
-.REST API of the `rollenspiel-cons` system
+.REST API of the {system} system
 [cols="<.<4,<.<4m,<.<8m,<.<4a",options="header",frame="topbot",grid="rows"]
 |===
 | Name | Method | URL | Permission
@@ -34,7 +34,7 @@ include::partial$config.adoc[]
 
 [[runtime-rollenspiel-cons-transcludes]]
 == Transcludes
-.Transcludes of {rpg-cons} to be included on other pages.
+.Transcludes of {system} to be included on other pages.
 [cols="<.<4,<.<12m,>.<1,>.<1,>.<1,>.<1",options="header",frame="topbot",grid="rows"]
 |===
 | Name | URL <| MinX <| MinY <| MaxX <| MaxY
@@ -49,7 +49,7 @@ include::partial$config.adoc[]
 
 This is an overview over existing general queues that exist in the whole system.
 
-.Messaging channels of the {rpg-cons}.
+.Messaging channels of the {system}.
 [cols="<.<4m,<.<4,<.<4,<.<8", options="header",frame="topbot",grid="rows"]
 |===
 | Name | Type | Direction | SCS

@@ -1,0 +1,2 @@
+The software is a {gloss_rpg} event management system.
+It helps connecting
