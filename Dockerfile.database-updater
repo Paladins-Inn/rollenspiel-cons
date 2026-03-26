@@ -1,4 +1,4 @@
-FROM quay.io AS runner/paladins-inn/db-updater:latest
+FROM quay.io/paladinsinn/db-updater:latest AS runner
 
 LABEL org.opencontainers.image.title="rollenspiel-cons DB Updater" \
       org.opencontainers.image.description="Database Updater for the rollenspiel-cons" \
