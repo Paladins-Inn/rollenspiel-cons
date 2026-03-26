@@ -1,0 +1,68 @@
+/*
+ * Copyright (c) 2026. Roland T. Lichti, Kaiserpfalz EDV-Service
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package de.paladinsinn.rollenspielcons.controllers;
+
+
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
+import jakarta.annotation.security.PermitAll;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+/**
+ *
+ *
+ * @author klenkes74 {@literal <rlichti@kaiserpfalz-edv.de>}
+ * @since 2026-03-25
+ */
+@Controller
+@RequestMapping("/api/events")
+@RequiredArgsConstructor
+@Slf4j
+public class ApiEventsController {
+  
+  @PermitAll
+  @GetMapping("")
+  @ResponseBody
+  @Counted(value = "api_events_count", description = "Total calls to event listing API")
+  @Timed(value = "api_events_duration", description = "Duration of calls to event listing API", percentiles = {0.5, 0.95, 0.99})
+  public List<Map<String, Object>> getEvents(
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+      LocalDateTime start,
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end
+  ) {
+    log.trace("enter - {}", new Object[] {start, end});
+    
+    LocalDateTime startDate = start != null ? start : LocalDateTime.now().minusMonths(1);
+    LocalDateTime endDate = end != null ? end : LocalDateTime.now().plusMonths(3);
+    
+    // TODO(klenkes74) 2026-03-25 Implement the loading of events.
+    
+    log.trace("exit - null");
+    return null;
+  }
+}
