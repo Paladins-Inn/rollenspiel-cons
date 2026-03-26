@@ -82,6 +82,9 @@ jobs:
         geocoding.api.key=${GEOCODING_API_KEY}
         EOF
       shell: bash
+      env:
+        WHAT3WORDS_API_KEY: ${{ secrets.WHAT3WORDS_API_KEY }}
+        GEOCODING_API_KEY: ${{ secrets.GEOCODING_API_KEY }}
 
     - name: Build Java
       run: mvn package -U --batch-mode --no-transfer-progress
