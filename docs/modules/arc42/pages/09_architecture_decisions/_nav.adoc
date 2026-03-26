@@ -9,3 +9,4 @@
 **** xref:rollenspiel-cons:arc42:09_architecture_decisions/009_caldav-library.adoc[]
 **** xref:rollenspiel-cons:arc42:09_architecture_decisions/010_encryption-for-database-fields.adoc[]
 **** xref:rollenspiel-cons:arc42:09_architecture_decisions/011_markdown.adoc[]
+**** xref:rollenspiel-cons:arc42:09_architecture_decisions/012_zero-downtime-database-migrations.adoc[]
