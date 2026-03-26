@@ -1,0 +1,14 @@
+spring:
+  config:
+    import: "optional:kubernetes:"
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+        mode: event
+        strategy: refresh
+      secrets:
+        sources:
+          - name: rollenspiel-cons-db
+        paths:
+          - /etc/secrets

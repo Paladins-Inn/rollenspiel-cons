@@ -1,17 +1,6 @@
 spring:
-  config:
-    import: "optional:kubernetes:"
-  cloud:
-    kubernetes:
-      reload:
-        enabled: true
-        mode: event
-        strategy: refresh
-      secrets:
-        sources:
-          - name: rollenspiel-cons-db
-        paths:
-          - /etc/secrets
+  profiles:
+    active: default
   main:
     banner-mode: off
   
@@ -20,10 +9,6 @@ spring:
     description: Rollenspiel PhysicalEvent Management
     version: @project.version@
     
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
-    default-schema: cons
-    enabled: false
   datasource:
     url: jdbc:postgresql://localhost:5432/rollenspiel-cons
     username: ${SPRING_DATASOURCE_USERNAME:changeme}
@@ -37,7 +22,7 @@ spring:
       connection-timeout: 30000
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       hibernate:
         default_schema: cons
@@ -146,4 +131,4 @@ ingress:
 logging:
   level:
     root: INFO
-    de.paladinsinn: TRACE
+    de.paladinsinn: DEBUG

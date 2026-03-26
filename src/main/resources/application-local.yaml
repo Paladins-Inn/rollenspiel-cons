@@ -3,8 +3,6 @@ spring:
     name: rollenspiel-cons
     description: Rollenspiel PhysicalEvent Management
     version: 999.999-SNAPSHOT
-  main:
-    banner-mode: log
   config:
     import: classpath:local.properties
     

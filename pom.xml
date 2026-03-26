@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2021 Kaiserpfalz EDV-Service, Roland T. Lichti.
+  ~ Copyright (c) 2025 Kaiserpfalz EDV-Service, Roland T. Lichti.
   ~
   ~ This program is free software: you can redistribute it and/or modify
   ~ it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
 
   <groupId>de.paladins-inn.rollenspiel-cons</groupId>
   <artifactId>rollenspiel-cons</artifactId>
-  <version>1.6.0</version>
+  <version>1.6.1-SNAPSHOT</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <url>https://rollenspiel-cons.info/</url>
@@ -39,6 +39,8 @@
     <skip.coverage>true</skip.coverage>
 
     <gpg.keyname>AF380360D648FC1D4BA7DBBA6A09445FE79CABD8</gpg.keyname>
+
+    <app.aes256.key>9ITuE9U2rzZwZF76wLGURy1Jw/oRWChvG8bIRPzS7ps=</app.aes256.key>
 
     <main.basedir>${project.basedir}</main.basedir>
     <argLine/>
@@ -153,7 +155,7 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>33.4.8-jre</version>
+      <version>33.5.0-jre</version>
     </dependency>
 
 
@@ -262,16 +264,6 @@
       <artifactId>spring-boot-starter-data-rest</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.liquibase</groupId>
-      <artifactId>liquibase-core</artifactId>
-      <exclusions>
-        <exclusion><!-- CVE-2025-48924 -->
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-lang3</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
@@ -281,32 +273,6 @@
       <artifactId>h2</artifactId>
       <scope>test</scope>
     </dependency>
-
-
-    <!-- Data Handling -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-hibernate6</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-    </dependency>
-
-
-    <!-- OpenAPI / Swagger -->
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.5.0</version>
-      <exclusions>
-        <exclusion><!-- CVE-2025-48924 -->
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-lang3</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-
 
     <!-- Caching -->
     <dependency>
@@ -1155,28 +1121,6 @@
                 </goals>
               </execution>
             </executions>
-          </plugin>
-
-          <!-- Beispiel: Verwendung später im POM (z.B. in Deinem 'database' profile) -->
-          <!-- statt ${env.SPRING_DATASOURCE_URL} dann ${db.url} nutzen -->
-          <plugin>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
-            <version>4.23.2</version>
-            <configuration>
-              <changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
-              <url>${spring.datasource.url}</url>
-              <username>${spring.datasource.username}</username>
-              <password>${spring.datasource.password}</password>
-              <defaultSchemaName>cons</defaultSchemaName>
-
-              <outputDirectory>${project.build.directory}</outputDirectory>
-              <outputChangeLogFile>${project.build.directory}/db.new-changelog.yaml</outputChangeLogFile>
-              <outputFileEncoding>${project.build.sourceEncoding}</outputFileEncoding>
-              <outputDefaultSchema>true</outputDefaultSchema>
-              <migrationSqlOutputFile>${project.build.directory}/db.sql</migrationSqlOutputFile>
-              <outputFile>${project.build.directory}/db.out</outputFile>
-            </configuration>
           </plugin>
         </plugins>
       </build>

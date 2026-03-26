@@ -1,7 +1,6 @@
 spring:
-  liquibase:
-    enabled: false
   config:
     import: optional:classpath:local.properties
-  main:
-    banner-mode: log
+  jpa:
+    hibernate:
+      ddl-auto: validate
