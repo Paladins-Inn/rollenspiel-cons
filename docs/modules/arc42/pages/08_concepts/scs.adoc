@@ -1,6 +1,5 @@
 // suppress inspection "HtmlUnknownAttribute" for whole file
 = Self-Contained Systems (SCS)
-
 include::partial$config.adoc[]
 
 == Introduction

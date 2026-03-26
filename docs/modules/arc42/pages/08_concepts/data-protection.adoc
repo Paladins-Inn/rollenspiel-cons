@@ -1,5 +1,4 @@
 = Data Protection
-
 include::partial$config.adoc[]
 
 Most of the data is user generated and heavily linked to the person who created it.

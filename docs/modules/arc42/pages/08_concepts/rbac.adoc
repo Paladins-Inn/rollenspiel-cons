@@ -1,5 +1,4 @@
 = Role based access control
-
 include::partial$config.adoc[]
 
 Role-Based Access Control (RBAC) is a widely used security model in IT systems that restricts system access based on the roles assigned to users within an organization.

@@ -1,5 +1,4 @@
 = Attribute based access control
-
 include::partial$config.adoc[]
 
 In addition to the xref:08_concepts/rbac.adoc[] working on the different access levels for players, game masters and the different orga roles, there is an attribute based access control throughout the system.
