@@ -3,4 +3,4 @@ spring:
     import: optional:classpath:local.properties
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
