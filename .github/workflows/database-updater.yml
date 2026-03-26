@@ -11,17 +11,9 @@ name: CI/CD OCI Container
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - '.github/ISSUE_TEMPLATE/**'
-      - .github/dependabot.yml
-      - '.github/workflows/release.yml'
-      - '.github/workflows/database-updater.yml'
-      - 'src/main/helm/**'
-      - 'src/main/kubernetes/**'
-      - CODE_OF_CONDUCT.md
-      - CONTRIBUTING.md
-      - README.md
-      - SECURITY.md
+    paths:
+      - 'src/main/resources/db/**'
+      - `.github/workflows/database-updater.yml`
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
@@ -62,37 +54,10 @@ jobs:
             { "id": "torganized-play-commons", "username": "${{ secrets.ARTIFACTSTORE_USER }}", "password": "${{ secrets.ARTIFACTSTORE_PASSWORD }}"}
           ]
 
-    - name: Get current POM Version
-      run: |
-        POM_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-        SHORT_SHA=$(git rev-parse --short HEAD)
-        echo "RELEASE_VERSION=${POM_VERSION}" >> $GITHUB_ENV
-        echo "SHORT_SHA=${SHORT_SHA}" >> $GITHUB_ENV
-
-    - name: Create `./local.properties`
-      run: |
-        APP_AES256_KEY=$(openssl rand -base64 32)
-        echo "APP_AES256_KEY=${APP_AES256_KEY}" >> $GITHUB_ENV
-        cat > local.properties <<'EOF'
-        spring.datasource.url=jdbc:h2:mem:testdb
-        spring.datasource.driverClassName=org.h2.Driver
-        spring.datasource.username=sa
-        spring.datasource.password=sa
-        app.aes256.key=${APP_AES256_KEY}
-        what3words.api.key=${WHAT3WORDS_API_KEY}
-        geocoding.api.key=${GEOCODING_API_KEY}
-        EOF
-      shell: bash
-
     - name: Build Java
-      run: mvn package -U --batch-mode --no-transfer-progress
+      run: mvn -U --batch-mode --no-transfer-progress process-resources -DskipTests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        APP_AES256_KEY: ${{ env.APP_AES256_KEY }}
-
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
 
     - name: Login to Quay.io
       uses: docker/login-action@v3
@@ -105,10 +70,11 @@ jobs:
       uses: docker/build-push-action@v6
       with:
         context: .
+        file: Dockerfile.database-updater
         platforms: linux/amd64
         push: ${{ github.event_name != 'pull_request' }}
         tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:${{ env.RELEASE_VERSION }}
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:${{ env.RELEASE_VERSION }}-${{ env.SHORT_SHA }}
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:db-updater-${{ env.RELEASE_VERSION }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:db-updater-${{ env.RELEASE_VERSION }}-${{ env.SHORT_SHA }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:db-updater-latest
         outputs: type=image,name=target

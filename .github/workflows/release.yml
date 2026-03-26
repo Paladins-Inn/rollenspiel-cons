@@ -121,7 +121,20 @@ jobs:
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:${{ env.RELEASE_VERSION }}
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:latest
         outputs: type=image,name=target
-
+        
+    - name: Build and push Database Updater OCI Container
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: Dockerfile.database-updater
+        platforms: linux/amd64
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: |
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:db-updater-${{ env.RELEASE_VERSION }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}:db-updater-latest
+        outputs: type=image,name=target
+    
+    
     - name: Commit Release, Tag and Push
       run: |
         git config user.name "github-actions[bot]"

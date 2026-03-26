@@ -1,0 +1,12 @@
+FROM quay.io AS runner/paladins-inn/db-updater:latest
+
+LABEL org.opencontainers.image.title="rollenspiel-cons DB Updater" \
+      org.opencontainers.image.description="Database Updater for the rollenspiel-cons" \
+      org.opencontainers.image.authors="Roland T. Lichti <rlichti@kaiserpfalz-edv.de" \
+      org.opencontainers.image.vendor="Paladins Inn" \
+      org.opencontainers.image.url="https://docs.paladins-inn.de/rollenspiel-cons/dev/manual/index.html" \
+      org.opencontainers.image.source="https://github.com/Paladins-Inn/rollenspiel-cons" \
+      org.opencontainers.image.licenses="AGPL-3.0" \
+      org.opencontainers.image.base.name="quay.io/paladinsinn/rollenspiel-cons"
+
+COPY --chown=root:root --chmod=0555 ./target/classes/db/changelog/ /
