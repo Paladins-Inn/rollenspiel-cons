@@ -79,13 +79,13 @@ jobs:
         spring.datasource.password=sa
         spring.jpa.hibernate.ddl-auto=none
         aes256.key=${APP_AES256_KEY}
-        what3words.api.key=123412412
+        what3words.api.key=9C34AK3K
         what3words.api.url=https://localhost:8089/
         #
         geocoding.api.url=https://localhost:8089/
-        geocoding.api.key=34324132412341
+        geocoding.api.key=15c3a4b37e432451616532sgo4faf16
         geocoding.rate-limit=3
-        google.calendar.id=changeme@group.calendar.google.com
+        google.calendar.id=88fb7669d9909b5ae6a8ac88c09526c3c09ff0ac32e840363094c2e758e4dd12@group.calendar.google.com
         google.client.id=changeme
         google.client.secret=changeme
         EOF
